@@ -11,7 +11,7 @@ namespace Cards
         public override void OnPlayed(List<AbstractEnemy> targets)
         {
             Cooldown.Value = Cooldown.Max;
-            Combat.ActiveCombat.Player.Block.Value += 5;
+            Combat.Player.Block.Value += 5;
             Debug.Log("Shield played");
         }
     }

@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class CappedInt
+public class CappedInt : IReadOnlyCappedInt
 {
     public CappedInt() : this(0, 0) { }
     public CappedInt(int value, int max) : this(value, 0, max) { }
     public CappedInt(int value, int min, int max)
     {
-        Value = value;
         Min = min;
         Max = max;
+        Value = value;
     }
     public float Normalized { get => (Value - Min) / Mathf.Max(1f, (float)(Max - Min)); }
     private int val;

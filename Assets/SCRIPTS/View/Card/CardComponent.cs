@@ -11,8 +11,6 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     private DrivenSpring ScaleSpring;
     private DrivenSpring GlowEffectSpring;
 
-    public float PlayYThreshold;
-
     Canvas cached_RootCanvas;
     Canvas RootCanvas => cached_RootCanvas ??= this.GetRootComponent<Canvas>();
 
@@ -38,6 +36,10 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     [Header("Spring Settings")]
     [field: SerializeField] private Spring.Config springConfig = new(20f, .6f);
 
+    [Header("Other Settings")]
+    public float PlayYThreshold;
+    private bool IsInPlayingArea => DragVisual.localPosition.y >= PlayYThreshold;
+    private bool IsPlayable => Combat.Active != null && Card.Cooldown.Value <= 0;
 
     private State state;
     enum State
@@ -53,8 +55,6 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         State.dragging | State.hovered => 1.2f,
         _ => 1f
     };
-
-    bool IsInPlayingArea => DragVisual.localPosition.y >= PlayYThreshold;
 
     float GlowAlpha => state switch
     {
@@ -98,6 +98,11 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     public void OnDrag(PointerEventData eventData)
     {
         PositionSpring.RestingPos = RootCanvas.worldCamera.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, RootCanvas.planeDistance));
+        if (IsInPlayingArea && !IsPlayable)
+        {
+            eventData.pointerDrag = null;
+            OnEndDrag(eventData);
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -108,7 +113,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         CanvasGroup.blocksRaycasts = true;
         RootCanvasGroup.blocksRaycasts = true;
 
-        if (IsInPlayingArea) Combat.ActiveCombat.PlayCard(Card);
+        if (IsInPlayingArea && IsPlayable) Combat.Active.PlayCard(Card);
     }
 
     //TODO: Idea: implement an interesting looking sorting algorithm that runs in a coroutine and slowly sorts the hand at the start of each turn by cost

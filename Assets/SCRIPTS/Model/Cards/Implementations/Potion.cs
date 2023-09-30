@@ -8,8 +8,9 @@ namespace Cards
 
         public override void OnPlayed(List<AbstractEnemy> targets)
         {
-            var player = Combat.ActiveCombat.Player;
+            var player = Combat.Player;
             player.Health.Value = player.Health.Max;
+            player.RemoveCard(this);
         }
     }
 }

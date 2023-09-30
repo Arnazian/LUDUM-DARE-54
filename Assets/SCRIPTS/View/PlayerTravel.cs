@@ -14,7 +14,8 @@ public class PlayerTravel : MonoBehaviour
         float targetPositionX = playerSpriteObject.transform.position.x + distanceToTravel;
         playerSpriteObject.transform.DOMoveX(targetPositionX, moveDurationInSeconds).OnComplete(() =>
         {
-            GameStateController.instance.ExitTravelling();
+            GameSession.GameState = GameSession.State.LOOT;
+            //GameStateController.instance.ExitTravelling();
         });
     }
 }
