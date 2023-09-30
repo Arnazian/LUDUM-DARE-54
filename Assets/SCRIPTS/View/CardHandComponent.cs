@@ -1,56 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class CardHandComponent : MonoBehaviour
 {
     [SerializeField] private CardComponent CardTemplate;
-    [SerializeField] private Transform layoutRoot;
 
-    private readonly Dictionary<AbstractCard, CardComponent> instances = new();
+    [field: SerializeField] public RectTransform[] CardSlots { get; private set; }
+    private Dictionary<int, CardComponent> InstancesBySlotID = new();
 
     [Header("Other Settings")]
     public float PlayYThreshold;
 
     void Start()
     {
-        GameSession.Player.OnCardAdded += AddCard;
-        GameSession.Player.OnReplaceCard += ReplaceCard;
-        GameSession.Player.OnCardRemoved += RemoveCard;
-        foreach (var card in GameSession.Player.Cards)
-            AddCard(card);
+        GameSession.Player.OnCardChanged += UpdateCard;
+        for (int i = 0; i < GameSession.Player.Cards.Count; i++)
+        {
+            AbstractCard card = GameSession.Player.Cards[i];
+            UpdateCard(i, card);
+        }
     }
 
     void OnDestroy()
     {
-        GameSession.Player.OnCardAdded -= AddCard;
-        GameSession.Player.OnReplaceCard -= ReplaceCard;
-        GameSession.Player.OnCardRemoved -= RemoveCard;
+        GameSession.Player.OnCardChanged -= UpdateCard;
     }
 
-    void AddCard(AbstractCard card)
+    void UpdateCard(int slot, AbstractCard card)
     {
-        var cardComponent = Instantiate(CardTemplate, layoutRoot);
-        instances[card] = cardComponent;
-        cardComponent.Card = card;
-        cardComponent.IsOverDropRegion = () => cardComponent.DragVisual.localPosition.y >= PlayYThreshold;
-        cardComponent.IsPlayable = () => card.Cooldown.Value <= 0 && GameSession.GameState == GameSession.State.COMBAT;
-        cardComponent.OnDrop += OnCardDropped;
-    }
-
-    void ReplaceCard(AbstractCard old, AbstractCard replacement)
-    {
-        var siblingIndex = instances[old].transform.GetSiblingIndex();
-        RemoveCard(old);
-        AddCard(replacement);
-        instances[replacement].transform.SetSiblingIndex(siblingIndex);
-    }
-
-    void RemoveCard(AbstractCard card)
-    {
-        Destroy(instances[card].gameObject);
-        instances.Remove(card);
+        if (card == null)
+        {
+            if (InstancesBySlotID.TryGetValue(slot, out var instance))
+            {
+                Destroy(instance.gameObject);
+                InstancesBySlotID.Remove(slot);
+            }
+        }
+        else
+        {
+            if (!InstancesBySlotID.TryGetValue(slot, out var instance))
+                InstancesBySlotID[slot] = instance = Instantiate(CardTemplate, CardSlots[slot]);
+            instance.Card = card;
+            instance.IsOverDropRegion = () => instance.DragVisual.localPosition.y >= PlayYThreshold;
+            instance.IsDraggable = () => card.Cooldown.Value <= 0 && GameSession.GameState == GameSession.State.COMBAT;
+            instance.OnDrop = OnCardDropped;
+        }
     }
 
     void OnCardDropped(CardComponent card, PointerEventData e)
@@ -59,3 +56,4 @@ public class CardHandComponent : MonoBehaviour
         Combat.Active.PlayCard(card.Card);
     }
 }
+

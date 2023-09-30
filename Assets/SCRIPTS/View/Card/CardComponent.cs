@@ -18,10 +18,10 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             TitleText.text = card.GetType().Name;
         }
     }
-    private Vector2Spring PositionSpring;
-    private BaseSpring RotSpring;
-    private DrivenSpring ScaleSpring;
-    private DrivenSpring GlowEffectSpring;
+    public Vector2Spring PositionSpring { get; private set; }
+    public BaseSpring RotSpring { get; private set; }
+    public DrivenSpring ScaleSpring { get; private set; }
+    public DrivenSpring GlowEffectSpring { get; private set; }
 
     Canvas cached_RootCanvas;
     Canvas RootCanvas => cached_RootCanvas ??= this.GetRootComponent<Canvas>();
@@ -49,10 +49,11 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     [Header("Spring Settings")]
     [field: SerializeField] private Spring.Config springConfig = new(20f, .6f);
 
-    public Func<bool> IsPlayable = () => false; //Combat.Active != null && Card.Cooldown.Value <= 0;
+    public Func<bool> IsDraggable = () => false; //Combat.Active != null && Card.Cooldown.Value <= 0;
     public Func<bool> IsOverDropRegion = () => false;
 
-    public event Action<CardComponent, PointerEventData> OnDrop;
+    public Action<CardComponent, PointerEventData> OnDrop;
+    public Action<CardComponent, PointerEventData> OnDragging;
 
     private State state;
     enum State
@@ -77,7 +78,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         _ => 0f
     };
 
-    void Start()
+    void Awake()
     {
         PositionSpring = new(springConfig);
         RotSpring = new(springConfig);
@@ -111,11 +112,13 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     public void OnDrag(PointerEventData eventData)
     {
         PositionSpring.RestingPos = RootCanvas.worldCamera.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, RootCanvas.planeDistance));
-        if (!IsPlayable())
+        if (!IsDraggable())
         {
             eventData.pointerDrag = null;
             OnEndDrag(eventData);
+            return;
         }
+        OnDragging?.Invoke(this, eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -129,7 +132,14 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         if (eventData.pointerDrag != null) OnDrop.Invoke(this, eventData);
     }
 
-    //TODO: Idea: implement an interesting looking sorting algorithm that runs in a coroutine and slowly sorts the hand at the start of each turn by cost
+    void OnEnable()
+    {
+        PositionSpring.RestingPos = PositionSpring.Position = RectTransform.position + RectTransform.TransformDirection(RectTransform.sizeDelta * (new Vector2(.5f, .5f) - RectTransform.pivot));
+        RotSpring.RestingPos = RotSpring.Position = RectTransform.eulerAngles.z >= 180 ? RectTransform.eulerAngles.z - 360 : RectTransform.eulerAngles.z;
+        ScaleSpring.RestingPos = 1f;
+        ScaleSpring.Position = 0;
+        GlowEffectSpring.Position = 0f;
+    }
 
     void Update()
     {

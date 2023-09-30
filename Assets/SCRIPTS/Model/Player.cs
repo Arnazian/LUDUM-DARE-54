@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Player
 {
@@ -15,27 +16,26 @@ public class Player
         new Cards.Potion(),
     };
 
-    public event Action<AbstractCard> OnCardRemoved;
-    public event Action<AbstractCard> OnCardAdded;
-    public event Action<AbstractCard, AbstractCard> OnReplaceCard;
+    public event Action<int, AbstractCard> OnCardChanged;
 
-    public void RemoveCard(AbstractCard card)
+    public void RemoveCard(AbstractCard card) => RemoveCardAt(Cards.IndexOf(card));
+    public void RemoveCardAt(int slot)
     {
-        Cards.Remove(card);
-        OnCardRemoved?.Invoke(card);
+        Cards[slot] = null;
+        OnCardChanged?.Invoke(slot, null);
     }
 
     public void AddCard(AbstractCard card)
     {
         Cards.Add(card);
-        OnCardAdded?.Invoke(card);
+        OnCardChanged?.Invoke(Cards.Count - 1, card);
     }
 
-    public void ReplaceCard(AbstractCard old, AbstractCard replacement)
+    public void ReplaceCard(AbstractCard old, AbstractCard replacement) => ReplaceCardAt(Cards.IndexOf(old), replacement);
+    public void ReplaceCardAt(int index, AbstractCard replacement)
     {
-        var index = Cards.IndexOf(old);
         Cards[index] = replacement;
-        OnReplaceCard?.Invoke(old, replacement);
+        OnCardChanged?.Invoke(index, replacement);
     }
 
     public void OnStartTurn()
@@ -45,7 +45,7 @@ public class Player
 
     public void OnCombatEnd()
     {
-        foreach (var card in Cards)
+        foreach (var card in Cards.Where(card => card != null))
         {
             card.Cooldown.Minimize();
             Block.Minimize();

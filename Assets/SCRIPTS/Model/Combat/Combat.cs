@@ -42,7 +42,7 @@ public class Combat
         //actually play 
         card.OnPlayed(new());
 
-        foreach (var c in Player.Cards)
+        foreach (var c in Player.Cards.Where(c => c != null))
             c.Cooldown.Value--;
         card.Cooldown.Maximize();
 
