@@ -49,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
     {
         while (spawnedEnemies.Count > 0)
         {
-            Destroy(spawnedEnemies[0].gameObject);
+            if (spawnedEnemies[0] != null) Destroy(spawnedEnemies[0].gameObject);
             spawnedEnemies.RemoveAt(0);
         }
     }
