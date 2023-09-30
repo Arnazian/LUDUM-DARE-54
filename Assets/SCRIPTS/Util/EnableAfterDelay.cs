@@ -7,8 +7,11 @@ public class EnableAfterDelay : MonoBehaviour
     [SerializeField] private float delayInSeconds;
     [SerializeField] private GameObject objectToEnable;
    
-    void Start()
+    void OnEnable()
     {
+        if (objectToEnable == null) return;
+
+        objectToEnable.SetActive(false);
         StartCoroutine(CoroutineEnableAfterDelay());        
     }
 
