@@ -128,11 +128,11 @@ MonoBehaviour:
   GlowEffect: {fileID: 3795616552385010081}
   CooldownFill: {fileID: 5024151905945992601}
   CooldownText: {fileID: 918378066713249838}
-  TitleText: {fileID: 0}
+  TitleText: {fileID: 6999524178508508503}
+  <DragVisual>k__BackingField: {fileID: 7193608911429536150}
   springConfig:
     <AngularFrequency>k__BackingField: 20
     <DampingRatio>k__BackingField: 0.6
-  PlayYThreshold: 2.5
 --- !u!1 &2305381500943462800
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,8 +167,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.00000011920929, y: 0}
-  m_SizeDelta: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0.00000011920929, y: 0.3}
+  m_SizeDelta: {x: 0, y: 0.2}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &9067838086212411881
 CanvasRenderer:
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem Ipsum sit dolor
+  m_text: Dagger
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -232,8 +232,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
