@@ -5,12 +5,14 @@ using UnityEngine;
 public class GameSession : MonoBehaviour
 {
     public static Combat ActiveCombat { get; set; }
+    public static AbstractCard OfferedCard { get; set; }
     public static Player Player { get; set; } = new();
 
     public enum State
     {
-        COMBAT, POST_COMBAT, LOOT
+        COMBAT, POST_COMBAT, LOOT, PRE_COMBAT
     }
+
 
     private static State gameState;
     public static State GameState
@@ -33,7 +35,7 @@ public class GameSession : MonoBehaviour
     }
 
     private static int EncounterCounter;
-    public void StartCombat()
+    public static void StartCombat()
     {
         ActiveCombat = new(EncounterGroups.Easy[EncounterCounter]);
         GameState = State.COMBAT;

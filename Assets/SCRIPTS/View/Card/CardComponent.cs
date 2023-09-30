@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -5,7 +6,18 @@ using UnityEngine.UI;
 
 public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public AbstractCard Card { get; set; }
+    private AbstractCard card;
+    public AbstractCard Card
+    {
+        get => card;
+        set
+        {
+            if (card == value) return;
+            card = value;
+            if (card == null) return;
+            TitleText.text = card.GetType().Name;
+        }
+    }
     private Vector2Spring PositionSpring;
     private BaseSpring RotSpring;
     private DrivenSpring ScaleSpring;
@@ -32,14 +44,15 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     [SerializeField] Image CooldownFill;
     [SerializeField] TMP_Text CooldownText;
     [SerializeField] TMP_Text TitleText;
+    [field: SerializeField] public RectTransform DragVisual { get; private set; }
 
     [Header("Spring Settings")]
     [field: SerializeField] private Spring.Config springConfig = new(20f, .6f);
 
-    [Header("Other Settings")]
-    public float PlayYThreshold;
-    private bool IsInPlayingArea => DragVisual.localPosition.y >= PlayYThreshold;
-    private bool IsPlayable => Combat.Active != null && Card.Cooldown.Value <= 0;
+    public Func<bool> IsPlayable = () => false; //Combat.Active != null && Card.Cooldown.Value <= 0;
+    public Func<bool> IsOverDropRegion = () => false;
+
+    public event Action<CardComponent, PointerEventData> OnDrop;
 
     private State state;
     enum State
@@ -58,10 +71,10 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     float GlowAlpha => state switch
     {
-        State.hovered => .5f,
-        State.dragging => IsInPlayingArea ? 1f : .5f,
-        State.dragging | State.hovered => IsInPlayingArea ? 1f : .5f,
-        _ => .3f
+        State.hovered => .3f,
+        State.dragging => IsOverDropRegion() ? 1f : .5f,
+        State.dragging | State.hovered => IsOverDropRegion() ? 1f : .5f,
+        _ => 0f
     };
 
     void Start()
@@ -83,7 +96,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         GlowEffectSpring.OnSpringUpdated += alpha => GlowEffect.color = new(GlowEffect.color.r, GlowEffect.color.g, GlowEffect.color.b, alpha);
     }
 
-    private RectTransform DragVisual => transform.GetChild(0) as RectTransform;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         state |= State.dragging;
@@ -98,7 +111,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     public void OnDrag(PointerEventData eventData)
     {
         PositionSpring.RestingPos = RootCanvas.worldCamera.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, RootCanvas.planeDistance));
-        if (IsInPlayingArea && !IsPlayable)
+        if (!IsPlayable())
         {
             eventData.pointerDrag = null;
             OnEndDrag(eventData);
@@ -113,7 +126,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         CanvasGroup.blocksRaycasts = true;
         RootCanvasGroup.blocksRaycasts = true;
 
-        if (IsInPlayingArea && IsPlayable) Combat.Active.PlayCard(Card);
+        if (eventData.pointerDrag != null) OnDrop.Invoke(this, eventData);
     }
 
     //TODO: Idea: implement an interesting looking sorting algorithm that runs in a coroutine and slowly sorts the hand at the start of each turn by cost

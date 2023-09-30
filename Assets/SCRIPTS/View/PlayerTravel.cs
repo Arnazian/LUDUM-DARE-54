@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class PlayerTravel : MonoBehaviour
 {
@@ -18,17 +19,19 @@ public class PlayerTravel : MonoBehaviour
 
     void OnStateChanged(GameSession.State state)
     {
-        if(state == GameSession.State.POST_COMBAT)
-            MovePlayer();
+        if (state == GameSession.State.POST_COMBAT)
+            MovePlayer(() => GameSession.GameState = GameSession.State.LOOT);
+        if (state == GameSession.State.PRE_COMBAT)
+        {
+            playerSpriteObject.transform.position = playerSpriteObject.transform.position - Vector3.right * distanceToTravel * 2;
+            MovePlayer(GameSession.StartCombat);
+        }
     }
 
-    public void MovePlayer()
+    public void MovePlayer(Action actionAfter)
     {
         float targetPositionX = playerSpriteObject.transform.position.x + distanceToTravel;
-        playerSpriteObject.transform.DOMoveX(targetPositionX, moveDurationInSeconds).OnComplete(() =>
-        {
-            GameSession.GameState = GameSession.State.LOOT;
-        });
+        playerSpriteObject.transform.DOMoveX(targetPositionX, moveDurationInSeconds).OnComplete(() => actionAfter?.Invoke());
     }
 }
 
