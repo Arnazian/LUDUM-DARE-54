@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "LD54 /RoundData")]
@@ -7,6 +8,6 @@ public class RoundData : ScriptableObject
     public int[] spawnPointNumber;
 
     [Header("Prefab Information")]
-    public GameObject[] prefabsToSpawn;
-   
+    public List<GameObject> enemiesToSpawn = new List<GameObject>();
 }
+   

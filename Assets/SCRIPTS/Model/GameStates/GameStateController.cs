@@ -9,12 +9,14 @@ public class GameStateController : MonoBehaviour
     private bool inTreasure = false;
     private bool isTravelling = false;
 
-    [SerializeField] private PlayerTravel playerTravel;
+    private PlayerTravel playerTravel;
+    private EnemySpawner enemySpawner;
 
     // private Combat activeCombat = Combat.ActiveCombat;
 
     private void Start()
     {
+        enemySpawner = GetComponent<EnemySpawner>();
         playerTravel = GetComponent<PlayerTravel>();    
         EnterTravelling();
     }
@@ -23,6 +25,7 @@ public class GameStateController : MonoBehaviour
     {
         inCombat = true;
         curRound++;
+        enemySpawner.SpawnEnemies();
         // spawn enemies
         // PlayerTurn();
 

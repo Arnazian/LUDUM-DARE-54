@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EasyOne
   m_EditorClassIdentifier: 
   spawnPointNumber: 0300000004000000
-  prefabsToSpawn:
+  enemiesToSpawn:
   - {fileID: 7244323080288346275, guid: c92a2fafec6e014468e1b18ae762c2e2, type: 3}
   - {fileID: 7244323080288346275, guid: c92a2fafec6e014468e1b18ae762c2e2, type: 3}
