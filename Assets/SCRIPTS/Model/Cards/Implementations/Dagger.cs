@@ -10,7 +10,7 @@ namespace Cards
 
         public override void OnPlayed(List<AbstractEnemy> targets)
         {
-            Debug.Log("Dagger played");            
+            Debug.Log("Dagger played");
         }
     }
 }

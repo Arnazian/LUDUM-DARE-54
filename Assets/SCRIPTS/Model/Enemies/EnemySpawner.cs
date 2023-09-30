@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach(GameObject go in enemiesToSpawn)
         {
-            activeCombat.Enemies.Add(go.GetComponent<AbstractEnemy>());
+            activeCombat.Enemies.Add(new DummyEnemy());
         }
     }
 

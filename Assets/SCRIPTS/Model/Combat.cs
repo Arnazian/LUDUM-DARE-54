@@ -22,12 +22,12 @@ public class Combat
     {
         foreach (var enemy in Enemies)
         {
-            if (enemy.Cooldown == 0)
+            if (enemy.ActCooldown.Value <= 0)
             {
                 enemy.Act();
                 break;
             }
-            enemy.Cooldown--;
+            enemy.ActCooldown.Value--;
         }
     }
 }
