@@ -26,7 +26,7 @@ public static class EncounterGroups
 
     public static List<List<AbstractEnemy>> Easy => new()
     {
-        new() { new DummyEnemy()}
+        new() { new DummyEnemy()},
     };
 
     public static List<List<AbstractEnemy>> Medium => new()

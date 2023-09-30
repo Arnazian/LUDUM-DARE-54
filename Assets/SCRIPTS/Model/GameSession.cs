@@ -9,7 +9,7 @@ public class GameSession : MonoBehaviour
 
     public enum State
     {
-        COMBAT, POST_COMBAT, LOOT
+        COMBAT, POST_COMBAT, LOOT, PRE_COMBAT
     }
 
     private static State gameState;
@@ -33,7 +33,7 @@ public class GameSession : MonoBehaviour
     }
 
     private static int EncounterCounter;
-    public void StartCombat()
+    public static void StartCombat()
     {
         ActiveCombat = new(EncounterGroups.Easy[EncounterCounter]);
         GameState = State.COMBAT;
