@@ -9,8 +9,11 @@ public class TreasureSelection : MonoBehaviour
     [SerializeField] private CardComponent card;
     [SerializeField] private float discardYThreshold = 4;
     [SerializeField] private CardHandComponent cardHand;
+
+    [SerializeField] private GameObject treasureSelectionScreen;
     void Start()
     {
+        treasureSelectionScreen.SetActive(false);
         GameSession.OnStateChanged += OnStateChanged;
         card.OnDrop = OnDrop;
         card.IsOverDropRegion = () => card.DragVisual.localPosition.y > discardYThreshold;
@@ -27,9 +30,10 @@ public class TreasureSelection : MonoBehaviour
     void OnStateChanged(GameSession.State state)
     {
         if (state != GameSession.State.LOOT) return;
+        treasureSelectionScreen.SetActive(false);
         GameSession.OfferedCard = new Cards.Dagger(); //TODO: replace with random card that gets better with combat difficulty
         card.Card = GameSession.OfferedCard;
-        card.gameObject.SetActive(true);
+        card.gameObject.SetActive(true); 
     }
 
     void OnDrag(CardComponent c, PointerEventData e)
