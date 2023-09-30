@@ -9,6 +9,15 @@ public class Combat
 
     public Queue<object> visualEvents;
 
+    public void PlayCard(AbstractCard card)
+    {
+        //do target selection stuff
+
+        //actually play 
+        card.OnPlayed(new());
+        card.Cooldown.Maximize();
+    }
+
     public void DoEnemyTurn()
     {
         foreach (var enemy in Enemies)
