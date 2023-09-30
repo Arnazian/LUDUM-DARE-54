@@ -14,7 +14,7 @@ public class GrowIntoPlace : MonoBehaviour
     [SerializeField] private Vector3 sizeToStartFrom;
     private Vector3 originalSize;
 
-    private void Start()
+    private void OnEnable()
     {
         originalSize = transform.localScale;
         StartCoroutine(CoroutineDoGrowIn());
