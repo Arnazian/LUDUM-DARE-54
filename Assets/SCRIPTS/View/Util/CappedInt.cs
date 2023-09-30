@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class CappedInt
 {
     public CappedInt() : this(0, 0) { }
@@ -8,8 +10,12 @@ public class CappedInt
         Min = min;
         Max = max;
     }
-    public int Value { get; set; }
+    public float Normalized { get => (Value - Min) / Mathf.Max(1f, (float)(Max - Min)); }
+    private int val;
+    public int Value { get => Mathf.Clamp(val, Min, Max); set => val = Mathf.Clamp(value, Min, Max); }
     public int Min { get; set; }
     public int Max { get; set; }
 
+    public void Maximize() => val = Max;
+    public void Minimize() => val = Min;
 }
