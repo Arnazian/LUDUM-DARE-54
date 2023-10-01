@@ -1376,6 +1376,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1613549595317374552, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.40999997
+      objectReference: {fileID: 0}
     - target: {fileID: 2725622224873344861, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1390,7 +1394,7 @@ PrefabInstance:
       objectReference: {fileID: 1624036130}
     - target: {fileID: 2834642040619634168, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_PlaneDistance
-      value: 6.1561885
+      value: 6.482408
       objectReference: {fileID: 0}
     - target: {fileID: 3206415779148298495, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: lineCurvature.m_Curve.Array.data[1].value
