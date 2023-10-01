@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,9 @@ using UnityEngine.EventSystems;
 
 public class CardHandComponent : MonoBehaviour
 {
+    [Header("Component References")]
     [SerializeField] private CardComponent CardTemplate;
+    [SerializeField] private CardSelectionVisualizer CardSelection;
 
     [field: SerializeField] public RectTransform[] CardSlots { get; private set; }
     private Dictionary<int, CardComponent> InstancesBySlotID = new();
@@ -45,15 +48,38 @@ public class CardHandComponent : MonoBehaviour
                 InstancesBySlotID[slot] = instance = Instantiate(CardTemplate, CardSlots[slot]);
             instance.Card = card;
             instance.IsOverDropRegion = () => instance.DragVisual.localPosition.y >= PlayYThreshold;
-            instance.IsDraggable = () => card.Cooldown.Value <= 0 && GameSession.GameState == GameSession.State.COMBAT;
+            instance.IsDraggable = () => selectionRoutine == null && card.Cooldown.Value <= 0 && GameSession.GameState == GameSession.State.COMBAT;
             instance.OnDrop = OnCardDropped;
         }
     }
 
     void OnCardDropped(CardComponent card, PointerEventData e)
     {
-        if (card.DragVisual.localPosition.y < PlayYThreshold) return;
-        Combat.Active.PlayCard(card.Card);
+        if (selectionRoutine != null || card.DragVisual.localPosition.y < PlayYThreshold) return;
+        selectionRoutine = StartCoroutine(PlayCardRoutine(card));
+    }
+
+    Coroutine selectionRoutine;
+    IEnumerator PlayCardRoutine(CardComponent card)
+    {
+        Queue<Type> selectionTypes = new(card.Card.Selections);
+        List<object> selections = new();
+        bool selecting = false;
+        Action<object> callback = (obj) =>
+        {
+            selecting = false;
+            selections.Add(obj);
+        };
+        ICardTarget.OnFinishSelection += callback;
+        while (selectionTypes.Count > 0)
+        {
+            selecting = true;
+            ICardTarget.DoSelection(card.transform.position + Vector3.up * 1f, selectionTypes.Dequeue());
+            while (selecting) yield return null;
+        }
+        ICardTarget.OnFinishSelection -= callback;
+        Combat.Active.PlayCard(card.Card, selections.ToArray());
+        selectionRoutine = null;
     }
 }
 

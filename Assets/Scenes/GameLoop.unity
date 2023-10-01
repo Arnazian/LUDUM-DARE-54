@@ -1389,7 +1389,7 @@ PrefabInstance:
       objectReference: {fileID: 1624036130}
     - target: {fileID: 2834642040619634168, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_PlaneDistance
-      value: 7.795032
+      value: 6.5972714
       objectReference: {fileID: 0}
     - target: {fileID: 3493632606037404392, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1572,6 +1572,7 @@ GameObject:
   - component: {fileID: 5266351264013964389}
   - component: {fileID: 790326155285730962}
   - component: {fileID: 6038854018678603630}
+  - component: {fileID: 6038854018678603631}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1595,6 +1596,22 @@ MonoBehaviour:
   springConfig:
     <AngularFrequency>k__BackingField: 10
     <DampingRatio>k__BackingField: 1.5
+--- !u!114 &6038854018678603631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6038854018678603629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1001 &8696424905534758382
 PrefabInstance:
   m_ObjectHideFlags: 0
