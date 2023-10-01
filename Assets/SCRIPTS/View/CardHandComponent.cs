@@ -19,7 +19,7 @@ public class CardHandComponent : MonoBehaviour
 
     bool IsPlayersTurn = false;
 
-    void Start()
+    void Awake()
     {
         GameSession.Player.OnCardChanged += UpdateCard;
         for (int i = 0; i < GameSession.Player.Cards.Count; i++)
@@ -27,6 +27,20 @@ public class CardHandComponent : MonoBehaviour
             AbstractCard card = GameSession.Player.Cards[i];
             UpdateCard(i, card);
         }
+        Combat.OnEventLogChanged += OnEventLogChanged;
+    }
+
+    private void OnEventLogChanged(CombatEvent e)
+    {
+        if (e.Target != GameSession.Player) return;
+        switch (e.Type)
+        {
+            case CombatEvent.EventType.TurnStarted:
+            case CombatEvent.EventType.TurnEnded:
+                IsPlayersTurn = e.Type == CombatEvent.EventType.TurnStarted;
+                break;
+        }
+
     }
 
     void OnDestroy()
