@@ -10,6 +10,8 @@ public class PlayerTravel : MonoBehaviour
     [SerializeField] private float moveDurationInSeconds;
     [SerializeField] private GameObject playerSpriteObject;
 
+    [SerializeField] private Animator anim;
+
     [SerializeField] private LevelLayoutController levelLayoutController;
 
     void Start()
@@ -29,9 +31,15 @@ public class PlayerTravel : MonoBehaviour
 
     public void MovePlayer(Action actionAfter)
     {
+        anim.SetBool("IsMoving", true);
         float targetPositionX = playerSpriteObject.transform.position.x + distanceToTravel;
         levelLayoutController.CreateNextLevelBlock();
-        playerSpriteObject.transform.DOMoveX(targetPositionX, moveDurationInSeconds).OnComplete(() => actionAfter?.Invoke());
+        playerSpriteObject.transform.DOMoveX(targetPositionX, moveDurationInSeconds).OnComplete(() =>
+        {
+            anim.SetBool("IsMoving", false);
+            actionAfter?.Invoke();           
+        });       
     }
-}
+} 
+
 
