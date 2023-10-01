@@ -33,8 +33,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6994207428164106339}
   - {fileID: 1913968687865859427}
+  - {fileID: 6994207428164106339}
   - {fileID: 4365422942150858559}
   m_Father: {fileID: 3493632606037404392}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -54,7 +54,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 0
+  m_PlaneDistance: 7.7942276
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -779,8 +779,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7334243464964890068}
   - {fileID: 2316730553728629673}
+  - {fileID: 7334243464964890068}
   m_Father: {fileID: 4573509555070955468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -804,6 +804,7 @@ MonoBehaviour:
   discardYThreshold: 4
   cardHand: {fileID: 3734545788571432852}
   treasureSelectionScreen: {fileID: 1153730719260677079}
+  treasureSelectionBackground: {fileID: 5219960842576458991}
 --- !u!1 &4017636420178039193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,17 +1153,17 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 10.129168
-      outSlope: 10.129168
-      tangentMode: 0
+      inSlope: 0.151291
+      outSlope: 0.151291
+      tangentMode: 34
       weightedMode: 2
       inWeight: 0.33333334
-      outWeight: 0.1983471
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.49999997
-      value: 1
-      inSlope: 0.00000011920929
-      outSlope: 0.00000011920929
+      value: 0.07564549
+      inSlope: 0.000000007450581
+      outSlope: 0.000000007450581
       tangentMode: 34
       weightedMode: 3
       inWeight: 0.33333334
@@ -1170,11 +1171,11 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -9.979375
-      outSlope: -9.979375
-      tangentMode: 0
+      inSlope: -0.15129098
+      outSlope: -0.15129098
+      tangentMode: 34
       weightedMode: 1
-      inWeight: 0.20041335
+      inWeight: 0.33333334
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1788,13 +1789,14 @@ GameObject:
   - component: {fileID: 9033518910123204333}
   - component: {fileID: 4165845537455701307}
   - component: {fileID: 5219960842576458991}
+  - component: {fileID: 469978287452639727}
   m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9033518910123204333
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1835,7 +1837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.9607843}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1852,6 +1854,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &469978287452639727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9021035503342411013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f539c98697e0daf4f98874e06b25cb32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageToFade: {fileID: 5219960842576458991}
+  delayToFadeIn: 0
+  durationToFadeIn: 2
+  startingAlpha: 0
 --- !u!1001 &4260295151061203540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2016,19 +2034,37 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1398046511780354939, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1961658451194774013, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
       insertIndex: 0
       addedObject: {fileID: 9033518910123204333}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3106714255918852483, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2417206621783674359}
   m_SourcePrefab: {fileID: 100100000, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
 --- !u!1 &1153730719260677079 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3106714255918852483, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
   m_PrefabInstance: {fileID: 4260295151061203540}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2417206621783674359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153730719260677079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73875e01edcb6f3459f04bad080ec815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayInSeconds: 3.2
+  objectToEnable: {fileID: 5173188502183582077}
 --- !u!224 &2316730553728629673 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1961658451194774013, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
@@ -2180,12 +2216,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8941829195927458423, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
   m_PrefabInstance: {fileID: 6382083503024197914}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 5173188502183582077}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b4578712056d4a43a65565097eb36f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5173188502183582077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2259519112913537127, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
+  m_PrefabInstance: {fileID: 6382083503024197914}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7334243464964890068 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4420776386249428174, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Sisus.ComponentNames;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class TreasureSelection : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class TreasureSelection : MonoBehaviour
     [SerializeField] private CardHandComponent cardHand;
 
     [SerializeField] private GameObject treasureSelectionScreen;
+    [SerializeField] private Image treasureSelectionBackground;
     void Start()
     {
         treasureSelectionScreen.SetActive(false);
@@ -31,13 +34,13 @@ public class TreasureSelection : MonoBehaviour
     {
         if (state != GameSession.State.LOOT)
         {
-            treasureSelectionScreen.SetActive(false);
+            StartCoroutine(CoroutineTurnOffTreasureSelectionScreen());
             return;
         }
         treasureSelectionScreen.SetActive(true);
         GameSession.OfferedCard = new Cards.Dagger(); //TODO: replace with random card that gets better with combat difficulty
         card.Card = GameSession.OfferedCard;
-        card.gameObject.SetActive(true);
+        // card.gameObject.SetActive(true);
     }
 
     void OnDrag(CardComponent c, PointerEventData e)
@@ -78,5 +81,13 @@ public class TreasureSelection : MonoBehaviour
                     break;
                 }
             }
+    }
+
+    IEnumerator CoroutineTurnOffTreasureSelectionScreen()
+    {
+        float backgroundFadeDuration = 2f;
+        treasureSelectionBackground.DOFade(0, backgroundFadeDuration);
+        yield return new WaitForSeconds(backgroundFadeDuration);
+        treasureSelectionScreen.SetActive(false);
     }
 }
