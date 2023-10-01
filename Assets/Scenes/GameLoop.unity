@@ -374,6 +374,11 @@ MonoBehaviour:
   levelBlockParent: {fileID: 1090305933}
   levelBlocks:
   - {fileID: 5775543650424354084, guid: 3246931f81cee10438c65f95d1d66114, type: 3}
+--- !u!4 &644181895 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7984200772796616196, guid: 38eb71e98cee9ad4188e32db4e19139f, type: 3}
+  m_PrefabInstance: {fileID: 8696424905534758382}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &685069464
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,11 +910,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e94070efd6de58845931e288a7dd634b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1526336496 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 435521200459215701, guid: 38eb71e98cee9ad4188e32db4e19139f, type: 3}
-  m_PrefabInstance: {fileID: 8696424905534758382}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1624036128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,7 +1592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76834b8258e2084bb9f996c98196aee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1526336496}
+  target: {fileID: 644181895}
   springConfig:
     <AngularFrequency>k__BackingField: 10
     <DampingRatio>k__BackingField: 1.5
@@ -1626,11 +1626,11 @@ PrefabInstance:
       objectReference: {fileID: 491724158}
     - target: {fileID: 4616674858838794643, guid: 38eb71e98cee9ad4188e32db4e19139f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.62
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 4616674858838794643, guid: 38eb71e98cee9ad4188e32db4e19139f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.52
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4616674858838794643, guid: 38eb71e98cee9ad4188e32db4e19139f, type: 3}
       propertyPath: m_LocalPosition.z
