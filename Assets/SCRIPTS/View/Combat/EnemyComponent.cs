@@ -13,6 +13,7 @@ public class EnemyComponent : MonoBehaviour
     Spring.Config springConfig = new(20, 2f);
     [SerializeField] private TMP_Text HealthText;
     [SerializeField] private TMP_Text ActionCooldown;
+    [SerializeField] StatusEffectList StatusList;
 
     private EnemyGetHitEffects getHitEffects;
 
@@ -20,6 +21,7 @@ public class EnemyComponent : MonoBehaviour
     {
         getHitEffects = GetComponent<EnemyGetHitEffects>();
         Combat.OnEventLogChanged += OnNewCombatEvent;
+        StatusList.Target = enemy;
         HealthText.text = enemy.ReadOnlyHealth.Value.ToString();
 
         HealthSpring = new(springConfig)

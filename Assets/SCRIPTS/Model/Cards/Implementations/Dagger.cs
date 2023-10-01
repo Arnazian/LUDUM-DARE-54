@@ -18,8 +18,7 @@ namespace Cards
         {
             foreach (var target in args)
             {
-                (target as IDamageable)?.RecieveDamage(Damage);
-                (target as IStatusEffectTarget)?.Apply<Bleeding>(1);
+                (target as IDamageable)?.RecieveDamage(Damage);                
             }
         }
     }

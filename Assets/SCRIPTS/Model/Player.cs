@@ -8,6 +8,8 @@ public class Player : IStatusEffectTarget, IDamageable
     IReadOnlyCappedInt IDamageable.Health => this.Health;
     public IReadOnlyCappedInt ReadOnlyHealth => this.Health;
 
+    public IStatusEffectTarget StatusEffectTarget => this;
+
     public const int CardCapacity = 5;
     public List<AbstractCard> Cards { get; private set; } = new(CardCapacity) {
         new Cards.Dagger(),
