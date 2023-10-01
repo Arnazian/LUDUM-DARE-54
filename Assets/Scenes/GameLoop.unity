@@ -266,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 442790983}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.23, y: -0.02, z: 0}
+  m_LocalPosition: {x: 4.23, y: -0.02, z: -0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -601,7 +601,7 @@ Transform:
   m_GameObject: {fileID: 1161061978}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.16, y: 0, z: 0}
+  m_LocalPosition: {x: 6.16, y: 0, z: -0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1682,7 +1682,7 @@ PrefabInstance:
       objectReference: {fileID: 1624036130}
     - target: {fileID: 2834642040619634168, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_PlaneDistance
-      value: 12.364834
+      value: 12.368241
       objectReference: {fileID: 0}
     - target: {fileID: 2907834182432135724, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
