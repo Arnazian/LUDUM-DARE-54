@@ -4,31 +4,27 @@ using UnityEngine;
 
 public class LevelLayoutController : MonoBehaviour
 {
-    [SerializeField] private float distanceOffsetX = 19.2f;
-    [SerializeField] private Transform levelBlockFolder;
+    [SerializeField] private Transform levelBlockParent;
     [SerializeField] private GameObject[] levelBlocks;
-    [SerializeField] private List<GameObject> activeLevelBlocks = new List<GameObject>();
+    private List<GameObject> activeLevelBlocks = new();
 
-    
-    void Start()
+    private float posX = -40;
+
+    public void Start()
     {
-        
-    }
-    void Update()
-    {
-        
+        for (int i = 0; i < 3; i++) CreateNextLevelBlock();
     }
 
     public void CreateNextLevelBlock()
     {
         GameObject newBlockDesign = levelBlocks[Random.Range(0, levelBlocks.Length)];
         GameObject newLevelBlock = Instantiate(newBlockDesign);
-        newLevelBlock.transform.parent = levelBlockFolder;
+        newLevelBlock.transform.parent = levelBlockParent;
 
-        float newPosX = activeLevelBlocks[activeLevelBlocks.Count - 1].transform.position.x + distanceOffsetX;
-        newLevelBlock.transform.position = new Vector2 (newPosX, newLevelBlock.transform.position.y);
+        posX += 20f;
+        newLevelBlock.transform.position = new Vector2(posX, newLevelBlock.transform.position.y);
         activeLevelBlocks.Add(newLevelBlock);
-        DestroyOldestLevelBlock();
+        if (activeLevelBlocks.Count > 3) DestroyOldestLevelBlock();
     }
 
     void DestroyOldestLevelBlock()

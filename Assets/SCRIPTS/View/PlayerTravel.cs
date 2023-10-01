@@ -21,11 +21,8 @@ public class PlayerTravel : MonoBehaviour
 
     void OnStateChanged(GameSession.State state)
     {
-        if (state == GameSession.State.POST_COMBAT)
-            MovePlayer(() => GameSession.GameState = GameSession.State.LOOT);
         if (state == GameSession.State.PRE_COMBAT)
         {
-            playerSpriteObject.transform.position = playerSpriteObject.transform.position - Vector3.right * distanceToTravel * 2;
             MovePlayer(GameSession.StartCombat);
         }
     }

@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 4616674858838794643}
   - component: {fileID: 3643012952749988995}
   m_Layer: 0
-  m_Name: PlayerCharacter 1
+  m_Name: PlayerCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c554e452ebb8c649a6bf3628726af13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToTravel: 19.2
+  distanceToTravel: 20
   moveDurationInSeconds: 4
   playerSpriteObject: {fileID: 8738373692355687733}
   levelLayoutController: {fileID: 0}
