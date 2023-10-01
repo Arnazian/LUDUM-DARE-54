@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.SymbolStore;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,10 +16,12 @@ public class EnemyComponent : MonoBehaviour
     [SerializeField] private TMP_Text ActionCooldown;
     [SerializeField] StatusEffectList StatusList;
 
+    private EnemyAttackVisuals attackVisuals;
     private EnemyGetHitEffects getHitEffects;
 
     void Start()
     {
+        attackVisuals = GetComponent<EnemyAttackVisuals>();
         getHitEffects = GetComponent<EnemyGetHitEffects>();
         Combat.OnEventLogChanged += OnNewCombatEvent;
         StatusList.Target = enemy;
@@ -72,7 +75,8 @@ public class EnemyComponent : MonoBehaviour
 
     IEnumerator AnimateAction(CombatEvent e)
     {
-        yield return new WaitForSeconds(1f);
+        attackVisuals.DoAttackVisuals();
+        yield return new WaitForSeconds(0.5f);
         e.Consume();
     }
 
