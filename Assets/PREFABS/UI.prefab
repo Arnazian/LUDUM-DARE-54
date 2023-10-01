@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 2189348484874536097}
   - component: {fileID: 6948549481051662424}
   - component: {fileID: 3252909725510236320}
-  m_Layer: 5
-  m_Name: Card Hand Canvas
+  m_Layer: 0
+  m_Name: Card Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,6 +34,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6994207428164106339}
+  - {fileID: 1913968687865859427}
   m_Father: {fileID: 3493632606037404392}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -52,7 +53,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 7.794229
+  m_PlaneDistance: 0
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -61,7 +62,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 1825873835
+  m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &2699324870582981446
@@ -420,13 +421,12 @@ Transform:
   m_GameObject: {fileID: 1562488388531373445}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7051759, y: -1.0025289, z: 662.0684}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4824513320588049489}
   - {fileID: 4573509555070955468}
-  - {fileID: 4221025516945289714}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2141165714185808942
@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 4595195468598209082}
   - component: {fileID: 93965946084061852}
   - component: {fileID: 2399424375344226280}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Slot (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +552,7 @@ GameObject:
   - component: {fileID: 8464997216649526934}
   - component: {fileID: 4636154186506920452}
   - component: {fileID: 7700846439039242442}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Slot (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -673,6 +673,60 @@ MonoBehaviour:
   - {fileID: 889976478882025613}
   - {fileID: 4595195468598209082}
   PlayYThreshold: 3
+--- !u!1 &3862624092195072242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1913968687865859427}
+  - component: {fileID: 5436825621112180234}
+  m_Layer: 0
+  m_Name: TreasureSelection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1913968687865859427
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3862624092195072242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7334243464964890068}
+  - {fileID: 2316730553728629673}
+  m_Father: {fileID: 4573509555070955468}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5436825621112180234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3862624092195072242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f4e54d9cda0a694b848f693900bffce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card: {fileID: 2631920117450687341}
+  discardYThreshold: 4
+  cardHand: {fileID: 3734545788571432852}
+  treasureSelectionScreen: {fileID: 1153730719260677079}
 --- !u!1 &4017636420178039193
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +841,7 @@ GameObject:
   - component: {fileID: 7322945377436401189}
   - component: {fileID: 7342282446144285088}
   - component: {fileID: 3774948570347426118}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -862,7 +916,7 @@ GameObject:
   - component: {fileID: 889976478882025613}
   - component: {fileID: 862226672954960844}
   - component: {fileID: 9179715340052427310}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Slot (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1060,43 +1114,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &5617609030222588510
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3337634675297745726}
-  m_Layer: 5
-  m_Name: TreasureSelection
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &3337634675297745726
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5617609030222588510}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7.7942505}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7334243464964890068}
-  - {fileID: 2316730553728629673}
-  m_Father: {fileID: 4221025516945289714}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -960, y: -540}
-  m_SizeDelta: {x: -1904, y: -1071}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6277392294868721704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,7 +1124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6250518833729459991}
   - component: {fileID: 236987439661088627}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1239,142 +1256,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &6539302780663012077
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4221025516945289714}
-  - component: {fileID: 2725622224873344861}
-  - component: {fileID: 7183424498227603104}
-  - component: {fileID: 3497723735544684255}
-  - component: {fileID: 2610829454601872433}
-  - component: {fileID: 6601411244701447366}
-  m_Layer: 5
-  m_Name: Treasure Selection Canvas
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &4221025516945289714
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6539302780663012077}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3337634675297745726}
-  m_Father: {fileID: 3493632606037404392}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
---- !u!223 &2725622224873344861
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6539302780663012077}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 1
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!114 &7183424498227603104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6539302780663012077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
---- !u!114 &3497723735544684255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6539302780663012077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &2610829454601872433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6539302780663012077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4e54d9cda0a694b848f693900bffce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  card: {fileID: 2631920117450687341}
-  discardYThreshold: 4
-  cardHand: {fileID: 3734545788571432852}
-  treasureSelectionScreen: {fileID: 5617609030222588510}
---- !u!114 &6601411244701447366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6539302780663012077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4e54d9cda0a694b848f693900bffce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  card: {fileID: 2631920117450687341}
-  discardYThreshold: 4
-  cardHand: {fileID: 3734545788571432852}
-  treasureSelectionScreen: {fileID: 5617609030222588510}
 --- !u!1 &7172154258062470523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,7 +1267,7 @@ GameObject:
   - component: {fileID: 6333518609265141224}
   - component: {fileID: 4962614030764242815}
   - component: {fileID: 280697203123811695}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Slot (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1630,7 +1511,7 @@ GameObject:
   - component: {fileID: 9033518910123204333}
   - component: {fileID: 4165845537455701307}
   - component: {fileID: 5219960842576458991}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1700,7 +1581,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3337634675297745726}
+    m_TransformParent: {fileID: 1913968687865859427}
     m_Modifications:
     - target: {fileID: 184078818745714207, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
       propertyPath: m_LocalScale.x
@@ -1768,15 +1649,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1961658451194774013, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1961658451194774013, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1961658451194774013, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1961658451194774013, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1798,6 +1679,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2180772969058351910, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2337136329194512424, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -1812,7 +1697,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3106714255918852483, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106714255918852483, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240980159171694621, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123382779251699455, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4434863836728481633, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
       propertyPath: m_LocalScale.x
@@ -1824,11 +1721,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6944627891572975581, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219855779655729866, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7422940354932926841, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9141190568933210029, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
       propertyPath: m_LocalScale.x
@@ -1846,6 +1747,11 @@ PrefabInstance:
       addedObject: {fileID: 9033518910123204333}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
+--- !u!1 &1153730719260677079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3106714255918852483, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
+  m_PrefabInstance: {fileID: 4260295151061203540}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2316730553728629673 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1961658451194774013, guid: b65bc6e895456054c8efb6b579258deb, type: 3}
@@ -1857,14 +1763,30 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3337634675297745726}
+    m_TransformParent: {fileID: 1913968687865859427}
     m_Modifications:
+    - target: {fileID: 1688819758695918756, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2259519112913537127, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
       propertyPath: m_Name
-      value: PlayerCardComponent
+      value: TreasureCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259519112913537127, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2259519112913537127, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305381500943462800, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3422387244741242242, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4420776386249428174, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
@@ -1947,12 +1869,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5072827869727186705, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5855571578412477624, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6691933506750484858, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
       propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7518810643472006846, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7560519010247135739, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7722849460890972158, guid: 3e922fc04ed492b4baab4838243f51c2, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

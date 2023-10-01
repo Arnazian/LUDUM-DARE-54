@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private float smoothTime = 0.3f;
     [SerializeField] private Transform target;
-    private Vector3 velocity = Vector3.zero;
-
-    private void FixedUpdate()
+    private Vector2Spring PositionSpring;
+    [SerializeField] private Spring.Config springConfig;
+    private void Start()
     {
-        MoveToTarget();        
+        PositionSpring = new(springConfig);
+        PositionSpring.OnSpringUpdated += (pos) => transform.position = new(pos.x, pos.y, transform.position.z);
     }
 
-    void MoveToTarget()
+    private void Update()
     {
-        Vector3 targetPos = new Vector3(target.position.x, transform.position.y, transform.position.z);
-        transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity, smoothTime);
+        PositionSpring.RestingPos = target.position;
+        PositionSpring.Step(Time.deltaTime);
     }
 }

@@ -29,11 +29,15 @@ public class TreasureSelection : MonoBehaviour
 
     void OnStateChanged(GameSession.State state)
     {
-        if (state != GameSession.State.LOOT) return;
-        treasureSelectionScreen.SetActive(false);
+        if (state != GameSession.State.LOOT)
+        {
+            treasureSelectionScreen.SetActive(false);
+            return;
+        }
+        treasureSelectionScreen.SetActive(true);
         GameSession.OfferedCard = new Cards.Dagger(); //TODO: replace with random card that gets better with combat difficulty
         card.Card = GameSession.OfferedCard;
-        card.gameObject.SetActive(true); 
+        card.gameObject.SetActive(true);
     }
 
     void OnDrag(CardComponent c, PointerEventData e)

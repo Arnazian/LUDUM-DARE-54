@@ -10,7 +10,7 @@ public class GameSession : MonoBehaviour
 
     public enum State
     {
-        COMBAT, POST_COMBAT, LOOT, PRE_COMBAT
+        COMBAT, LOOT, PRE_COMBAT
     }
 
 

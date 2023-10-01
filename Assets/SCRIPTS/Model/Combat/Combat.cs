@@ -59,7 +59,7 @@ public class Combat
         {
             Player.OnCombatEnd();
             GameSession.ActiveCombat = null;
-            GameSession.GameState = GameSession.State.POST_COMBAT;
+            GameSession.GameState = GameSession.State.LOOT;
         }
         else Player.OnStartTurn();
     }
