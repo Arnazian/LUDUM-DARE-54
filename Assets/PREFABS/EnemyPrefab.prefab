@@ -5238,7 +5238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6190980593788416498
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5335,7 +5335,7 @@ GameObject:
   - component: {fileID: -2897376442765248092}
   - component: {fileID: 27218635406030815}
   m_Layer: 0
-  m_Name: EnemyPlaceHolder
+  m_Name: EnemyPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5371,7 +5371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb58a8e63ea6ad5459998d5dc877387b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemySprite: {fileID: 0}
+  EnemySprite: {fileID: 8088467258443476850}
   Healthbar: {fileID: 3329533315513235326}
   HealthText: {fileID: 3015221322702830199}
   ActionCooldown: {fileID: 1095087030169110501}
