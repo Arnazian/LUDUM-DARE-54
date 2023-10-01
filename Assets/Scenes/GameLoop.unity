@@ -374,7 +374,6 @@ MonoBehaviour:
   levelBlockParent: {fileID: 1090305933}
   levelBlocks:
   - {fileID: 5775543650424354084, guid: 3246931f81cee10438c65f95d1d66114, type: 3}
-  posX: 0
 --- !u!1 &685069464
 GameObject:
   m_ObjectHideFlags: 0
