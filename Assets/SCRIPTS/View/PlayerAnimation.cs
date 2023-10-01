@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,6 +6,24 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
+    [Header("Sprite References")]
+    [SerializeField] private SpriteRenderer mainSprite;
+    [SerializeField] private SpriteRenderer hitFlashSprite;
+
+    [Header("Audio References")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip getHitClip;
+
+    [Header("Particle References")]
+    [SerializeField] private ParticleSystem getHitParticles;
+
+    [Header("Flash Values")]
+    [SerializeField] private float flashDuration = 0.2f;
+    [SerializeField] private float secondsToFadeSprite = 0.15f;
+
+    [Header("Animator Reference")]
+    [SerializeField] private Animator anim;
+
     void Start()
     {
         Combat.OnEventLogChanged += OnEvent;
@@ -77,7 +96,16 @@ public class PlayerAnimation : MonoBehaviour
 
     IEnumerator BeenDamagedAnimation(CombatEvent e)
     {
-        yield return null;
+        float effectDuration = 0.5f;
+
+        getHitParticles.Play();
+        hitFlashSprite.DOFade(1, secondsToFadeSprite);
+        mainSprite.DOFade(0, secondsToFadeSprite);
+        yield return new WaitForSeconds(flashDuration);
+        hitFlashSprite.DOFade(0, secondsToFadeSprite);
+        mainSprite.DOFade(1, secondsToFadeSprite);
+
+        yield return new WaitForSeconds(effectDuration);
         e.Consume();
     }
 
