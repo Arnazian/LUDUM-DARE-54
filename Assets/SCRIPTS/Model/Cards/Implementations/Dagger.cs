@@ -1,6 +1,6 @@
 
-using System.Collections.Generic;
-using UnityEngine;
+using System;
+
 
 namespace Cards
 {
@@ -8,12 +8,11 @@ namespace Cards
     {
         public override CappedInt Cooldown { get; set; } = new(0, 3);
         private const int Damage = 5;
-
-        public override void OnPlayed(List<AbstractEnemy> targets)
+        public override Type[] Selections => new[] { typeof(AbstractEnemy) };
+        public override void OnPlayed(params object[] args)
         {
-            Debug.Log("Dagger played");
-            foreach (var target in targets)
-                target.Damage(Damage);
+            foreach (var target in args)
+                (target as AbstractEnemy)?.Damage(Damage);
         }
     }
 }

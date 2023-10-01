@@ -6,7 +6,7 @@ namespace Cards
     {
         public override CappedInt Cooldown { get; set; } = new(0, 3);
 
-        public override void OnPlayed(List<AbstractEnemy> targets)
+        public override void OnPlayed(params object[] args)
         {
             var player = Combat.Player;
         }

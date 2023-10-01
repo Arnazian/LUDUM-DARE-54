@@ -34,13 +34,9 @@ public class Combat
         ProcessEnemies();
     }
 
-    public void PlayCard(AbstractCard card)
-    {
-        //do target selection stuff
-
-
-        //actually play 
-        card.OnPlayed(new());
+    public void PlayCard(AbstractCard card, params object[] args)
+    {                
+        card.OnPlayed(args);
 
         foreach (var c in Player.Cards.Where(c => c != null))
             c.Cooldown.Value--;
