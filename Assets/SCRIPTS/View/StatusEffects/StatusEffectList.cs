@@ -40,7 +40,7 @@ public class StatusEffectList : MonoBehaviour
                 effect = e.Args[0] as AbstractStatusEffect;
                 if (Target.GetStacks(effect.GetType()) == 0)
                 {
-                    Destroy(Instances[effect]?.gameObject);
+                    if (Instances[effect] != null) Destroy(Instances[effect].gameObject);
                     Instances[effect] = null;
                 }
                 break;
