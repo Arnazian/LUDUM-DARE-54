@@ -17,7 +17,10 @@ namespace Cards
         public override void OnPlayed(params object[] args)
         {
             foreach (var target in args)
-                (target as AbstractEnemy)?.TakeDamage(Damage);
+            {
+                (target as IDamageable)?.RecieveDamage(Damage);
+                (target as IStatusEffectTarget)?.Apply<Bleeding>(1);
+            }
         }
     }
 }

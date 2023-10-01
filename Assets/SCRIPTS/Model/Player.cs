@@ -70,7 +70,6 @@ public class Player : IStatusEffectTarget, IDamageable
         IStatusEffectTarget.OnBeforeRecieveDamage(this, ref amount);
         Health.Value -= amount;
         Combat.Active.PushCombatEvent(CombatEvent.Damaged(this, amount));
-        //TODO: handle death
         if (Health.Value <= 0) Die();
     }
 
@@ -85,5 +84,6 @@ public class Player : IStatusEffectTarget, IDamageable
     void Die()
     {
         GameSession.GameState = GameSession.State.GAME_OVER;
+        //TODO: handle deathg
     }
 }

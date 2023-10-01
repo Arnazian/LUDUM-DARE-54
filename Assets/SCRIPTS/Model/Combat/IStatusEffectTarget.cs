@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public interface IStatusEffectTarget
 {
@@ -10,54 +11,62 @@ public interface IStatusEffectTarget
         Add, Max
     }
 
-    public static void OnBeginTurn(IStatusEffectTarget target) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnBeginTurn(target); }
-    public static void OnEndTurn(IStatusEffectTarget target) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnEndTurn(target); }
-    public static void OnAfterTargetSelection(IStatusEffectTarget target, ref object[] TargetSelections) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnAfterTargetSelection(target, ref TargetSelections); }
-    public static void OnBeforeDoDamage(IStatusEffectTarget target, ref int amount) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnBeforeDealDamage(target, ref amount); }
-    public static void OnBeforeRecieveDamage(IStatusEffectTarget target, ref int amount) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnBeforeRecieveDamage(target, ref amount); }
-    public static void OnBeforeRecieveHealing(IStatusEffectTarget target, ref int amount) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnBeforeRecieveHeal(target, ref amount); }
-    public static void OnBeforeDoHealing(IStatusEffectTarget target, ref int amount) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnBeforeDoHealing(target, ref amount); }
-    public static void OnAfterAction(IStatusEffectTarget target, Action Action) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnAfterAction(target, Action); }
+    public static void OnBeginTurn(IStatusEffectTarget target) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnBeginTurn(); }
+    public static void OnEndTurn(IStatusEffectTarget target) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnEndTurn(); }
+    public static void OnAfterTargetSelection(IStatusEffectTarget target, ref object[] TargetSelections) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnAfterTargetSelection(ref TargetSelections); }
+    public static void OnBeforeDoDamage(IStatusEffectTarget target, ref int amount) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnBeforeDealDamage(ref amount); }
+    public static void OnBeforeRecieveDamage(IStatusEffectTarget target, ref int amount) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnBeforeRecieveDamage(ref amount); }
+    public static void OnBeforeRecieveHealing(IStatusEffectTarget target, ref int amount) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnBeforeRecieveHeal(ref amount); }
+    public static void OnBeforeDoHealing(IStatusEffectTarget target, ref int amount) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnBeforeDoHealing(ref amount); }
+    public static void OnAfterAction(IStatusEffectTarget target, Action Action) { foreach (var effect in target.EffectStacks) effect.Value.effect.OnAfterAction(Action); }
 
 
+    public int GetStacks<EffectType>() => GetStacks(typeof(EffectType));
+    public int GetStacks(Type type) => EffectStacks.TryGetValue(type, out var effect) ? effect.stacks : 0;
 
-    public virtual void Apply<EffectType>(int stacks, ApplyBlending blending = ApplyBlending.Max) where EffectType : IStatusEffect, new()
+    public virtual void Apply<EffectType>(int stacks, ApplyBlending blending = ApplyBlending.Max) where EffectType : AbstractStatusEffect, new() => Apply(typeof(EffectType), stacks, blending);
+    public virtual void Apply(Type type, int stacks, ApplyBlending blending = ApplyBlending.Max)
     {
-        if (stacks == 0) return; //do nothing        
-        if (!EffectStacks.ContainsKey(typeof(EffectType)))
+        if (stacks == 0) return; //do nothing                
+        if (!EffectStacks.TryGetValue(type, out var appliedEffect))
         {
-            var effect = Activator.CreateInstance<EffectType>();
-            EffectStacks.Add(typeof(EffectType), new(effect, stacks));
-            effect.OnApply(this);
+            var effect = (AbstractStatusEffect)Activator.CreateInstance(type);
+            effect.EffectTarget = this;
+            EffectStacks.Add(type, new(effect, stacks));
+            effect.OnApply();
         }
-        var appliedEffect = EffectStacks[typeof(EffectType)];
+        else
+        {
+            stacks = blending == ApplyBlending.Max ? Mathf.Max(stacks, GetStacks(type)) : stacks + GetStacks(type);
+
+        }
         Combat.Active.PushCombatEvent(CombatEvent.ApplyStatus(this, appliedEffect.effect, appliedEffect.stacks));
     }
 
-    public virtual void Remove<EffectType>(int stacks = -1) where EffectType : IStatusEffect
+    public virtual void Remove<EffectType>(int stacks = -1) where EffectType : AbstractStatusEffect => Remove(typeof(EffectType), stacks);
+    public virtual void Remove(Type type, int stacks = -1)
     {
         if (stacks == 0) return; //do nothing
-        if (!EffectStacks.ContainsKey(typeof(EffectType))) return; //effect not found        
+        if (!EffectStacks.ContainsKey(type)) return; //effect not found        
 
-        var reducedStatusEffect = EffectStacks[typeof(EffectType)];
+        var reducedStatusEffect = EffectStacks[type];
         reducedStatusEffect.stacks -= stacks < 0 ? reducedStatusEffect.stacks : stacks; //if stacks negative, remove all
         if (reducedStatusEffect.stacks == 0)
         {
-            var effect = EffectStacks[typeof(EffectType)].effect;
-            EffectStacks.Remove(typeof(EffectType)); //remove if counter at exactly 0. negative effects stay        
-            effect.OnRemove(this);
+            var effect = EffectStacks[type].effect;
+            EffectStacks.Remove(type); //remove if counter at exactly 0. negative effects stay
+            effect.OnRemove();
         }
-        else EffectStacks[typeof(EffectType)] = reducedStatusEffect;
+        else EffectStacks[type] = reducedStatusEffect;
         Combat.Active.PushCombatEvent(CombatEvent.RemoveStatus(this, reducedStatusEffect.effect, reducedStatusEffect.stacks));
-
     }
 
     protected struct AppliedEffect
     {
-        public IStatusEffect effect;
+        public AbstractStatusEffect effect;
         public int stacks;
 
-        public AppliedEffect(IStatusEffect effect, int stacks)
+        public AppliedEffect(AbstractStatusEffect effect, int stacks)
         {
             this.effect = effect;
             this.stacks = stacks;

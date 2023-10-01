@@ -41,11 +41,6 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
             target.RecieveHealing(amount);
     }
 
-    public void TakeDamage(int amount)
-    {
-
-    }
-
     public void Die()
     {
         Health.Value = 0;

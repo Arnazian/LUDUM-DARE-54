@@ -53,13 +53,6 @@ public class PlayerHUD : MonoBehaviour
                 UpdateHealthUI();
                 e.Consume();
                 break;
-            case CombatEvent.EventType.Killed:
-                e.Consume();
-                break;
-            case CombatEvent.EventType.StatusApplied:
-            case CombatEvent.EventType.StatusRemoved:
-                e.Consume();
-                break;
         };
     }
 

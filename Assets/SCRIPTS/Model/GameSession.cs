@@ -30,7 +30,7 @@ public class GameSession : MonoBehaviour
     public void CheatKillAll()
     {
         foreach (var enemy in ActiveCombat.Enemies.ToList())
-            enemy.TakeDamage(int.MaxValue);
+            enemy.Die();
         ActiveCombat.Pass();
     }
 
