@@ -18,12 +18,14 @@ public class Combat
         EventLogHistory.Add(e);
         if (EventLog.Count == 0) return; //queue empty
         _OnEventLogChanged?.Invoke(EventLog.Peek());
+        if(e.users == 0) ConsumeCombatEvent(e);
     }
     public void PushCombatEvent(CombatEvent e)
     {
-        EventLog.Enqueue(e);
+        EventLog.Enqueue(e);        
         if (EventLog.Count > 1) return; //'e' not visible yet
         _OnEventLogChanged?.Invoke(EventLog.Peek());
+        if(e.users == 0) ConsumeCombatEvent(e);
     }
 
     private static event Action<CombatEvent> _OnEventLogChanged;
@@ -61,6 +63,7 @@ public class Combat
         foreach (var c in Player.Cards.Where(c => c != null))
             c.Cooldown.Value--;
         card.Cooldown.Maximize();
+        PushCombatEvent(CombatEvent.TakenAction(Player));
 
         //End Turn
         Pass();

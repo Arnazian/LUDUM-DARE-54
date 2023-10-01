@@ -11,6 +11,7 @@ public class PlayerHUD : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private Image healthImage;
+    [SerializeField] private StatusEffectList statusEffectList;
     BaseSpring HealthSpring;
     Spring.Config springConfig = new(20, 2f);
     void Start()
@@ -26,6 +27,7 @@ public class PlayerHUD : MonoBehaviour
 
         GameSession.OnStateChanged += OnStateChanged;
         Combat.OnEventLogChanged += OnEventLogChanged;
+        statusEffectList.Target = GameSession.Player;
     }
 
     private void UpdateMaterial(float fill)
@@ -51,7 +53,6 @@ public class PlayerHUD : MonoBehaviour
             case CombatEvent.EventType.Damaged:
             case CombatEvent.EventType.Healed:
                 UpdateHealthUI();
-                e.Consume();
                 break;
         };
     }

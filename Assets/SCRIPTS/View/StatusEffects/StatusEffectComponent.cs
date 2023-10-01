@@ -8,24 +8,25 @@ using UnityEngine.UI;
 
 public class StatusEffectComponent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] IStatusEffectTarget target;
     [SerializeField] TMP_Text StackCountText;
     [SerializeField] RectTransform Tooltip;
     [SerializeField] TMP_Text TooltipName;
     [SerializeField] TMP_Text TooltipDescr;
     [SerializeField] Image BaseImage;
 
-    public AbstractStatusEffect effect;
+    public IStatusEffectTarget Target { get; set; }
+    private AbstractStatusEffect effect;
     public AbstractStatusEffect Effect
     {
         get => effect;
         set
         {
             effect = value;
-            BaseImage.color = effect.Color;
-            TooltipName.text = effect.Name;
-            TooltipDescr.text = effect.Description;
-            StackCountText.text = effect.Stacks.ToString();
+            if (value == null) return;
+            BaseImage.color = value.Color;
+            TooltipName.text = value.Name;
+            TooltipDescr.text = value.Description;
+            StackCountText.text = value.Stacks.ToString();
         }
     }
 
@@ -36,7 +37,7 @@ public class StatusEffectComponent : MonoBehaviour, IPointerEnterHandler, IPoint
 
     private void OnCombatEvent(CombatEvent e)
     {
-        if (e.Target != target) return;
+        if (e.Target != Target) return;
         switch (e.Type)
         {
             case CombatEvent.EventType.StatusApplied:

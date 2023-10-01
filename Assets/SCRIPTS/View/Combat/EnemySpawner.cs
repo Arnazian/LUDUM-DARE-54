@@ -26,7 +26,6 @@ public class EnemySpawner : MonoBehaviour
                 SpawnEnemies();
                 break;
             case GameSession.State.LOOT:
-                DestroyEnemies();
                 break;
         }
     }
@@ -34,23 +33,12 @@ public class EnemySpawner : MonoBehaviour
     // instantiate visuals at start of combat
     public void SpawnEnemies()
     {
-        DestroyEnemies();
         int enemyCount = GameSession.ActiveCombat.Enemies.Count;
         for (int i = 0; i < enemyCount; i++)
         {
             var EnemyInstance = Instantiate(EnemyTemplate, spawnPoints[i]);
             EnemyInstance.enemy = GameSession.ActiveCombat.Enemies[i];
             spawnedEnemies.Add(EnemyInstance);
-        }
-    }
-
-    // clean up visuals after combat
-    public void DestroyEnemies()
-    {
-        while (spawnedEnemies.Count > 0)
-        {
-            if (spawnedEnemies[0] != null) Destroy(spawnedEnemies[0].gameObject);
-            spawnedEnemies.RemoveAt(0);
         }
     }
 }

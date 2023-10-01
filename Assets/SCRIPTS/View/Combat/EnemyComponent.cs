@@ -13,6 +13,7 @@ public class EnemyComponent : MonoBehaviour
     Spring.Config springConfig = new(20, 2f);
     [SerializeField] private TMP_Text HealthText;
     [SerializeField] private TMP_Text ActionCooldown;
+    [SerializeField] StatusEffectList StatusList;
 
     private EnemyGetHitEffects getHitEffects;
 
@@ -20,6 +21,7 @@ public class EnemyComponent : MonoBehaviour
     {
         getHitEffects = GetComponent<EnemyGetHitEffects>();
         Combat.OnEventLogChanged += OnNewCombatEvent;
+        StatusList.Target = enemy;
         HealthText.text = enemy.ReadOnlyHealth.Value.ToString();
 
         HealthSpring = new(springConfig)
@@ -45,11 +47,13 @@ public class EnemyComponent : MonoBehaviour
         switch (e.Type)
         {
             case CombatEvent.EventType.Killed:
+                e.Accept();
                 getHitEffects.DoDeathEffects();
                 /// Destroy(gameObject); //death animation
                 e.Consume();
                 break;
             case CombatEvent.EventType.Damaged:
+                e.Accept();
                 getHitEffects.DoGetHitEffects();
                 HealthText.text = enemy.ReadOnlyHealth.Value.ToString();
                 HealthSpring.RestingPos = enemy.ReadOnlyHealth.Normalized;
@@ -58,10 +62,20 @@ public class EnemyComponent : MonoBehaviour
             case CombatEvent.EventType.TurnEnded:
             case CombatEvent.EventType.TurnStarted:
                 ActionCooldown.text = enemy.ReadOnlyActCooldown.Value > 0 ? enemy.ReadOnlyActCooldown.Value.ToString() : "<color=red>0</color>";
-                e.Consume();
+                break;
+            case CombatEvent.EventType.TakenAction:
+                e.Accept();
+                StartCoroutine(AnimateAction(e));
                 break;
         }
     }
+
+    IEnumerator AnimateAction(CombatEvent e)
+    {
+        yield return new WaitForSeconds(1f);
+        e.Consume();
+    }
+
     void Update() => HealthSpring.Step(Time.deltaTime);
 
     void OnDestroy()

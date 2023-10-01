@@ -13,8 +13,7 @@ namespace Cards
 
         public override void OnPlayed(params object[] args)
         {
-            //Combat.Player.Block.Value += 5;
-            Debug.Log("Shield played");
+            GameSession.Player.StatusEffectTarget.Apply<Block>(5);
         }
     }
 }

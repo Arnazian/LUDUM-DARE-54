@@ -7,6 +7,6 @@ public class DummyEnemy : AbstractEnemy
 
     public override void Act()
     {
-        GameSession.Player.RecieveDamage(5);
+        DealDamage(5);
     }
 }

@@ -62,6 +62,6 @@ public class EnemyGetHitEffects : MonoBehaviour
         // replace with death effects
         DoGetHitEffects();
         yield return new WaitForSeconds(2f);
-        // Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

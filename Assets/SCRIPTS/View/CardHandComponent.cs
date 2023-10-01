@@ -27,21 +27,6 @@ public class CardHandComponent : MonoBehaviour
             AbstractCard card = GameSession.Player.Cards[i];
             UpdateCard(i, card);
         }
-        Combat.OnEventLogChanged += OnEventLogChanged;
-    }
-
-    private void OnEventLogChanged(CombatEvent e)
-    {
-        if (e.Target != GameSession.Player) return;
-        switch (e.Type)
-        {
-            case CombatEvent.EventType.TurnStarted:
-            case CombatEvent.EventType.TurnEnded:
-                IsPlayersTurn = e.Type == CombatEvent.EventType.TurnStarted;
-                e.Consume();
-                break;
-        }
-
     }
 
     void OnDestroy()
