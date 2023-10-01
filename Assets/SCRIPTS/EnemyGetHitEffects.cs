@@ -20,6 +20,8 @@ public class EnemyGetHitEffects : MonoBehaviour
     [SerializeField] private float flashDuration = 0.2f;
     [SerializeField] private float secondsToFadeSprite = 0.15f;
 
+    private Sequence fadeMainToNormal;
+
     void Start()
     {
         hitFlashSprite.DOFade(0, 0);
@@ -59,9 +61,14 @@ public class EnemyGetHitEffects : MonoBehaviour
     }
     IEnumerator CoroutineDeathEffects()
     {
-        // replace with death effects
-        DoGetHitEffects();
-        yield return new WaitForSeconds(2f);
+        mainSprite.enabled = false;
+
+        getHitParticles.Play();
+        hitFlashSprite.DOFade(1, secondsToFadeSprite);
+        yield return new WaitForSeconds(flashDuration);
+        hitFlashSprite.DOFade(0, secondsToFadeSprite);
+
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 }
