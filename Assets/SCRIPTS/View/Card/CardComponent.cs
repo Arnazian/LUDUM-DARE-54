@@ -56,6 +56,9 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     [Header("Spring Settings")]
     [field: SerializeField] private Spring.Config springConfig = new(20f, .6f);
 
+    [Header("Audio Settings")]
+    [SerializeField] AudioSource audioSource;
+
     public Func<bool> IsDraggable = () => false; //Combat.Active != null && Card.Cooldown.Value <= 0;
     public Func<bool> IsOverDropRegion = () => false;
 
@@ -170,6 +173,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     public void OnPointerEnter(PointerEventData eventData)
     {
         state |= State.hovered;
+        audioSource.Play();
         Tooltip.gameObject.SetActive(true);
     }
 

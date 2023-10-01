@@ -28,7 +28,8 @@ public class EnemyComponent : MonoBehaviour
         {
             case CombatEvent.EventType.Killed:
                 if (e.Args[0] != enemy) break;
-                Destroy(gameObject); //death animation
+                getHitEffects.DoDeathEffects();
+                /// Destroy(gameObject); //death animation
                 e.Consume();
                 break;
             case CombatEvent.EventType.Damaged:
