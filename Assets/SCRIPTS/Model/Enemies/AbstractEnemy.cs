@@ -20,6 +20,7 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
             return;
         }
         Act();
+        Combat.Active.PushCombatEvent(CombatEvent.TakenAction(this));
         IStatusEffectTarget.OnAfterAction(this, Act);
         ActCooldown.Maximize();
         IStatusEffectTarget.OnEndTurn(this);

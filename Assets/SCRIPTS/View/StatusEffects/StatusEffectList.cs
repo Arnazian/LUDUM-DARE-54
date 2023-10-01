@@ -35,7 +35,6 @@ public class StatusEffectList : MonoBehaviour
                 var effect = e.Args[0] as AbstractStatusEffect;
                 if (!Instances.ContainsKey(effect))
                     InstantiateEffectComponent(effect);
-                e.Consume();
                 break;
             case CombatEvent.EventType.StatusRemoved:
                 effect = e.Args[0] as AbstractStatusEffect;
@@ -44,7 +43,6 @@ public class StatusEffectList : MonoBehaviour
                     Destroy(Instances[effect]?.gameObject);
                     Instances[effect] = null;
                 }
-                e.Consume();
                 break;
         }
     }

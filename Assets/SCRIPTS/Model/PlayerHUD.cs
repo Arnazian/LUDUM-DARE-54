@@ -53,7 +53,6 @@ public class PlayerHUD : MonoBehaviour
             case CombatEvent.EventType.Damaged:
             case CombatEvent.EventType.Healed:
                 UpdateHealthUI();
-                e.Consume();
                 break;
         };
     }
