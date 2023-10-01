@@ -41,6 +41,6 @@ public static class EncounterGroups
 
     public static List<List<AbstractEnemy>> Boss => new()
     {
-        new() { new DummyEnemy(), new DummyEnemy(), new DummyEnemy(), new DummyEnemy()}
+        new() { new DummyEnemy(), new DummyEnemy(), new DummyEnemy(), new DummyEnemy(), new DummyEnemy()}
     };
 }

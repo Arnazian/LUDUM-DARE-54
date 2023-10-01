@@ -22,7 +22,7 @@ public class PlayerHUD : MonoBehaviour
             RestingPos = GameSession.Player.ReadOnlyHealth.Normalized
         };
         healthImage.material = Instantiate(healthImage.material);
-
+        healthText.text = GameSession.Player.Health.Value.ToString();
         HealthSpring.OnSpringUpdated += UpdateMaterial;
 
         GameSession.OnStateChanged += OnStateChanged;

@@ -34,10 +34,32 @@ public class GameSession : MonoBehaviour
         ActiveCombat.Pass();
     }
 
+
+    private static readonly EncounterGroups.Difficulty[] Pattern = new EncounterGroups.Difficulty[]
+    {
+        EncounterGroups.Difficulty.Easy,
+        EncounterGroups.Difficulty.Easy,
+        EncounterGroups.Difficulty.Easy,
+        EncounterGroups.Difficulty.Medium,
+        EncounterGroups.Difficulty.Easy,
+        EncounterGroups.Difficulty.Medium,
+        EncounterGroups.Difficulty.Medium,
+        EncounterGroups.Difficulty.Medium,
+        EncounterGroups.Difficulty.Hard,
+        EncounterGroups.Difficulty.Medium,
+        EncounterGroups.Difficulty.Hard,
+        EncounterGroups.Difficulty.Hard,
+        EncounterGroups.Difficulty.Hard,
+        EncounterGroups.Difficulty.Hard,
+        EncounterGroups.Difficulty.Boss,
+    };
+
     private static int EncounterCounter;
     public static void StartCombat()
     {
-        ActiveCombat = new(EncounterGroups.Easy[EncounterCounter]);
+        var encounterOptions = EncounterGroups.EncountersByDifficulty[Pattern[EncounterCounter++]];
+        var rand = new System.Random();
+        ActiveCombat = new(encounterOptions[rand.Next(encounterOptions.Count)]);
         GameState = State.COMBAT;
         ActiveCombat.PushCombatEvent(CombatEvent.TurnStarted(Player));
     }
