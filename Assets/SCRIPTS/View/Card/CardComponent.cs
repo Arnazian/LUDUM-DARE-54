@@ -15,7 +15,9 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             if (card == value) return;
             card = value;
             if (card == null) return;
-            TitleText.text = card.GetType().Name;
+            TitleText.text = card.Name;
+            DescriptionText.text = card.Description;
+            Artwork.sprite = Resources.Load<Sprite>($"Cards/{card.Name}");
         }
     }
     public Vector2Spring PositionSpring { get; private set; }
@@ -43,8 +45,13 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     [SerializeField] Image GlowEffect;
     [SerializeField] Image CooldownFill;
     [SerializeField] TMP_Text CooldownText;
-    [SerializeField] TMP_Text TitleText;
     [field: SerializeField] public RectTransform DragVisual { get; private set; }
+
+    [Header("Tooltip")]
+    [SerializeField] RectTransform Tooltip;
+    [SerializeField] TMP_Text TitleText;
+    [SerializeField] TMP_Text DescriptionText;
+    
 
     [Header("Spring Settings")]
     [field: SerializeField] private Spring.Config springConfig = new(20f, .6f);
@@ -107,6 +114,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
         CanvasGroup.blocksRaycasts = false;
         RootCanvasGroup.blocksRaycasts = false;
+        Tooltip.gameObject.SetActive(false);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -162,10 +170,12 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     public void OnPointerEnter(PointerEventData eventData)
     {
         state |= State.hovered;
+        Tooltip.gameObject.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         state &= ~State.hovered;
+        Tooltip.gameObject.SetActive(false);
     }
 }

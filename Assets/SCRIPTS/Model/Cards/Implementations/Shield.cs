@@ -8,6 +8,9 @@ namespace Cards
     {
         public override CappedInt Cooldown { get; set; } = new(0, 3);
 
+        public override string Name => "Block";
+        public override string Description => "Gain 5 Block.";
+
         public override void OnPlayed(params object[] args)
         {
             Cooldown.Value = Cooldown.Max;
