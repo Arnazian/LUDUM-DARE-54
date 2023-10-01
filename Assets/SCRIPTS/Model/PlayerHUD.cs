@@ -42,7 +42,7 @@ public class PlayerHUD : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
-        gameObject.SetActive(true);        
+        gameObject.SetActive(true);
     }
 
     private void OnEventLogChanged(CombatEvent e)
@@ -52,15 +52,15 @@ public class PlayerHUD : MonoBehaviour
         {
             case CombatEvent.EventType.Damaged:
             case CombatEvent.EventType.Healed:
-                UpdateHealthUI();
+                UpdateHealthUI(e);
                 break;
         };
     }
 
-    void UpdateHealthUI()
+    void UpdateHealthUI(CombatEvent e)
     {
-        healthText.text = GameSession.Player.ReadOnlyHealth.Value.ToString();
-        HealthSpring.RestingPos = GameSession.Player.ReadOnlyHealth.Normalized;
+        healthText.text = e.Args[0].ToString();
+        HealthSpring.RestingPos = ((int)e.Args[0]) / (float)GameSession.Player.ReadOnlyHealth.Max;
     }
 
     void Update() => HealthSpring.Step(Time.deltaTime);

@@ -53,7 +53,7 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
     {
         IStatusEffectTarget.OnBeforeRecieveDamage(this, ref amount);
         Health.Value -= amount;
-        GameSession.ActiveCombat.PushCombatEvent(CombatEvent.Damaged(this, amount));
+        GameSession.ActiveCombat.PushCombatEvent(CombatEvent.Damaged(this, Health.Value));
         if (Health.Value <= 0) Die();
     }
 
@@ -61,7 +61,7 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
     {
         IStatusEffectTarget.OnBeforeRecieveHealing(this, ref amount);
         Health.Value += amount;
-        GameSession.ActiveCombat.PushCombatEvent(CombatEvent.Healed(this, amount));
+        GameSession.ActiveCombat.PushCombatEvent(CombatEvent.Healed(this, Health.Value));
         if (Health.Value <= 0) Die();
     }
 }
