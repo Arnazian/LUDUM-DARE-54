@@ -14,7 +14,7 @@ namespace Cards
         public override void OnPlayed(params object[] args)
         {
             var player = Combat.Player;
-            player.DoHeal(player.ReadOnlyHealth.Max);
+            player.DoHealing(player.ReadOnlyHealth.Max, player);
             player.RemoveCard(this);
         }
     }

@@ -17,7 +17,7 @@ namespace Cards
         public override void OnPlayed(params object[] args)
         {
             foreach (var target in args)
-                (target as AbstractEnemy)?.Damage(Damage);
+                (target as AbstractEnemy)?.TakeDamage(Damage);
         }
     }
 }

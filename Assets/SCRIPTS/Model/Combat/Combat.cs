@@ -46,14 +46,18 @@ public class Combat
     public void Pass()
     {
         PushCombatEvent(CombatEvent.TurnEnded(Player));
+        IStatusEffectTarget.OnEndTurn(Player);
         ProcessEnemies();
+        if (GameSession.GameState != GameSession.State.COMBAT) return; // combat over, exit early
+        IStatusEffectTarget.OnBeginTurn(Player);
         PushCombatEvent(CombatEvent.TurnStarted(Player));
     }
 
     public void PlayCard(AbstractCard card, params object[] args)
     {
+        IStatusEffectTarget.OnAfterTargetSelection(Player, ref args);
         card.OnPlayed(args);
-
+        IStatusEffectTarget.OnAfterAction(Player, () => card.OnPlayed(args));
         foreach (var c in Player.Cards.Where(c => c != null))
             c.Cooldown.Value--;
         card.Cooldown.Maximize();
@@ -67,7 +71,7 @@ public class Combat
         foreach (var enemy in Enemies.ToList())
         {
             PushCombatEvent(CombatEvent.TurnStarted(enemy));
-            enemy.DoTurn();
+            enemy.DoTurn();            
             PushCombatEvent(CombatEvent.TurnEnded(enemy));
         }
         if (Enemies.Count == 0) //won combat
@@ -76,6 +80,5 @@ public class Combat
             GameSession.ActiveCombat = null;
             GameSession.GameState = GameSession.State.LOOT;
         }
-        else Player.OnStartTurn();
     }
 }

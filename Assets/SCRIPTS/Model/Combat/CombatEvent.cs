@@ -26,4 +26,7 @@ public class CombatEvent
     public static CombatEvent Healed(object target, int amount) => new(EventType.Healed, target, amount);
     public static CombatEvent TurnStarted(object target) => new(EventType.TurnStarted, target);
     public static CombatEvent TurnEnded(object target) => new(EventType.TurnEnded, target);
+
+    public static CombatEvent ApplyStatus(object target, IStatusEffect status, int stacks) => new(EventType.StatusApplied, target, status, stacks);
+    public static CombatEvent RemoveStatus(object target, IStatusEffect status, int stacks) => new(EventType.StatusRemoved, target, status, stacks);
 }

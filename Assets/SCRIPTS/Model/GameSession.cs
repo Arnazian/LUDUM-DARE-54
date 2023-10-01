@@ -10,7 +10,7 @@ public class GameSession : MonoBehaviour
 
     public enum State
     {
-        COMBAT, LOOT, PRE_COMBAT
+        COMBAT, LOOT, PRE_COMBAT, GAME_OVER
     }
 
 
@@ -30,7 +30,7 @@ public class GameSession : MonoBehaviour
     public void CheatKillAll()
     {
         foreach (var enemy in ActiveCombat.Enemies.ToList())
-            enemy.Damage(int.MaxValue);
+            enemy.TakeDamage(int.MaxValue);
         ActiveCombat.Pass();
     }
 
