@@ -719,28 +719,7 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 3279681619122535296}
-    - target: {fileID: 8897225511249507671, guid: 85c477f4e1d4f4449b0b5b823feeb9a3, type: 3}
-      propertyPath: shieldBG
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8897225511249507671, guid: 85c477f4e1d4f4449b0b5b823feeb9a3, type: 3}
-      propertyPath: healthText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8897225511249507671, guid: 85c477f4e1d4f4449b0b5b823feeb9a3, type: 3}
-      propertyPath: shieldText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8897225511249507671, guid: 85c477f4e1d4f4449b0b5b823feeb9a3, type: 3}
-      propertyPath: healthSlider
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8897225511249507671, guid: 85c477f4e1d4f4449b0b5b823feeb9a3, type: 3}
-      propertyPath: shieldSlider
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8897225511249507671, guid: 85c477f4e1d4f4449b0b5b823feeb9a3, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1682,7 +1661,7 @@ PrefabInstance:
       objectReference: {fileID: 1624036130}
     - target: {fileID: 2834642040619634168, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_PlaneDistance
-      value: 12.364834
+      value: 12.3636465
       objectReference: {fileID: 0}
     - target: {fileID: 2907834182432135724, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
