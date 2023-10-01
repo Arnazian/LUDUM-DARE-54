@@ -29,8 +29,8 @@ public class EnemyComponent : MonoBehaviour
 
         HealthSpring = new(springConfig)
         {
-            Position = GameSession.Player.ReadOnlyHealth.Normalized,
-            RestingPos = GameSession.Player.ReadOnlyHealth.Normalized
+            Position = enemy.ReadOnlyHealth.Normalized,
+            RestingPos = enemy.ReadOnlyHealth.Normalized
         };
         healthImage.material = Instantiate(healthImage.material);
 
