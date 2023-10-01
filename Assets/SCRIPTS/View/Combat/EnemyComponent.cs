@@ -8,7 +8,9 @@ public class EnemyComponent : MonoBehaviour
 {
     public AbstractEnemy enemy;
     [SerializeField] private SpriteRenderer EnemySprite;
-    [SerializeField] private Image Healthbar;
+    [SerializeField] private Image healthImage;
+    BaseSpring HealthSpring;
+    Spring.Config springConfig = new(20, 2f);
     [SerializeField] private TMP_Text HealthText;
     [SerializeField] private TMP_Text ActionCooldown;
 
@@ -17,40 +19,53 @@ public class EnemyComponent : MonoBehaviour
     void Start()
     {
         getHitEffects = GetComponent<EnemyGetHitEffects>();
-        GameSession.ActiveCombat.OnEventLogChanged += OnNewCombatEvent;
+        Combat.OnEventLogChanged += OnNewCombatEvent;
         HealthText.text = enemy.ReadOnlyHealth.Value.ToString();
-        Healthbar.fillAmount = enemy.ReadOnlyHealth.Normalized;
+
+        HealthSpring = new(springConfig)
+        {
+            Position = GameSession.Player.ReadOnlyHealth.Normalized,
+            RestingPos = GameSession.Player.ReadOnlyHealth.Normalized
+        };
+        healthImage.material = Instantiate(healthImage.material);
+
+        HealthSpring.OnSpringUpdated += UpdateMaterial;
+
         ActionCooldown.text = enemy.ReadOnlyActCooldown.Value > 0 ? enemy.ReadOnlyActCooldown.Value.ToString() : "";
     }
+
+    private void UpdateMaterial(float fill)
+    {
+        healthImage.material.SetFloat("_Fill", fill);
+    }
+
     private void OnNewCombatEvent(CombatEvent e)
     {
+        if (e.Target != enemy) return;
         switch (e.Type)
         {
             case CombatEvent.EventType.Killed:
-                if (e.Args[0] != enemy) break;
                 getHitEffects.DoDeathEffects();
                 /// Destroy(gameObject); //death animation
                 e.Consume();
                 break;
             case CombatEvent.EventType.Damaged:
-                if (e.Args[0] != enemy) break;
                 getHitEffects.DoGetHitEffects();
                 HealthText.text = enemy.ReadOnlyHealth.Value.ToString();
-                Healthbar.fillAmount = enemy.ReadOnlyHealth.Normalized;
+                HealthSpring.RestingPos = enemy.ReadOnlyHealth.Normalized;
                 e.Consume();
                 break;
-            case CombatEvent.EventType.EnemyTurnStarted:
-                ActionCooldown.text = enemy.ReadOnlyActCooldown.Value > 0 ? enemy.ReadOnlyActCooldown.Value.ToString() : "";
+            case CombatEvent.EventType.TurnEnded:
+            case CombatEvent.EventType.TurnStarted:
+                ActionCooldown.text = enemy.ReadOnlyActCooldown.Value > 0 ? enemy.ReadOnlyActCooldown.Value.ToString() : "<color=red>0</color>";
                 e.Consume();
                 break;
-
         }
-
-
     }
+    void Update() => HealthSpring.Step(Time.deltaTime);
+
     void OnDestroy()
     {
-        if (GameSession.ActiveCombat != null)
-            GameSession.ActiveCombat.OnEventLogChanged -= OnNewCombatEvent;
+        Combat.OnEventLogChanged -= OnNewCombatEvent;
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 public class Player
 {
     public CappedInt Health { get; private set; } = new(20, 20);
-    public CappedInt Block { get; private set; } = new(0, int.MaxValue);
+    public IReadOnlyCappedInt ReadOnlyHealth => this.Health;    
 
     public const int CardCapacity = 5;
     public List<AbstractCard> Cards { get; private set; } = new(CardCapacity) {
@@ -48,7 +48,19 @@ public class Player
         foreach (var card in Cards.Where(card => card != null))
         {
             card.Cooldown.Minimize();
-            Block.Minimize();
         }
+    }
+
+    public void DoDamage(int amount)
+    {
+        Health.Value -= amount;
+        Combat.Active.PushCombatEvent(CombatEvent.Damaged(this, amount));
+        //TODO: handle death
+    }
+
+    public void DoHeal(int amount)
+    {
+        Health.Value += amount;
+        Combat.Active.PushCombatEvent(CombatEvent.Healed(this, amount));
     }
 }

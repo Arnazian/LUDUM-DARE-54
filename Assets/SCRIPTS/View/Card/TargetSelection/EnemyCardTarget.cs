@@ -23,7 +23,6 @@ public class EnemyCardTarget : MonoBehaviour, ICardTarget
     {
         if (ICardTarget.CurrentSelectionType != typeof(AbstractEnemy)) return;
         ICardTarget.InvokeEnter(Camera.main.WorldToScreenPoint(transform.position));
-        Debug.Log(transform.position);
     }
     public void OnPointerExit(PointerEventData eventData)
     {

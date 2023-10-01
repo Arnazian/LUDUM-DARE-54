@@ -8,8 +8,11 @@ public abstract class AbstractEnemy
     public abstract void Act();
     public void DoTurn()
     {
-        ActCooldown.Value--;
-        if (ActCooldown.Value > 0) return;
+        if (ActCooldown.Value > 0)
+        {
+            ActCooldown.Value--;
+            return;
+        }
         Act();
         ActCooldown.Maximize();
     }

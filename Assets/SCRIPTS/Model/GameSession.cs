@@ -39,5 +39,6 @@ public class GameSession : MonoBehaviour
     {
         ActiveCombat = new(EncounterGroups.Easy[EncounterCounter]);
         GameState = State.COMBAT;
+        ActiveCombat.PushCombatEvent(CombatEvent.TurnStarted(Player));
     }
 }

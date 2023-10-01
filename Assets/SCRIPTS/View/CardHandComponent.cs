@@ -17,6 +17,8 @@ public class CardHandComponent : MonoBehaviour
     [Header("Other Settings")]
     public float PlayYThreshold;
 
+    bool IsPlayersTurn = false;
+
     void Start()
     {
         GameSession.Player.OnCardChanged += UpdateCard;
@@ -25,6 +27,21 @@ public class CardHandComponent : MonoBehaviour
             AbstractCard card = GameSession.Player.Cards[i];
             UpdateCard(i, card);
         }
+        Combat.OnEventLogChanged += OnEventLogChanged;
+    }
+
+    private void OnEventLogChanged(CombatEvent e)
+    {
+        if (e.Target != GameSession.Player) return;
+        switch (e.Type)
+        {
+            case CombatEvent.EventType.TurnStarted:
+            case CombatEvent.EventType.TurnEnded:
+                IsPlayersTurn = e.Type == CombatEvent.EventType.TurnStarted;
+                e.Consume();
+                break;
+        }
+
     }
 
     void OnDestroy()
@@ -48,7 +65,7 @@ public class CardHandComponent : MonoBehaviour
                 InstancesBySlotID[slot] = instance = Instantiate(CardTemplate, CardSlots[slot]);
             instance.Card = card;
             instance.IsOverDropRegion = () => instance.DragVisual.localPosition.y >= PlayYThreshold;
-            instance.IsDraggable = () => selectionRoutine == null && card.Cooldown.Value <= 0 && GameSession.GameState == GameSession.State.COMBAT;
+            instance.IsDraggable = () => IsPlayersTurn && selectionRoutine == null && card.Cooldown.Value <= 0 && GameSession.GameState == GameSession.State.COMBAT;
             instance.OnDrop = OnCardDropped;
         }
     }

@@ -2,23 +2,28 @@ public class CombatEvent
 {
     public enum EventType
     {
-        EnemyTurnStarted,
-        PlayerTurnStarted,
+        TurnStarted,
+        TurnEnded,
         Damaged,
         Healed,
         Killed,
         StatusApplied,
+        StatusRemoved,
     }
     public EventType Type { get; }
+    public object Target { get; }
     public object[] Args { get; }
 
-    public CombatEvent(EventType type, params object[] args)
+    public CombatEvent(EventType type, object target, params object[] args)
     {
         Type = type;
+        Target = target;
         Args = args;
     }
-    public void Consume() => GameSession.ActiveCombat.ConsumeCombatEvent(this);
-    public static CombatEvent Killed(AbstractEnemy enemy) => new(EventType.Killed, enemy);
-    public static CombatEvent Damaged(AbstractEnemy enemy, int amount) => new(EventType.Damaged, enemy, amount);
-    public static CombatEvent EnemyTurnStarted => new(EventType.EnemyTurnStarted);
+    public void Consume() => GameSession.ActiveCombat?.ConsumeCombatEvent(this);
+    public static CombatEvent Killed(object target) => new(EventType.Killed, target);
+    public static CombatEvent Damaged(object target, int amount) => new(EventType.Damaged, target, amount);
+    public static CombatEvent Healed(object target, int amount) => new(EventType.Healed, target, amount);
+    public static CombatEvent TurnStarted(object target) => new(EventType.TurnStarted, target);
+    public static CombatEvent TurnEnded(object target) => new(EventType.TurnEnded, target);
 }
