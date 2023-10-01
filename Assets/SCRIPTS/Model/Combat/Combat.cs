@@ -13,13 +13,16 @@ public class Combat
     public IReadOnlyList<CombatEvent> ImmutableEventLogHistory => EventLogHistory;
     private readonly Queue<CombatEvent> EventLog = new();
     public void ConsumeCombatEvent(CombatEvent e)
-    {
-        if (EventLog.Peek() == e) EventLog.Dequeue();
-        EventLogHistory.Add(e);
+    {        
         if (EventLog.Count == 0) return; //queue empty
-        _OnEventLogChanged?.Invoke(EventLog.Peek());
-        if(e.users == 0) ConsumeCombatEvent(e);
+        if (EventLog.Peek() == e) EventLog.Dequeue();
+        EventLogHistory.Add(e);        
+        if (EventLog.Count == 0) return; //queue empty
+        e = EventLog.Peek();
+        _OnEventLogChanged?.Invoke(e);
+        if(e.users == 0 && EventLog.Count > 0) ConsumeCombatEvent(e);        
     }
+
     public void PushCombatEvent(CombatEvent e)
     {
         EventLog.Enqueue(e);        
