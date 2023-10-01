@@ -7,12 +7,13 @@ public class LevelLayoutController : MonoBehaviour
     [SerializeField] private Transform levelBlockParent;
     [SerializeField] private GameObject[] levelBlocks;
     private List<GameObject> activeLevelBlocks = new();
+    [SerializeField] private Transform enemyRoot;
 
-    private float posX = -40;
+    private float posX = -60;
 
     public void Start()
     {
-        for (int i = 0; i < 3; i++) CreateNextLevelBlock();
+        for (int i = 0; i < 4; i++) CreateNextLevelBlock();
     }
 
     public void CreateNextLevelBlock()
@@ -21,10 +22,11 @@ public class LevelLayoutController : MonoBehaviour
         GameObject newLevelBlock = Instantiate(newBlockDesign);
         newLevelBlock.transform.parent = levelBlockParent;
 
+        enemyRoot.transform.position = new(posX, 0, enemyRoot.transform.position.z);
         posX += 20f;
         newLevelBlock.transform.position = new Vector2(posX, newLevelBlock.transform.position.y);
         activeLevelBlocks.Add(newLevelBlock);
-        if (activeLevelBlocks.Count > 3) DestroyOldestLevelBlock();
+        if (activeLevelBlocks.Count > 4) DestroyOldestLevelBlock();
     }
 
     void DestroyOldestLevelBlock()

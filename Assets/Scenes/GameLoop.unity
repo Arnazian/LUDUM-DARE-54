@@ -374,6 +374,7 @@ MonoBehaviour:
   levelBlockParent: {fileID: 1090305933}
   levelBlocks:
   - {fileID: 5775543650424354084, guid: 3246931f81cee10438c65f95d1d66114, type: 3}
+  enemyRoot: {fileID: 980695843}
 --- !u!4 &644181895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7984200772796616196, guid: 38eb71e98cee9ad4188e32db4e19139f, type: 3}
@@ -1011,7 +1012,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 96
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1389,7 +1390,51 @@ PrefabInstance:
       objectReference: {fileID: 1624036130}
     - target: {fileID: 2834642040619634168, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_PlaneDistance
-      value: 6.5972714
+      value: 6.1561885
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206415779148298495, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
+      propertyPath: lineCurvature.m_Curve.Array.data[1].value
+      value: 0.07564549
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206415779148298495, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
+      propertyPath: lineCurvature.m_Curve.Array.data[0].inSlope
+      value: 0.151291
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206415779148298495, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
+      propertyPath: lineCurvature.m_Curve.Array.data[1].inSlope
+      value: 0.000000007450581
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206415779148298495, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
+      propertyPath: lineCurvature.m_Curve.Array.data[2].inSlope
+      value: -0.15129098
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206415779148298495, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
+      propertyPath: lineCurvature.m_Curve.Array.data[0].outSlope
+      value: 0.151291
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206415779148298495, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
+      propertyPath: lineCurvature.m_Curve.Array.data[1].outSlope
+      value: 0.000000007450581
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206415779148298495, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
+      propertyPath: lineCurvature.m_Curve.Array.data[2].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206415779148298495, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
+      propertyPath: lineCurvature.m_Curve.Array.data[2].outSlope
+      value: -0.15129098
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206415779148298495, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
+      propertyPath: lineCurvature.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206415779148298495, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
+      propertyPath: lineCurvature.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206415779148298495, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
+      propertyPath: lineCurvature.m_Curve.Array.data[2].tangentMode
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 3493632606037404392, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1524,7 +1569,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 151
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

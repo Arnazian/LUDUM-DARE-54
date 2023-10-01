@@ -60,10 +60,10 @@ public class CardSelectionVisualizer : MonoBehaviour
         var delta = (to - from) / dotCount;
         for (int i = 0; i < dotCount; i++)
         {
-            var pos = delta + from;
+            var pos = delta * (i + .5f) + from;
             var cross = Vector2.Perpendicular(delta);
             if (cross.y < 0) cross = -cross;
-            //pos += cross * lineCurvature.Evaluate(i / (float)dotCount);
+            pos += cross * lineCurvature.Evaluate(i / (float)dotCount) * len;
             Dots[i].position = new(pos.x, pos.y, Dots[i].position.z);
         }
     }
@@ -71,6 +71,7 @@ public class CardSelectionVisualizer : MonoBehaviour
     void Init(Vector2 startPosition)
     {
         this.StartPosition = startPosition;
+        PositionSpring.Position = StartPosition;
         Crosshair.gameObject.SetActive(true);
         Cursor.visible = false;
     }
@@ -78,10 +79,16 @@ public class CardSelectionVisualizer : MonoBehaviour
     void End(object _)
     {
         Crosshair.gameObject.SetActive(false);
+        while (Dots.Count > 0)
+        {
+            Destroy(Dots[0].gameObject);
+            Dots.RemoveAt(0);
+        }
         Cursor.visible = true;
+        OverridePosition = null;
     }
 
-    void OnEnter(Vector2 pos) => OverridePosition = pos;
+    void OnEnter(Vector2 p) => OverridePosition = RootCanvas.worldCamera.ScreenToWorldPoint(new(p.x, p.y, RootCanvas.planeDistance));
     void OnExit() => OverridePosition = null;
 
 }

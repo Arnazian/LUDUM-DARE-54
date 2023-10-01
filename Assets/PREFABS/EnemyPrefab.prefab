@@ -4982,7 +4982,7 @@ GameObject:
   - component: {fileID: 8942264666466814907}
   - component: {fileID: 8745605922600153246}
   - component: {fileID: 3206534838759597461}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5059,7 +5059,7 @@ GameObject:
   - component: {fileID: 2442945319391684948}
   - component: {fileID: 4025958396099880334}
   - component: {fileID: 3015221322702830199}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5193,7 +5193,7 @@ GameObject:
   - component: {fileID: 4568923102287641612}
   - component: {fileID: 6933116925618281286}
   - component: {fileID: 3329533315513235326}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5269,7 +5269,7 @@ GameObject:
   - component: {fileID: 5700120503446999612}
   - component: {fileID: 4307701309112088302}
   - component: {fileID: 6968622531174800285}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10529,7 +10529,7 @@ GameObject:
   - component: {fileID: 2048680794206868780}
   - component: {fileID: 2406544620091674471}
   - component: {fileID: 1095087030169110501}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Action CooldownText
   m_TagString: Untagged
   m_Icon: {fileID: 0}

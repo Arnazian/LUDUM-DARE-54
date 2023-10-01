@@ -20,7 +20,7 @@ public class CardCardTarget : MonoBehaviour, ICardTarget
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (ICardTarget.CurrentSelectionType != typeof(AbstractCard)) return;
-        ICardTarget.InvokeEnter(transform.position);
+        ICardTarget.InvokeEnter(Card.RootCanvas.worldCamera.WorldToScreenPoint(transform.position));
     }
     public void OnPointerExit(PointerEventData eventData)
     {

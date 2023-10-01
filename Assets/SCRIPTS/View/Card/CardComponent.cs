@@ -24,7 +24,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     public DrivenSpring GlowEffectSpring { get; private set; }
 
     Canvas cached_RootCanvas;
-    Canvas RootCanvas => cached_RootCanvas ??= this.GetRootComponent<Canvas>();
+    public Canvas RootCanvas => cached_RootCanvas ??= this.GetRootComponent<Canvas>();
 
     CanvasGroup cached_RootCanvasGroup;
     CanvasGroup RootCanvasGroup => cached_RootCanvasGroup ??= this.GetRootComponent<CanvasGroup>();
@@ -72,7 +72,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     float GlowAlpha => state switch
     {
-        State.hovered => .3f,
+        State.hovered => IsDraggable() ? .3f : 0f,
         State.dragging => IsOverDropRegion() ? 1f : .5f,
         State.dragging | State.hovered => IsOverDropRegion() ? 1f : .5f,
         _ => 0f
