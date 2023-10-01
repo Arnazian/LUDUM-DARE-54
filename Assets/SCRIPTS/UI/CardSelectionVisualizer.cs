@@ -71,6 +71,7 @@ public class CardSelectionVisualizer : MonoBehaviour
     void Init(Vector2 startPosition)
     {
         this.StartPosition = startPosition;
+        PositionSpring.Position = StartPosition;
         Crosshair.gameObject.SetActive(true);
         Cursor.visible = false;
     }
@@ -84,6 +85,7 @@ public class CardSelectionVisualizer : MonoBehaviour
             Dots.RemoveAt(0);
         }
         Cursor.visible = true;
+        OverridePosition = null;
     }
 
     void OnEnter(Vector2 p) => OverridePosition = RootCanvas.worldCamera.ScreenToWorldPoint(new(p.x, p.y, RootCanvas.planeDistance));

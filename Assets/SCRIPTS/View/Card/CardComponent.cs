@@ -72,7 +72,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     float GlowAlpha => state switch
     {
-        State.hovered => .3f,
+        State.hovered => IsDraggable() ? .3f : 0f,
         State.dragging => IsOverDropRegion() ? 1f : .5f,
         State.dragging | State.hovered => IsOverDropRegion() ? 1f : .5f,
         _ => 0f

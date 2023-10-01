@@ -12,6 +12,11 @@ public interface ICardTarget : IDropHandler, IPointerClickHandler, IPointerEnter
         CurrentSelectionType = targetType;
         OnBeginSelection?.Invoke(cursorOrigin);
     }
+    public static void Cancel()
+    {
+        CurrentSelectionType = null;
+        OnFinishSelection?.Invoke(null);
+    }
     public static event Action<Vector2> OnBeginSelection; //param: start position
     public static event Action<object> OnFinishSelection;
 

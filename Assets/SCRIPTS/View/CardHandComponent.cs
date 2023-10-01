@@ -71,14 +71,24 @@ public class CardHandComponent : MonoBehaviour
             selections.Add(obj);
         };
         ICardTarget.OnFinishSelection += callback;
-        while (selectionTypes.Count > 0)
+        bool cancel = false;
+        while (selectionTypes.Count > 0 && !cancel)
         {
             selecting = true;
             ICardTarget.DoSelection(card.transform.position + Vector3.up * 1f, selectionTypes.Dequeue());
-            while (selecting) yield return null;
+            while (selecting)
+            {
+                if (Input.GetMouseButtonDown(1))
+                {
+                    cancel = true;
+                    ICardTarget.Cancel();
+                    break;
+                }
+                yield return null;
+            }
         }
         ICardTarget.OnFinishSelection -= callback;
-        Combat.Active.PlayCard(card.Card, selections.ToArray());
+        if (!cancel) Combat.Active.PlayCard(card.Card, selections.ToArray());
         selectionRoutine = null;
     }
 }
