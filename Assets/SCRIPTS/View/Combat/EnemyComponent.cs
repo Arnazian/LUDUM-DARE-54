@@ -12,8 +12,11 @@ public class EnemyComponent : MonoBehaviour
     [SerializeField] private TMP_Text HealthText;
     [SerializeField] private TMP_Text ActionCooldown;
 
+    private EnemyGetHitEffects getHitEffects;
+
     void Start()
     {
+        getHitEffects = GetComponent<EnemyGetHitEffects>();
         GameSession.ActiveCombat.OnEventLogChanged += OnNewCombatEvent;
         HealthText.text = enemy.ReadOnlyHealth.Value.ToString();
         Healthbar.fillAmount = enemy.ReadOnlyHealth.Normalized;
@@ -30,7 +33,7 @@ public class EnemyComponent : MonoBehaviour
                 break;
             case CombatEvent.EventType.Damaged:
                 if (e.Args[0] != enemy) break;
-                //hitflash anim here
+                getHitEffects.DoGetHitEffects();
                 HealthText.text = enemy.ReadOnlyHealth.Value.ToString();
                 Healthbar.fillAmount = enemy.ReadOnlyHealth.Normalized;
                 e.Consume();
