@@ -24,7 +24,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     public DrivenSpring GlowEffectSpring { get; private set; }
 
     Canvas cached_RootCanvas;
-    Canvas RootCanvas => cached_RootCanvas ??= this.GetRootComponent<Canvas>();
+    public Canvas RootCanvas => cached_RootCanvas ??= this.GetRootComponent<Canvas>();
 
     CanvasGroup cached_RootCanvasGroup;
     CanvasGroup RootCanvasGroup => cached_RootCanvasGroup ??= this.GetRootComponent<CanvasGroup>();
