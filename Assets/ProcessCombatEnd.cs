@@ -21,7 +21,7 @@ public class ProcessCombatEnd : MonoBehaviour
             GameSession.GameState = GameSession.State.LOOT;
         }
     }
-    void OnDestroyed()
+    void OnDestroy()
     {
         Combat.OnEventLogChanged -= OnCombatEvent;
     }

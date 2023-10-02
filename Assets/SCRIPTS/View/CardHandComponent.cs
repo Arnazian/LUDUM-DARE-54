@@ -33,7 +33,7 @@ public class CardHandComponent : MonoBehaviour
         Combat.OnEventLogChanged += OnEventLogChanged;
     }
 
-    void OnDestroyed()
+    void OnDestroy()
     {
         Player.OnCardChanged -= UpdateCard;
         Combat.OnEventLogChanged -= OnEventLogChanged;
