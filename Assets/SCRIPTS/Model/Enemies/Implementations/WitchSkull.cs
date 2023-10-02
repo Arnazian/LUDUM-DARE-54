@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class WitchSkull : AbstractEnemy
 {
-    public override CappedInt ActCooldown { get; set; } = new(5, 5);
+    public override CappedInt ActCooldown { get; set; } = new(10, 10);
     protected override CappedInt Health { get; set; } = new(20, 20);
     public override string PrefabName => "WitchSkull";
 
     public WitchSkull()
     {
-        EffectTarget.Apply<HexGenerator>(-1);
+        // EffectTarget.Apply<HexGenerator>(-1);
     }
 
     public override void Act()
     {
-        DealDamage(1);
+        DealDamage(15);
     }
 
     public class HexGenerator : AbstractStatusEffect

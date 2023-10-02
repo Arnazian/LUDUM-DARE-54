@@ -57,7 +57,7 @@ public class GameSession : MonoBehaviour
         EncounterGroups.Difficulty.Boss,
     };
 
-    private static int EncounterCounter;
+    public static int EncounterCounter;
     public static void StartCombat()
     {
         var difficulty = Pattern[EncounterCounter++ % Pattern.Length];

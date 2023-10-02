@@ -5,7 +5,7 @@ using UnityEngine;
 public class BabyBag : AbstractEnemy
 {
     public override CappedInt ActCooldown { get; set; } = new(3, 3);
-    protected override CappedInt Health { get; set; } = new(8, 8);
+    protected override CappedInt Health { get; set; } = new(5, 5);
     public override string PrefabName => "BabyBag";
 
     public BabyBag()
