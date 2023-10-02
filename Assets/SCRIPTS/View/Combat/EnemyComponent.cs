@@ -9,12 +9,14 @@ public class EnemyComponent : MonoBehaviour
 {
     public AbstractEnemy enemy;
     [SerializeField] private SpriteRenderer EnemySprite;
+    [SerializeField] private SpriteRenderer Hitflash;
     [SerializeField] private Image healthImage;
     BaseSpring HealthSpring;
     Spring.Config springConfig = new(20, 2f);
     [SerializeField] private TMP_Text HealthText;
     [SerializeField] private TMP_Text ActionCooldown;
     [SerializeField] StatusEffectList StatusList;
+    [SerializeField] PolygonCollider2D polyCollider;
 
     private EnemyAttackVisuals attackVisuals;
     private EnemyGetHitEffects getHitEffects;
@@ -26,11 +28,16 @@ public class EnemyComponent : MonoBehaviour
         Combat.OnEventLogChanged += OnNewCombatEvent;
         StatusList.Target = enemy;
         HealthText.text = enemy.ReadOnlyHealth.Value.ToString();
+        EnemySprite.sprite = Resources.Load<Sprite>($"Enemies/{enemy.GetType().Name}");
+        Hitflash.sprite = EnemySprite.sprite;
+        var shape = new List<Vector2>();
+        EnemySprite.sprite.GetPhysicsShape(0, shape);
+        polyCollider.SetPath(0, shape);
 
         HealthSpring = new(springConfig)
         {
-            Position = GameSession.Player.ReadOnlyHealth.Normalized,
-            RestingPos = GameSession.Player.ReadOnlyHealth.Normalized
+            Position = enemy.ReadOnlyHealth.Normalized,
+            RestingPos = enemy.ReadOnlyHealth.Normalized
         };
         healthImage.material = Instantiate(healthImage.material);
 

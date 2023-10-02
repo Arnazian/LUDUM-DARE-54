@@ -26,6 +26,14 @@ public interface IStatusEffectTarget
     public int GetStacks<EffectType>() => GetStacks(typeof(EffectType));
     public int GetStacks(Type type) => EffectStacks.TryGetValue(type, out var effect) ? effect.stacks : 0;
 
+    public void Cleanse()
+    {
+        var effects = EffectStacks.Values.ToArray();
+        foreach (var effect in effects)
+            effect.effect.OnRemove();
+        EffectStacks.Clear();
+    }
+
     public void Apply<EffectType>(int stacks, ApplyBlending blending = ApplyBlending.Add) where EffectType : AbstractStatusEffect, new() => Apply(typeof(EffectType), stacks, blending);
     public void Apply(Type type, int stacks, ApplyBlending blending = ApplyBlending.Add)
     {

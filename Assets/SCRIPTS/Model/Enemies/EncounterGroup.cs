@@ -26,21 +26,26 @@ public static class EncounterGroups
 
     public static List<List<AbstractEnemy>> Easy => new()
     {
-        new() { new DummyEnemy()},
+        new() { new Pumpkin()},
+        new() { new BabyBag()},
     };
 
     public static List<List<AbstractEnemy>> Medium => new()
     {
-        new() { new DummyEnemy(), new DummyEnemy()}
+        new() { new Pumpkin(), new Pumpkin()},
+        new() { new BabyBag()},
+        new() { new Ghosty()},
     };
 
     public static List<List<AbstractEnemy>> Hard => new()
     {
-        new() { new DummyEnemy(), new DummyEnemy(), new DummyEnemy()}
+        new() { new Pumpkin(), new Pumpkin()},
+        new() { new BabyBag(), new BabyBagJoker(), new BabyBagQueen()},
+        new() { new Ghosty()},
     };
 
     public static List<List<AbstractEnemy>> Boss => new()
     {
-        new() { new DummyEnemy(), new DummyEnemy(), new DummyEnemy(), new DummyEnemy(), new DummyEnemy()}
+        new() { new WitchSkull(), new Ghosty(), new Ghosty(), new Ghosty(), new Ghosty()}
     };
 }
