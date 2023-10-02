@@ -4,6 +4,7 @@ using System.Linq;
 
 public class Combat
 {
+    public EncounterGroups.Difficulty difficulty;
     public static Combat Active => GameSession.ActiveCombat;
     public static Player Player => GameSession.Player;
     public List<AbstractEnemy> Enemies { get; private set; }
@@ -37,15 +38,16 @@ public class Combat
         add
         {
             _OnEventLogChanged += value;
-            if (GameSession.ActiveCombat?.EventLog.Count > 0)
-                value?.Invoke(GameSession.ActiveCombat.EventLog.Peek());
+            if (Active?.EventLog.Count > 0)
+                value?.Invoke(Active.EventLog.Peek());
         }
         remove => _OnEventLogChanged -= value;
     }
 
-    public Combat(List<AbstractEnemy> enemies)
+    public Combat(List<AbstractEnemy> enemies, EncounterGroups.Difficulty difficulty)
     {
         Enemies = enemies;
+        this.difficulty = difficulty;
     }
 
     public void Pass()
@@ -89,8 +91,6 @@ public class Combat
         if (Enemies.Count == 0) //won combat
         {
             Player.OnCombatEnd();
-            GameSession.ActiveCombat = null;
-            GameSession.GameState = GameSession.State.LOOT;
         }
     }
 }

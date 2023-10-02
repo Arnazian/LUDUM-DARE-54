@@ -38,12 +38,7 @@ public class TreasureSelection : MonoBehaviour
             return;
         }
         treasureSelectionScreen.SetActive(true);
-            
-
-        GameSession.OfferedCard = Cards.CardGroups.GetRandom(EncounterGroups.Difficulty.Hard);
-                
         card.Card = GameSession.OfferedCard;
-        // card.gameObject.SetActive(true);
     }
 
     void OnDrag(CardComponent c, PointerEventData e)

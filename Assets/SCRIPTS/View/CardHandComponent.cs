@@ -33,6 +33,12 @@ public class CardHandComponent : MonoBehaviour
         Combat.OnEventLogChanged += OnEventLogChanged;
     }
 
+    void OnDestroyed()
+    {
+        Player.OnCardChanged -= UpdateCard;
+        Combat.OnEventLogChanged -= OnEventLogChanged;
+    }
+
     private void OnEventLogChanged(CombatEvent e)
     {
         if (e.Target != GameSession.Player) return;

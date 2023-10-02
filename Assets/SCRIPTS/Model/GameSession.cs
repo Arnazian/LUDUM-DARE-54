@@ -62,9 +62,10 @@ public class GameSession : MonoBehaviour
     private static int EncounterCounter;
     public static void StartCombat()
     {
-        var encounterOptions = EncounterGroups.EncountersByDifficulty[Pattern[EncounterCounter++]];
+        var difficulty = Pattern[EncounterCounter++];
+        var encounterOptions = EncounterGroups.EncountersByDifficulty[difficulty];
         var rand = new System.Random();
-        ActiveCombat = new(encounterOptions[rand.Next(encounterOptions.Count)]);
+        ActiveCombat = new(encounterOptions[rand.Next(encounterOptions.Count)], difficulty);
         GameState = State.COMBAT;
         ActiveCombat.PushCombatEvent(CombatEvent.TurnStarted(Player));
     }
