@@ -51,7 +51,7 @@ public interface IStatusEffectTarget
             stacks = blending == ApplyBlending.Max ? Mathf.Max(stacks, GetStacks(type)) : stacks + GetStacks(type);
             EffectStacks[type] = new(EffectStacks[type].effect, stacks);
         }
-        Combat.Active.PushCombatEvent(CombatEvent.ApplyStatus(this, appliedEffect.effect, appliedEffect.stacks));
+        Combat.Active?.PushCombatEvent(CombatEvent.ApplyStatus(this, appliedEffect.effect, appliedEffect.stacks));
     }
 
     public void Remove<EffectType>(int stacks = -1) where EffectType : AbstractStatusEffect => Remove(typeof(EffectType), stacks);
@@ -69,7 +69,7 @@ public interface IStatusEffectTarget
             effect.OnRemove();
         }
         else EffectStacks[type] = reducedStatusEffect;
-        Combat.Active.PushCombatEvent(CombatEvent.RemoveStatus(this, reducedStatusEffect.effect, reducedStatusEffect.stacks));
+        Combat.Active?.PushCombatEvent(CombatEvent.RemoveStatus(this, reducedStatusEffect.effect, reducedStatusEffect.stacks));
     }
 
     protected struct AppliedEffect

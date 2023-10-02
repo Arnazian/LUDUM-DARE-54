@@ -64,6 +64,7 @@ public class Combat
         if (GameSession.GameState != GameSession.State.COMBAT) return; // combat over, exit early
         IStatusEffectTarget.OnBeginTurn(Player);
         PushCombatEvent(CombatEvent.TurnStarted(Player));
+        if(Player.Cards.Where(card => card != null).All(card => card.Cooldown.Value > 0)) Pass(); //Autoskip
     }
 
     public void PlayCard(AbstractCard card, params object[] args)
