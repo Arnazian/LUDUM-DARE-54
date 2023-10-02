@@ -17,6 +17,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             if (card == null) return;
             TitleText.text = card.Name;
             DescriptionText.text = card.Description;
+            MaxCooldownText.text = card.Cooldown.Max.ToString();
             Artwork.sprite = Resources.Load<Sprite>($"Cards/{card.GetType().Name}");
         }
     }
