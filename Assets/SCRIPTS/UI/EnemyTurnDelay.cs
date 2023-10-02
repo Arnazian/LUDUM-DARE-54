@@ -24,7 +24,7 @@ public class EnemyTurnDelay : MonoBehaviour
     IEnumerator ConsumeDelayed(CombatEvent e)
     {
         var div = Mathf.Max(1, Combat.Active?.Enemies.Count ?? 1);
-        yield return new WaitForSeconds(.5f / div);
+        yield return new WaitForSeconds(.1f / div);
         e.Consume();
     }
 }
