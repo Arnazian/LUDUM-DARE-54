@@ -25,7 +25,13 @@ public class GameSession : MonoBehaviour
         }
     }
     public static event Action<State> OnStateChanged;
-    void Awake() => StartCombat();
+    void Awake()
+    {
+        Player = new();
+        OfferedCard = null;
+        ActiveCombat = null;
+        StartCombat();
+    }
 
     public void CheatKillAll()
     {
