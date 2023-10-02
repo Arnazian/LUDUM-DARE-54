@@ -30,6 +30,12 @@ public class PlayerHUD : MonoBehaviour
         statusEffectList.Target = GameSession.Player;
     }
 
+    void OnDestroy()
+    {
+        GameSession.OnStateChanged -= OnStateChanged;
+        Combat.OnEventLogChanged -= OnEventLogChanged;
+    }
+
     private void UpdateMaterial(float fill)
     {
         healthImage.material.SetFloat("_Fill", fill);

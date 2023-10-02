@@ -10,12 +10,14 @@ public class CardHandComponent : MonoBehaviour
     [Header("Component References")]
     [SerializeField] private CardComponent CardTemplate;
     [SerializeField] private CardSelectionVisualizer CardSelection;
+    [SerializeField] private AudioSource Source;
 
     [field: SerializeField] public RectTransform[] CardSlots { get; private set; }
     private Dictionary<int, CardComponent> InstancesBySlotID = new();
 
     [Header("Other Settings")]
     public float PlayYThreshold;
+
 
     bool IsPlayersTurn = true;
 
@@ -104,6 +106,9 @@ public class CardHandComponent : MonoBehaviour
             }
         }
         ICardTarget.OnFinishSelection -= callback;
+        var sfx = Resources.Load<AudioClip>($"Cards/{card.name}");
+        Source.clip = sfx;
+        Source.Play();
         if (!cancel) Combat.Active.PlayCard(card.Card, selections.ToArray());
         selectionRoutine = null;
     }
