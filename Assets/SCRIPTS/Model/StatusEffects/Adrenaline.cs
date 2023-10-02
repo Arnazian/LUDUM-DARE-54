@@ -9,7 +9,12 @@ public class Adrenaline : AbstractStatusEffect
 
     public override void OnAfterAction(Action action)
     {
-        action.Invoke();
-        RemoveFully();
+        if (Stacks == 2)
+            Remove(1);
+        else
+        {
+            action.Invoke();
+            RemoveFully();
+        }
     }
 }

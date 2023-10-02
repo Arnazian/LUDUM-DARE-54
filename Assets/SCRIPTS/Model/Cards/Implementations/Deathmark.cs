@@ -14,7 +14,7 @@ namespace Cards
 
         public override void OnPlayed(params object[] args)
         {
-            foreach (var target in args) (target as IStatusEffectTarget)?.Apply<Deathmarked>(1, blending: IStatusEffectTarget.ApplyBlending.Max);
+            foreach (var target in args) (target as IStatusEffectTarget)?.Apply<Deathmarked>(-1, blending: IStatusEffectTarget.ApplyBlending.Max);
         }
     }
 }
