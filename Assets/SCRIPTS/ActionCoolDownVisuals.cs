@@ -18,31 +18,37 @@ public class ActionCoolDownVisuals : MonoBehaviour
 
     [SerializeField] private Transform actionCoolDownObject;
     [SerializeField] private TextMeshProUGUI coolDownText;
+    private Vector2 originalPosition;
     private Vector2 originalScale;
 
     private void Awake()
     {
+        originalPosition = actionCoolDownObject.localPosition;
         originalScale = actionCoolDownObject.transform.localScale;
     }
-/*     private void Update()
+    private void Update()
     {
         Debug.Log("Keycode Used For Testing");
         if (Input.GetKeyDown(KeyCode.P))
         {
             AnimatedCoolDownChange();
         }
-    } */
+    } 
     public void AnimatedCoolDownChange()
     {
         actionCoolDownObject.DOScale(newScale, scalingDuration).OnComplete(() =>
         {
             finishedParticles?.Play();
+            // actionCoolDownObject.DOScale(originalScale, scalingDuration);
+            
             actionCoolDownObject.DOShakePosition(shakeDuration, shakeStrength).OnComplete(() =>
             {
+                actionCoolDownObject.DOLocalMove(originalPosition, 0.2f);
                 actionCoolDownObject.DOScale(originalScale, scalingDuration);
                 
                 // change cd number
             });
+            
         });
-    }    
+    }
 }

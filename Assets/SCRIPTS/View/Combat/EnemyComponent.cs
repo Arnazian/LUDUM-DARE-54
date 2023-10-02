@@ -18,12 +18,14 @@ public class EnemyComponent : MonoBehaviour
     [SerializeField] StatusEffectList StatusList;
     [SerializeField] PolygonCollider2D polyCollider;
 
+    private ActionCoolDownVisuals cdVisuals;
     private ControlSelectionRotator selectionRotator;
     private EnemyAttackVisuals attackVisuals;
     private EnemyGetHitEffects getHitEffects;
 
     void Start()
     {
+        cdVisuals = GetComponent<ActionCoolDownVisuals>();
         selectionRotator = GetComponent<ControlSelectionRotator>();
         selectionRotator.DisableRotatorVisuals();
         attackVisuals = GetComponent<EnemyAttackVisuals>();
@@ -72,9 +74,12 @@ public class EnemyComponent : MonoBehaviour
                 e.Consume();
                 break;
             case CombatEvent.EventType.TurnEnded:
-            case CombatEvent.EventType.TurnStarted:
                 // StartCoroutine(CoroutineDoTurn());
-                ActionCooldown.text = enemy.ReadOnlyActCooldown.Value > 0 ? enemy.ReadOnlyActCooldown.Value.ToString() : "<color=red>0</color>";
+                break;
+
+            case CombatEvent.EventType.TurnStarted:
+                e.Accept();
+                StartCoroutine(CoroutineDoTurn(e));                
                 break;
             case CombatEvent.EventType.TakenAction:
                 e.Accept();
@@ -83,7 +88,7 @@ public class EnemyComponent : MonoBehaviour
         }
     }
 
-    IEnumerator CoroutineDoTurn()
+    IEnumerator CoroutineDoTurn(CombatEvent e)
     {
         float waitBeforeAction = 1f;
         float waitAfterAction = 0.5f;
@@ -91,17 +96,21 @@ public class EnemyComponent : MonoBehaviour
         selectionRotator.EnableRotatorVisuals();
         yield return new WaitForSeconds(waitBeforeAction);
 
-        // actionCD lowering animation
+        cdVisuals.AnimatedCoolDownChange();
+        yield return new WaitForSeconds(0.5f);
+        ActionCooldown.text = enemy.ReadOnlyActCooldown.Value > 0 ? enemy.ReadOnlyActCooldown.Value.ToString() : "<color=red>0</color>";
         yield return new WaitForSeconds(waitAfterAction);
         // if(actionCD > 1)
         {
             // do action
             yield return new WaitForSeconds(waitAfterAction);
             selectionRotator.DisableRotatorVisuals();
+            e.Consume();
         }
         // else
         {
             selectionRotator.DisableRotatorVisuals();
+            e.Consume();
         }
         // end turn
     }
