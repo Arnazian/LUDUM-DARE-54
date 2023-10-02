@@ -34,17 +34,17 @@ namespace Cards
             {
                 EncounterGroups.Difficulty.Easy,
                 new() {
-                        {Rarity.Common,    1f},
+                        {Rarity.Common,   .75f},
                         {Rarity.Rare,     .5f},
-                        {Rarity.Legendary, 0f}
+                        {Rarity.Legendary, .1f}
                 }
             },
             {
                 EncounterGroups.Difficulty.Medium,
                 new() {
-                        {Rarity.Common,   .15f},
-                        {Rarity.Rare,     .1f},
-                        {Rarity.Legendary, 0f}
+                        {Rarity.Common,   .5f},
+                        {Rarity.Rare,     .75f},
+                        {Rarity.Legendary, .1f}
                 }
             },
             {

@@ -14,7 +14,7 @@ public class WitchSkull : AbstractEnemy
 
     public override void Act()
     {
-        DealDamage(15);
+        DealDamage(10);
     }
 
     public class HexGenerator : AbstractStatusEffect

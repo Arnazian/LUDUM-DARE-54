@@ -17,31 +17,42 @@ public static class EncounterGroups
 
     public static List<List<AbstractEnemy>> Easy => new()
     {
-        new() { new Pumpkin()},
+        new() { new BabyBag(), new Ghosty()},
+        new() { new BabyBag(), new Pumpkin()},
+        new() { new Pumpkin(), new Ghosty()},
+
+        new() { new Pumpkin(), new Pumpkin()},
+        new() { new Ghosty(), new Ghosty()},
         new() { new BabyBag(), new BabyBag()},
-        new() { new Ghosty()},
     };
 
     public static List<List<AbstractEnemy>> Medium => new()
     {
-        new() { new BabyBag(), new Ghosty()},
+        new() { new BabyBag(), new Ghosty(), new Pumpkin()},
+        new() { new BabyBag(), new Ghosty(), new Pumpkin()},
+        new() { new BabyBag(), new Ghosty(), new Pumpkin()},
+
+        new() { new BabyBag(), new BabyBag(), new Ghosty()},
+        new() { new BabyBag(), new BabyBag(), new Pumpkin()},
+        new() { new Pumpkin(), new Pumpkin(), new BabyBag()},
+
+        new() { new Pumpkin(), new Ghosty(), new Ghosty()},
         new() { new Pumpkin(), new Pumpkin(), new Pumpkin()},
-        new() { new Pumpkin(), new Pumpkin(), new Ghosty()},
-        new() { new Ghosty(), new Ghosty(), new Ghosty(), new Ghosty() },
         new() { new BabyBag(), new BabyBag(), new BabyBag()},
+
     };
 
     public static List<List<AbstractEnemy>> Hard => new()
     {
          new() { new WitchSkull()},
-         new() { new WitchSkull(), new Ghosty()},
-         new() { new BabyBag(), new BabyBag(), new BabyBag()},
          new() { new BabyBag(), new BabyBag(), new Pumpkin(), new Pumpkin()},
          new() { new BabyBag(), new BabyBag(), new Ghosty(), new Ghosty()},
+         new() { new Pumpkin(), new Pumpkin(), new Ghosty(), new Ghosty()},
+
     };
 
     public static List<List<AbstractEnemy>> Boss => new()
     {
-        new() { new WitchSkull(), new Ghosty(), new Ghosty(), new Ghosty(), new Ghosty()}
+        new() { new WitchSkull(), new Pumpkin(), new Pumpkin(), new Ghosty(), new BabyBag()}
     };
 }

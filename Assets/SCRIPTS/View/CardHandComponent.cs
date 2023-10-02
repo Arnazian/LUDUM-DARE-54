@@ -52,7 +52,7 @@ public class CardHandComponent : MonoBehaviour
             case CombatEvent.EventType.CooldownChanged:
                 var cooldown = (int)e.Args[0];
                 var card = e.Args[1] as AbstractCard;
-                var cardComponent = InstancesBySlotID.Values.First(cc => cc.Card == card);
+                var cardComponent = InstancesBySlotID.Values.FirstOrDefault(cc => cc.Card == card);
                 cardComponent.UpdateCooldown(cooldown);
                 break;
         }

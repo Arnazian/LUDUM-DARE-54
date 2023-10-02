@@ -5,7 +5,7 @@ using UnityEngine;
 public class BabyBag : AbstractEnemy
 {
     public override CappedInt ActCooldown { get; set; } = new(3, 3);
-    protected override CappedInt Health { get; set; } = new(5, 5);
+    protected override CappedInt Health { get; set; } = new(4, 4);
     public override string PrefabName => "BabyBag";
 
     public BabyBag()
@@ -15,14 +15,14 @@ public class BabyBag : AbstractEnemy
 
     public override void Act()
     {
-        DealDamage(5);
+        DealDamage(3);
     }
 
     public class Shy : AbstractStatusEffect
     {
         public override Color Color => new Color(.8f, .8f, .8f);
         public override string Name => "Shy";
-        public override string Description => "Resets action timer upon taking damage.";
+        public override string Description => "Resets attack timer upon taking damage.";
 
         public override void OnBeforeRecieveDamage(ref int amount)
         {

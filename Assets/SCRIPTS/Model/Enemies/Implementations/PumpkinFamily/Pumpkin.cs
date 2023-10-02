@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pumpkin : AbstractEnemy
 {
     public override CappedInt ActCooldown { get; set; } = new(3, 3);
-    protected override CappedInt Health { get; set; } = new(5, 5);
+    protected override CappedInt Health { get; set; } = new(3, 3);
     public override string PrefabName => "Pumpkin";
 
     public Pumpkin()
@@ -15,7 +15,7 @@ public class Pumpkin : AbstractEnemy
 
     public override void Act()
     {
-        DealDamage(2);
+        DealDamage(1);
     }
 
 
