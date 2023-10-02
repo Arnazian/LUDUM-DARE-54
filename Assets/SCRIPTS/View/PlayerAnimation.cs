@@ -21,6 +21,10 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private float flashDuration = 0.2f;
     [SerializeField] private float secondsToFadeSprite = 0.15f;
 
+    [Header("Screen Shake Values")]
+    [SerializeField] private float shakeDuration;
+    [SerializeField] private float shakeStrength;
+
     [Header("Animator Reference")]
     [SerializeField] private Animator anim;
 
@@ -97,13 +101,14 @@ public class PlayerAnimation : MonoBehaviour
     IEnumerator BeenDamagedAnimation(CombatEvent e)
     {
         float effectDuration = 0.5f;
-
+        Camera.main.GetComponent<CameraController>().ScreenShake(shakeDuration, shakeStrength);
         getHitParticles.Play();
         hitFlashSprite.DOFade(1, secondsToFadeSprite);
         mainSprite.DOFade(0, secondsToFadeSprite);
         yield return new WaitForSeconds(flashDuration);
         hitFlashSprite.DOFade(0, secondsToFadeSprite);
         mainSprite.DOFade(1, secondsToFadeSprite);
+        
 
         yield return new WaitForSeconds(effectDuration);
         e.Consume();

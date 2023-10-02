@@ -20,10 +20,18 @@ public class EnemyGetHitEffects : MonoBehaviour
     [SerializeField] private float flashDuration = 0.2f;
     [SerializeField] private float secondsToFadeSprite = 0.15f;
 
+    [Header("Screen Shake Values")]
+    [SerializeField] private float hitShakeDuration;
+    [SerializeField] private float hitShakeStrength;
+    [SerializeField] private float deathShakeDuration;
+    [SerializeField] private float deathShakeStrength;
+
+    private CameraController cameraController;
     private Sequence fadeMainToNormal;
 
     void Start()
     {
+        cameraController = Camera.main.GetComponent<CameraController>();
         hitFlashSprite.DOFade(0, 0);
     }
 
@@ -48,6 +56,7 @@ public class EnemyGetHitEffects : MonoBehaviour
     IEnumerator CoroutineHitFlash()
     {
         getHitParticles.Play();
+        cameraController.ScreenShake(hitShakeDuration, hitShakeStrength);
         hitFlashSprite.DOFade(1, secondsToFadeSprite);
         mainSprite.DOFade(0, secondsToFadeSprite);
         yield return new WaitForSeconds(flashDuration);
@@ -62,7 +71,7 @@ public class EnemyGetHitEffects : MonoBehaviour
     IEnumerator CoroutineDeathEffects()
     {
         mainSprite.enabled = false;
-
+        cameraController.ScreenShake(deathShakeDuration, deathShakeStrength);
         getHitParticles.Play();
         hitFlashSprite.DOFade(1, secondsToFadeSprite);
         yield return new WaitForSeconds(flashDuration);

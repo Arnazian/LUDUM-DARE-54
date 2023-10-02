@@ -5668,6 +5668,10 @@ MonoBehaviour:
   getHitParticles: {fileID: 1022398402529112113}
   flashDuration: 0.15
   secondsToFadeSprite: 0.05
+  hitShakeDuration: 0.2
+  hitShakeStrength: 0.1
+  deathShakeDuration: 0.5
+  deathShakeStrength: 0.5
 --- !u!82 &2247306878193266889
 AudioSource:
   m_ObjectHideFlags: 0
