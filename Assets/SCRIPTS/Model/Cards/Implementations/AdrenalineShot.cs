@@ -13,7 +13,7 @@ namespace Cards
 
         public override void OnPlayed(params object[] args)
         {
-            Combat.Player.StatusEffectTarget.Apply<Adrenaline>(1);
+            Combat.Player.StatusEffectTarget.Apply<Adrenaline>(2);
         }
     }
 }

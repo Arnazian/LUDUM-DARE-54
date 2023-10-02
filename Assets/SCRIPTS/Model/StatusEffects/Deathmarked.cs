@@ -6,7 +6,7 @@ public class Deathmarked : AbstractStatusEffect
     public override string Name => "Marked for death";
     public override string Description => "All Damage done to this is increased by 1.";
 
-    public override void OnBeforeDealDamage(ref int amount)
+    public override void OnBeforeRecieveDamage(ref int amount)
     {
         amount += 1;
     }
