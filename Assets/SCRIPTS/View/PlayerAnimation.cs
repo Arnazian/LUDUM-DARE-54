@@ -100,17 +100,19 @@ public class PlayerAnimation : MonoBehaviour
 
     IEnumerator BeenDamagedAnimation(CombatEvent e)
     {
-        float effectDuration = 0.5f;
-        Camera.main.GetComponent<CameraController>().ScreenShake(shakeDuration, shakeStrength);
-        getHitParticles.Play();
-        hitFlashSprite.DOFade(1, secondsToFadeSprite);
-        mainSprite.DOFade(0, secondsToFadeSprite);
-        yield return new WaitForSeconds(flashDuration);
-        hitFlashSprite.DOFade(0, secondsToFadeSprite);
-        mainSprite.DOFade(1, secondsToFadeSprite);
-        
-
-        yield return new WaitForSeconds(effectDuration);
+        int amount = (int)e.Args[1];
+        if (amount > 0)
+        {
+            float effectDuration = 0.5f;
+            Camera.main.GetComponent<CameraController>().ScreenShake(shakeDuration, shakeStrength);
+            getHitParticles.Play();
+            hitFlashSprite.DOFade(1, secondsToFadeSprite);
+            mainSprite.DOFade(0, secondsToFadeSprite);
+            yield return new WaitForSeconds(flashDuration);
+            hitFlashSprite.DOFade(0, secondsToFadeSprite);
+            mainSprite.DOFade(1, secondsToFadeSprite);
+            yield return new WaitForSeconds(effectDuration);
+        }
         e.Consume();
     }
 
