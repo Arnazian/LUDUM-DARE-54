@@ -53,7 +53,8 @@ public class CardHandComponent : MonoBehaviour
                 var cooldown = (int)e.Args[0];
                 var card = e.Args[1] as AbstractCard;
                 var cardComponent = InstancesBySlotID.Values.FirstOrDefault(cc => cc.Card == card);
-                cardComponent.UpdateCooldown(cooldown);
+                if(cardComponent != null)
+                    cardComponent.UpdateCooldown(cooldown);
                 break;
         }
 

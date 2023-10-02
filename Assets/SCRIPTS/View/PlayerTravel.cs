@@ -11,6 +11,7 @@ public class PlayerTravel : MonoBehaviour
     [SerializeField] private GameObject playerSpriteObject;
 
     [SerializeField] private Animator anim;
+    [SerializeField] private AudioSource walkAudio;
 
     [SerializeField] private LevelLayoutController levelLayoutController;
 
@@ -32,11 +33,13 @@ public class PlayerTravel : MonoBehaviour
     public void MovePlayer(Action actionAfter)
     {
         anim.SetBool("IsMoving", true);
+        walkAudio.Play();
         float targetPositionX = playerSpriteObject.transform.position.x + distanceToTravel;
         levelLayoutController.CreateNextLevelBlock();
         playerSpriteObject.transform.DOMoveX(targetPositionX, moveDurationInSeconds).OnComplete(() =>
         {
             anim.SetBool("IsMoving", false);
+            walkAudio.Stop();
             actionAfter?.Invoke();           
         });       
     }

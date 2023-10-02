@@ -1302,7 +1302,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 765fb54d3b0acaf4d8e5a61fc6e9b769, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6164b6363fcf4cb45920345d8e1e4e74, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -1400,7 +1400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 015dcb306c0655248849d2e1c576f5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMusic: {fileID: 8300000, guid: 765fb54d3b0acaf4d8e5a61fc6e9b769, type: 3}
+  mainMusic: {fileID: 8300000, guid: 6164b6363fcf4cb45920345d8e1e4e74, type: 3}
   deathMusic: {fileID: 8300000, guid: bd9b3c3b6058a084c8be0d5ee96b324f, type: 3}
 --- !u!1 &1879867671
 GameObject:
@@ -1498,7 +1498,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7930b67a53dae694888364a69ccaca7e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b1988e1841e72254db4e73669d18176e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.01
   m_Pitch: 1
@@ -1596,7 +1596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d299159672b5604d8b1b950737a303d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1889193358}
 --- !u!4 &1889193360
 Transform:
   m_ObjectHideFlags: 0
@@ -1757,6 +1757,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1624036130}
+    - target: {fileID: 2834642040619634168, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 12.37157
+      objectReference: {fileID: 0}
     - target: {fileID: 3493632606037404392, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
