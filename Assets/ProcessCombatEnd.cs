@@ -18,7 +18,12 @@ public class ProcessCombatEnd : MonoBehaviour
             StartCoroutine(SwitchStateRoutine(GameSession.State.GAME_OVER));
         else if (Combat.Active.Enemies.Count == 0)
         {
-            GameSession.OfferedCard = CardGroups.GetRandom(Combat.Active.difficulty);
+            do
+            {
+                GameSession.OfferedCard = CardGroups.GetRandom(Combat.Active.difficulty);
+            }
+            while (GameSession.OfferedCard is Dagger && GameSession.Player.Cards.Any(c => c is Dagger));
+
             if (GameSession.Player.Cards.Any(c => c?.GetType() == GameSession.OfferedCard.GetType()))
                 GameSession.OfferedCard = CardGroups.GetRandom(Combat.Active.difficulty); //reroll once if type is already in hand
             GameSession.ActiveCombat = null;
