@@ -26,8 +26,11 @@ public class BabyBag : AbstractEnemy
 
         public override void OnBeforeRecieveDamage(ref int amount)
         {
-            if (EffectTarget is AbstractEnemy) (EffectTarget as AbstractEnemy)?.ActCooldown?.Maximize();
-            Combat.Active.PushCombatEvent(CombatEvent.CooldownChanged(this, ActCooldown.Value));
+            if (EffectTarget is AbstractEnemy)
+            {
+                (EffectTarget as AbstractEnemy).ActCooldown?.Maximize();
+                Combat.Active.PushCombatEvent(CombatEvent.CooldownChanged(this, (EffectTarget as AbstractEnemy).ActCooldown.Value));
+            }
         }
     }
 }
