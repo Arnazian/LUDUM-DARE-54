@@ -21,6 +21,7 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
         if (ActCooldown.Value > 1)
         {
             ActCooldown.Value--;
+            Combat.Active.PushCombatEvent(CombatEvent.CooldownChanged(this, ActCooldown.Value));
             IStatusEffectTarget.OnEndTurn(this);
             return;
         }
@@ -28,6 +29,7 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
         Act();
         IStatusEffectTarget.OnAfterAction(this, Act);
         ActCooldown.Maximize();
+        Combat.Active.PushCombatEvent(CombatEvent.CooldownChanged(this, ActCooldown.Value));
         IStatusEffectTarget.OnEndTurn(this);
     }
 

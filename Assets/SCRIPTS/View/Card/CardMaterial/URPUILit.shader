@@ -160,9 +160,7 @@ Shader "URP/UI/Lit"
                 clip (baseMap.a - 0.001);
                 #endif
 
-                #ifdef UNITY_UI_CLIP_RECT
-                color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
-                #endif
+
 
 				// Get Baked GI
 				half3 bakedGI = SAMPLE_GI(IN.lightmapUV, IN.vertexSH, normalWS);
@@ -170,14 +168,21 @@ Shader "URP/UI/Lit"
 				// Main Light & Shadows
 				float4 shadowCoord = TransformWorldToShadowCoord(IN.positionWS.xyz);
 				Light mainLight = GetMainLight(shadowCoord);
-				half3 attenuatedLightColor = mainLight.color * (mainLight.distanceAttenuation * mainLight.shadowAttenuation);
 
 				// Mix Realtime & Baked (if LIGHTMAP_SHADOW_MIXING / _MIXED_LIGHTING_SUBTRACTIVE is enabled)
 				MixRealtimeAndBakedGI(mainLight, normalWS, bakedGI);
 
 				// Diffuse
+				half3 attenuatedLightColor = mainLight.color * (mainLight.distanceAttenuation * mainLight.shadowAttenuation);
 				half3 shading = bakedGI + LightingLambert(attenuatedLightColor, mainLight.direction, normalWS);
-				half4 color = baseMap * _Color * IN.color;
+				half4 color = baseMap * _Color * IN.color;				
+				int lights =  GetAdditionalLightsCount();
+				for(int i = 0; i < lights; i++)
+				{
+					Light light = GetAdditionalLight(i, IN.positionWS);
+					half3 lightColor = light.color * light.distanceAttenuation;
+        			color += half4(LightingLambert(lightColor, light.direction, normalWS),0);
+				}
 				return half4(color.rgb * shading, color.a);
 			}
 			ENDHLSL

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.SymbolStore;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -80,6 +79,9 @@ public class EnemyComponent : MonoBehaviour
             case CombatEvent.EventType.TurnStarted:
                 e.Accept();
                 StartCoroutine(CoroutineDoTurn(e));                
+                break;
+            case CombatEvent.EventType.CooldownChanged:
+                //Cooldown update here
                 break;
             case CombatEvent.EventType.TakenAction:
                 e.Accept();

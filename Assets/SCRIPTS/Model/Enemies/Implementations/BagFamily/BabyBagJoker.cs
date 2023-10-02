@@ -18,6 +18,7 @@ public class BabyBagJoker : AbstractEnemy
         {
             if (enemy == this) continue;
             enemy.ActCooldown.Value--;
+            Combat.Active.PushCombatEvent(CombatEvent.CooldownChanged(enemy, enemy.ActCooldown.Value));
         }
     }
 
