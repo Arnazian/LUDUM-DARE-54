@@ -73,15 +73,16 @@ public class EnemyComponent : MonoBehaviour
                 e.Consume();
                 break;
             case CombatEvent.EventType.TurnEnded:
-                // StartCoroutine(CoroutineDoTurn());
                 break;
 
             case CombatEvent.EventType.TurnStarted:
                 e.Accept();
-                StartCoroutine(CoroutineDoTurn(e));                
+                StartCoroutine(CoroutineDoTurn(e));
                 break;
             case CombatEvent.EventType.CooldownChanged:
-                //Cooldown update here
+                var amount = (int)e.Args[0];
+                cdVisuals.AnimatedCoolDownChange();
+                ActionCooldown.text = amount > 0 ? amount.ToString() : "<color=red>0</color>";
                 break;
             case CombatEvent.EventType.TakenAction:
                 e.Accept();
@@ -96,11 +97,7 @@ public class EnemyComponent : MonoBehaviour
         float waitAfterAction = 0.25f;
 
         selectionRotator.EnableRotatorVisuals();
-        yield return new WaitForSeconds(waitBeforeAction);
-
-        cdVisuals.AnimatedCoolDownChange();
-        yield return new WaitForSeconds(0.5f);
-        ActionCooldown.text = enemy.ReadOnlyActCooldown.Value > 0 ? enemy.ReadOnlyActCooldown.Value.ToString() : "<color=red>0</color>";
+        yield return new WaitForSeconds(waitBeforeAction);        
         yield return new WaitForSeconds(waitAfterAction);
         // if(actionCD > 1)
         {
