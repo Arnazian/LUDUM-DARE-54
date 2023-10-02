@@ -8,7 +8,7 @@ namespace Cards
 {
     public class Dagger : AbstractCard
     {
-        public override CappedInt Cooldown { get; set; } = new(0, 1);
+        public override CappedInt Cooldown { get; set; } = new(0, 0);
         private const int Damage = 1;
         public override Type[] Selections => new[] { typeof(AbstractEnemy) };
 
