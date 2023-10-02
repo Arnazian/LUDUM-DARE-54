@@ -15413,7 +15413,7 @@ GameObject:
   - component: {fileID: 5088595381880345909}
   - component: {fileID: 365045127923116083}
   m_Layer: 0
-  m_Name: MagicSnakePrefab
+  m_Name: WitchSkull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

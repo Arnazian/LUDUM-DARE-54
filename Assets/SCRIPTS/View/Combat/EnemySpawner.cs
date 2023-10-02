@@ -8,8 +8,6 @@ public class EnemySpawner : MonoBehaviour
     [Header("Spawn Points")]
     [SerializeField] private Transform[] spawnPoints;
 
-
-    [SerializeField] private EnemyComponent EnemyTemplate;
     private readonly List<EnemyComponent> spawnedEnemies = new();
 
     void Start()
@@ -36,8 +34,11 @@ public class EnemySpawner : MonoBehaviour
         int enemyCount = GameSession.ActiveCombat.Enemies.Count;
         for (int i = 0; i < enemyCount; i++)
         {
-            var EnemyInstance = Instantiate(EnemyTemplate, spawnPoints[i]);
-            EnemyInstance.enemy = GameSession.ActiveCombat.Enemies[i];
+            var enemy = GameSession.ActiveCombat.Enemies[i];
+            var template = Resources.Load<EnemyComponent>($"Enemies/{enemy.PrefabName}");
+           // var template = templateGO?.GetComponent<EnemyComponent>();
+            var EnemyInstance = Instantiate(template, spawnPoints[i]);
+            EnemyInstance.enemy = enemy;
             spawnedEnemies.Add(EnemyInstance);
         }
     }

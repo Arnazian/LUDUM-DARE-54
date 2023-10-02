@@ -62,7 +62,8 @@ public class StatusEffectList : MonoBehaviour
     private void ClearAll()
     {
         foreach (var effect in Instances)
-            Destroy(effect.Value.gameObject);
+            if (effect.Value != null)
+                Destroy(effect.Value.gameObject);
         Instances.Clear();
     }
 

@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 1997075161416471327}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.46, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -256,7 +256,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.30588236, g: 0.5294118, b: 1, a: 1}
+      maxColor: {r: 0.3066038, g: 0.5295785, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4936,7 +4936,7 @@ SpriteRenderer:
   m_SortingLayerID: 650986673
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f356de3d80ff65d4097d129cb3ff60f3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 50143c7798de7d64e8569d97d9156f3a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5003,8 +5003,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 3.75, y: 3.28}
+    pivot: {x: 0.48482028, y: 0.12076138}
+    oldSize: {x: 3.18, y: 3.7}
     newSize: {x: 3.18, y: 3.7}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5419,7 +5419,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.91}
+  m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: 2, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5700120503446999612
@@ -5577,7 +5577,7 @@ GameObject:
   - component: {fileID: 2247306878193266889}
   - component: {fileID: 2315722094579424829}
   m_Layer: 0
-  m_Name: GhostPrefab
+  m_Name: Pumpkin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6005,7 +6005,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.67058825, g: 0.627451, b: 0.67058825, a: 1}
+      maxColor: {r: 0.59607846, g: 0.47058827, b: 0.25882354, a: 0.88235295}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -10818,7 +10818,7 @@ SpriteRenderer:
   m_SortingLayerID: 650986673
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f356de3d80ff65d4097d129cb3ff60f3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 50143c7798de7d64e8569d97d9156f3a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
@@ -11089,7 +11089,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.6784314, g: 0.6392157, b: 0.6784314, a: 1}
+      maxColor: {r: 0.5943396, g: 0.43454075, b: 0.18222678, a: 0.49019608}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

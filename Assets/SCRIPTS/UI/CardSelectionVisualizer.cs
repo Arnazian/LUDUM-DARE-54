@@ -35,6 +35,15 @@ public class CardSelectionVisualizer : MonoBehaviour
         };
     }
 
+    void OnDestroy()
+    {
+        ICardTarget.OnBeginSelection -= Init;
+        ICardTarget.OnFinishSelection -= End;
+
+        ICardTarget.OnEnter -= OnEnter;
+        ICardTarget.OnExit -= OnExit;
+    }
+
     void Update()
     {
         if (!Crosshair.gameObject.activeSelf) return;
