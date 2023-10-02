@@ -43,7 +43,6 @@ public class GameSession : MonoBehaviour
 
     private static readonly EncounterGroups.Difficulty[] Pattern = new EncounterGroups.Difficulty[]
     {
-        EncounterGroups.Difficulty.Boss,
         EncounterGroups.Difficulty.Easy,
         EncounterGroups.Difficulty.Easy,
         EncounterGroups.Difficulty.Medium,

@@ -2,15 +2,6 @@ using System.Collections.Generic;
 
 public static class EncounterGroups
 {
-    public static Difficulty[] DiffByEncounterCounter = new Difficulty[] {
-        Difficulty.Easy,
-        Difficulty.Easy,
-        Difficulty.Medium,
-        Difficulty.Medium,
-        Difficulty.Hard,
-        Difficulty.Boss,
-    };
-
     public enum Difficulty
     {
         Easy, Medium, Hard, Boss
