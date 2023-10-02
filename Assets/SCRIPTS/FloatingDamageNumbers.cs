@@ -23,14 +23,6 @@ public class FloatingDamageNumbers : MonoBehaviour
         originalPosition = numberTransform.localPosition;
     }
 
-    private void Update()
-    {
-        Debug.Log("Remove this");
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            StartMoveUp("100");
-        }
-    }
     public void StartMoveUp(string number)
     {
         float newYPosition = originalPosition.y + moveUpAmount;
