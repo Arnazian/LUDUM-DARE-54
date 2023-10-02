@@ -11235,7 +11235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ghostSprite: {fileID: 8088467258443476850}
-  transAlpha: 0.1
+  transAlpha: 0.2
   fadeDurationInSeconds: 0.5
 --- !u!1 &7781238199357659986
 GameObject:
