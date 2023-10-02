@@ -30,6 +30,7 @@ public class PlayerAnimation : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         Combat.OnEventLogChanged += OnEvent;
     }
 
@@ -103,6 +104,8 @@ public class PlayerAnimation : MonoBehaviour
         int amount = (int)e.Args[1];
         if (amount > 0)
         {
+            audioSource.clip = getHitClip;
+            audioSource.Play();
             float effectDuration = 0.5f;
             Camera.main.GetComponent<CameraController>().ScreenShake(shakeDuration, shakeStrength);
             getHitParticles.Play();
