@@ -5,6 +5,7 @@ public class BabyBagJoker : AbstractEnemy
     public override CappedInt ActCooldown { get; set; } = new(3, 3);
     protected override CappedInt Health { get; set; } = new(10, 10);
     public override string PrefabName => "BabyBag";
+    public override int Damage => 2;
 
     public BabyBagJoker()
     {
@@ -13,7 +14,7 @@ public class BabyBagJoker : AbstractEnemy
 
     public override void Act()
     {
-        DealDamage(2);
+        DealDamage();
         foreach (var enemy in Combat.Active.Enemies)
         {
             if (enemy == this) continue;

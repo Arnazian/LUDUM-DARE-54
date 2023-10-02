@@ -8,6 +8,7 @@ public class BabyBagQueen : AbstractEnemy
     public override CappedInt ActCooldown { get; set; } = new(4, 4);
     protected override CappedInt Health { get; set; } = new(10, 10);
     public override string PrefabName => "BabyBag";
+    public override int Damage => 1;
 
     public BabyBagQueen()
     {
@@ -23,7 +24,7 @@ public class BabyBagQueen : AbstractEnemy
             var enemy = others[random];
             enemy.Act();
         }
-        else DealDamage(1);
+        else DealDamage();
     }
 
     public class Royalty : AbstractStatusEffect
