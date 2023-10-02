@@ -14,7 +14,11 @@ namespace Cards
         public override void OnPlayed(params object[] args)
         {
             Combat.Player.DoHealing(2);
-            foreach (var card in args) (card as AbstractCard).Cooldown.Value -= 5;
+            foreach (var card in args)
+            {
+                (card as AbstractCard).Cooldown.Value -= 5;
+                Combat.Active.PushCombatEvent(CombatEvent.CooldownChanged(Combat.Player, (card as AbstractCard).Cooldown.Value, card));
+            }
         }
     }
 }

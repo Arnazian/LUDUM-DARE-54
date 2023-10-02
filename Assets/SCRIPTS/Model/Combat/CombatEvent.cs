@@ -36,7 +36,7 @@ public class CombatEvent
     public static CombatEvent TurnEnded(object target) => new(EventType.TurnEnded, target);
 
     public static CombatEvent TakenAction(object target) => new(EventType.TakenAction, target);
-    public static CombatEvent CooldownChanged(object target, int cooldown) => new(EventType.CooldownChanged, target, cooldown);
+    public static CombatEvent CooldownChanged(object target, int cooldown, object context = null) => new(EventType.CooldownChanged, target, cooldown, context);
 
     public static CombatEvent ApplyStatus(object target, AbstractStatusEffect status, int stacks) => new(EventType.StatusApplied, target, status, stacks);
     public static CombatEvent RemoveStatus(object target, AbstractStatusEffect status, int stacks) => new(EventType.StatusRemoved, target, status, stacks);

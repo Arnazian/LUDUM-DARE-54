@@ -18,6 +18,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             TitleText.text = card.Name;
             DescriptionText.text = card.Description;
             MaxCooldownText.text = card.Cooldown.Max.ToString();
+            UpdateCooldown(card.Cooldown.Value);
             Artwork.sprite = Resources.Load<Sprite>($"Cards/{card.GetType().Name}");
         }
     }
@@ -53,7 +54,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     [SerializeField] RectTransform Tooltip;
     [SerializeField] TMP_Text TitleText;
     [SerializeField] TMP_Text DescriptionText;
-    
+
 
     [Header("Spring Settings")]
     [field: SerializeField] private Spring.Config springConfig = new(20f, .6f);
@@ -166,10 +167,13 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         RotSpring.Step(Time.deltaTime);
         ScaleSpring.Step(Time.deltaTime);
         GlowEffectSpring.Step(Time.deltaTime);
+    }    
 
-        CanvasGroup.interactable = Card.Cooldown.Value == 0;
-        CooldownFill.fillAmount = Card.Cooldown.Normalized;
-        CooldownText.text = Card.Cooldown.Value > 0 ? Card.Cooldown.Value.ToString() : "";
+    public void UpdateCooldown(int amount)
+    {
+        CanvasGroup.interactable = amount == 0;
+        CooldownFill.fillAmount = amount / (float)Card.Cooldown.Max;
+        CooldownText.text = amount > 0 ? amount.ToString() : "";
     }
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -53,7 +53,10 @@ public class Combat
     public void Pass()
     {
         foreach (var c in Player.Cards.Where(c => c != null))
+        {
             c.Cooldown.Value--;
+            PushCombatEvent(CombatEvent.CooldownChanged(Player, c.Cooldown.Value, c));
+        }
         EnemyTurn();
     }
     private void EnemyTurn()
@@ -72,8 +75,12 @@ public class Combat
         card.OnPlayed(args);
         IStatusEffectTarget.OnAfterAction(Player, () => card.OnPlayed(args));
         foreach (var c in Player.Cards.Where(c => c != null))
+        {
             c.Cooldown.Value--;
+            PushCombatEvent(CombatEvent.CooldownChanged(Player, c.Cooldown.Value, c));
+        }
         card.Cooldown.Maximize();
+        PushCombatEvent(CombatEvent.CooldownChanged(Player, card.Cooldown.Value, card));
         PushCombatEvent(CombatEvent.TakenAction(Player));
 
         //End Turn
