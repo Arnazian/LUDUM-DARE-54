@@ -2202,6 +2202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5636395776224632331}
+  - component: {fileID: 1815452223531984924}
   m_Layer: 5
   m_Name: SkipTurn
   m_TagString: Untagged
@@ -2229,6 +2230,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1815452223531984924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517606925772574115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e039e376d32ca48970ac0b4c0b76da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6524700232242255976
 GameObject:
   m_ObjectHideFlags: 0
@@ -2424,7 +2437,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 144773689978634166}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1815452223531984924}
+        m_TargetAssemblyTypeName: SkipTurn, Assembly-CSharp
+        m_MethodName: DoSkipTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7172154258062470523
 GameObject:
   m_ObjectHideFlags: 0
