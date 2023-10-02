@@ -69,7 +69,7 @@ public class CardHandComponent : MonoBehaviour
                 InstancesBySlotID[slot] = instance = Instantiate(CardTemplate, CardSlots[slot]);
             instance.Card = card;
             instance.IsOverDropRegion = () => instance.DragVisual.localPosition.y >= PlayYThreshold;
-            instance.IsDraggable = () => IsPlayersTurn && selectionRoutine == null && card.Cooldown.Value <= 0 && GameSession.GameState == GameSession.State.COMBAT;
+            instance.IsDraggable = () => IsPlayersTurn && Combat.Active != null && Combat.Active.Enemies.Count > 0 && selectionRoutine == null && card.Cooldown.Value <= 0 && GameSession.GameState == GameSession.State.COMBAT;
             instance.OnDrop = OnCardDropped;
         }
     }
