@@ -66,7 +66,7 @@ public class EnemyComponent : MonoBehaviour
                 break;
             case CombatEvent.EventType.Damaged:
                 e.Accept();
-                getHitEffects.DoGetHitEffects();
+                getHitEffects.DoGetHitEffects((int)e.Args[1]);
                 HealthText.text = enemy.ReadOnlyHealth.Value.ToString();
                 HealthSpring.RestingPos = enemy.ReadOnlyHealth.Normalized;
                 e.Consume();

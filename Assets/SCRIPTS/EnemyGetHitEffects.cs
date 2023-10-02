@@ -35,27 +35,19 @@ public class EnemyGetHitEffects : MonoBehaviour
         hitFlashSprite.DOFade(0, 0);
     }
 
-    private void Update()
-    {
-        /// deleeete
-        if(Input.GetKeyDown(KeyCode.J))
-        {
-            DoGetHitEffects();
-        }
-    }
-
-    public void DoGetHitEffects()
+    public void DoGetHitEffects(int damageAmount)
     {
         // move to card if we have different sounds for each different card
         audioSource.clip = getHitClip;
         audioSource.Play();
 
-        StartCoroutine(CoroutineHitFlash());       
+        StartCoroutine(CoroutineHitFlash(damageAmount));       
     }
 
-    IEnumerator CoroutineHitFlash()
+    IEnumerator CoroutineHitFlash(int damageAmount)
     {
         getHitParticles.Play();
+        GetComponent<FloatingDamageNumbers>().StartMoveUp(damageAmount.ToString());
         cameraController.ScreenShake(hitShakeDuration, hitShakeStrength);
         hitFlashSprite.DOFade(1, secondsToFadeSprite);
         mainSprite.DOFade(0, secondsToFadeSprite);

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Ghosty : AbstractEnemy
 {
-    public override CappedInt ActCooldown { get; set; } = new(2, 2);
-    protected override CappedInt Health { get; set; } = new(10, 10);
+    public override CappedInt ActCooldown { get; set; } = new(1, 1);
+    protected override CappedInt Health { get; set; } = new(4, 4);
     public override string PrefabName => "Ghosty";
     public override void Act()
     {
-        DealDamage(5);
+        DealDamage(1);
     }
 }

@@ -30,6 +30,7 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
         IStatusEffectTarget.OnEndTurn(this);
     }
 
+
     public void DealDamage(int amount) => DealDamage(amount, GameSession.Player);
     public void DealDamage(int amount, params IDamageable[] targets)
     {

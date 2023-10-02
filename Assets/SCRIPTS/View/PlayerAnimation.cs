@@ -28,9 +28,11 @@ public class PlayerAnimation : MonoBehaviour
     [Header("Animator Reference")]
     [SerializeField] private Animator anim;
     private ControlSelectionRotator selectionRotator;
+    private FloatingDamageNumbers floatingDamageNumbers;
 
     void Start()
     {
+        floatingDamageNumbers = GetComponent<FloatingDamageNumbers>();
         selectionRotator = GetComponent<ControlSelectionRotator>(); 
         audioSource = GetComponent<AudioSource>();
         Combat.OnEventLogChanged += OnEvent;
@@ -108,6 +110,7 @@ public class PlayerAnimation : MonoBehaviour
         int amount = (int)e.Args[1];
         if (amount > 0)
         {
+            floatingDamageNumbers.StartMoveUp(amount.ToString());
             audioSource.clip = getHitClip;
             audioSource.Play();
             float effectDuration = 0.5f;
@@ -119,6 +122,10 @@ public class PlayerAnimation : MonoBehaviour
             hitFlashSprite.DOFade(0, secondsToFadeSprite);
             mainSprite.DOFade(1, secondsToFadeSprite);
             yield return new WaitForSeconds(effectDuration);
+        }
+        else
+        {
+            GetComponent<DoShieldVisuals>().StartShieldVisuals();
         }
         e.Consume();
     }
