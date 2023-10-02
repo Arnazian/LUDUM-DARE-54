@@ -32,6 +32,7 @@ public class MischievousPumpkin : AbstractEnemy
             if (cardNotOnCD.Length == 0) return;
             var randomCard = cardNotOnCD[UnityEngine.Random.Range(0, cardNotOnCD.Length)];
             randomCard.Cooldown.Maximize();
+            Combat.Active.PushCombatEvent(CombatEvent.CooldownChanged(Combat.Player, randomCard.Cooldown.Value, randomCard));
         }
     }
 }

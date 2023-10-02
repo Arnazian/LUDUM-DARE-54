@@ -49,6 +49,12 @@ public class CardHandComponent : MonoBehaviour
                 IsPlayersTurn = e.Type == CombatEvent.EventType.TurnStarted;
                 FlameLit.gameObject.SetActive(IsPlayersTurn);
                 break;
+            case CombatEvent.EventType.CooldownChanged:
+                var cooldown = (int)e.Args[0];
+                var card = e.Args[1] as AbstractCard;
+                var cardComponent = InstancesBySlotID.Values.First(cc => cc.Card == card);
+                cardComponent.UpdateCooldown(cooldown);
+                break;
         }
 
     }

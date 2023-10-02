@@ -49,7 +49,10 @@ public class Player : IStatusEffectTarget, IDamageable
     {
         StatusEffectTarget.Cleanse();
         foreach (var card in Cards.Where(card => card != null))
+        {
             card.Cooldown.Minimize();
+            Combat.Active.PushCombatEvent(CombatEvent.CooldownChanged(Combat.Player, card.Cooldown.Value, card));
+        }
     }
 
     public void DoDamage(int amount, params IDamageable[] targets)

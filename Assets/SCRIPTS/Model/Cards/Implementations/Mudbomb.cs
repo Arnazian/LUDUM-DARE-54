@@ -11,7 +11,11 @@ namespace Cards
 
         public override void OnPlayed(params object[] args)
         {
-            foreach (var enemy in Combat.Active.Enemies) enemy.ActCooldown.Value += 2;
+            foreach (var enemy in Combat.Active.Enemies)
+            {
+                enemy.ActCooldown.Value += 2;
+                Combat.Active.PushCombatEvent(CombatEvent.CooldownChanged(enemy, enemy.ActCooldown.Value));
+            }
         }
     }
 }

@@ -11,7 +11,11 @@ namespace Cards
         {
             var player = Combat.Player;
             foreach (var card in player.Cards)
+            {
                 card.Cooldown.Value -= 1;
+                Combat.Active.PushCombatEvent(CombatEvent.CooldownChanged(Combat.Player, card.Cooldown.Value, card));
+            }
+
         }
     }
 }
