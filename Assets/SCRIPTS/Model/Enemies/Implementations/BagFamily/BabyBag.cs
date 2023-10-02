@@ -7,15 +7,16 @@ public class BabyBag : AbstractEnemy
     public override CappedInt ActCooldown { get; set; } = new(3, 3);
     protected override CappedInt Health { get; set; } = new(4, 4);
     public override string PrefabName => "BabyBag";
+    public override int Damage => 3; 
 
     public BabyBag()
     {
-        ((IStatusEffectTarget)this).Apply<Shy>(-1);
+        EffectTarget.Apply<Shy>(-1);
     }
 
     public override void Act()
     {
-        DealDamage(3);
+        DealDamage();
     }
 
     public class Shy : AbstractStatusEffect

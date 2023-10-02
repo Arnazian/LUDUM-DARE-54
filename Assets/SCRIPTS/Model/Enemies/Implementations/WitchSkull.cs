@@ -6,15 +6,15 @@ public class WitchSkull : AbstractEnemy
     public override CappedInt ActCooldown { get; set; } = new(10, 10);
     protected override CappedInt Health { get; set; } = new(20, 20);
     public override string PrefabName => "WitchSkull";
-
+    public override int Damage => 2;
     public WitchSkull()
     {
-        // EffectTarget.Apply<HexGenerator>(-1);
+        EffectTarget.Apply<HexGenerator>(-1);
     }
 
     public override void Act()
     {
-        DealDamage(10);
+        DealDamage();
     }
 
     public class HexGenerator : AbstractStatusEffect

@@ -13,6 +13,7 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
 
     public string Name => GetType().Name;
     public abstract string PrefabName { get; }
+    public abstract int Damage { get; }
 
     public abstract void Act();
     public void DoTurn()
@@ -34,7 +35,7 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
     }
 
 
-    public void DealDamage(int amount) => DealDamage(amount, GameSession.Player);
+    public void DealDamage() => DealDamage(Damage, GameSession.Player);
     public void DealDamage(int amount, params IDamageable[] targets)
     {
         IStatusEffectTarget.OnBeforeDoDamage(this, ref amount);

@@ -10,10 +10,12 @@ public class EnemyComponent : MonoBehaviour
     [SerializeField] private SpriteRenderer EnemySprite;
     [SerializeField] private SpriteRenderer Hitflash;
     [SerializeField] private Image healthImage;
+
     BaseSpring HealthSpring;
     Spring.Config springConfig = new(20, 2f);
     [SerializeField] private TMP_Text HealthText;
     [SerializeField] private TMP_Text ActionCooldown;
+    [SerializeField] private TMP_Text DamageText;
     [SerializeField] StatusEffectList StatusList;
     [SerializeField] PolygonCollider2D polyCollider;
 
@@ -33,6 +35,7 @@ public class EnemyComponent : MonoBehaviour
         StatusList.Target = enemy;
         HealthText.text = enemy.ReadOnlyHealth.Value.ToString();
         EnemySprite.sprite = Resources.Load<Sprite>($"Enemies/{enemy.GetType().Name}");
+        DamageText.text = enemy.Damage.ToString();
         Hitflash.sprite = EnemySprite.sprite;
         var shape = new List<Vector2>();
         EnemySprite.sprite.GetPhysicsShape(0, shape);

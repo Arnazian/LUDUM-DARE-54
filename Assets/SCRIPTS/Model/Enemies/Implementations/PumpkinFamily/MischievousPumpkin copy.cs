@@ -7,22 +7,22 @@ using UnityEngine;
 public class MischievousPumpkin : AbstractEnemy
 {
     public override CappedInt ActCooldown { get; set; } = new(5, 5);
-    protected override CappedInt Health { get; set; } = new(8, 8);
+    protected override CappedInt Health { get; set; } = new(4, 4);
     public override string PrefabName => "Pumpkin";
-
+    public override int Damage => 2;
     public MischievousPumpkin()
     {
-        this.EffectTarget.Apply<Vengeful>(-1);
+        this.EffectTarget.Apply<Mischievous>(-1);
     }
 
     public override void Act()
     {
-        DealDamage(2);
+        DealDamage();
     }
 
-    public class Vengeful : AbstractStatusEffect
+    public class Mischievous : AbstractStatusEffect
     {
-        public override Color Color => new Color(.8f, .4f, .4f);
+        public override Color Color => new Color(.3f, .3f, .3f);
         public override string Name => "Mischievous";
         public override string Description => "After attacking, puts a random player card on cooldown.";
 
