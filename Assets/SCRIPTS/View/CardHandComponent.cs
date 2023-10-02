@@ -10,6 +10,7 @@ public class CardHandComponent : MonoBehaviour
     [Header("Component References")]
     [SerializeField] private CardComponent CardTemplate;
     [SerializeField] private CardSelectionVisualizer CardSelection;
+    [SerializeField] private RectTransform FlameLit;
     [SerializeField] private AudioSource Source;
 
     [field: SerializeField] public RectTransform[] CardSlots { get; private set; }
@@ -40,6 +41,7 @@ public class CardHandComponent : MonoBehaviour
             case CombatEvent.EventType.TurnStarted:
             case CombatEvent.EventType.TurnEnded:
                 IsPlayersTurn = e.Type == CombatEvent.EventType.TurnStarted;
+                FlameLit.gameObject.SetActive(IsPlayersTurn);
                 break;
         }
 

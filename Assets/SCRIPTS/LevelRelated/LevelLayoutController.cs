@@ -22,9 +22,9 @@ public class LevelLayoutController : MonoBehaviour
         GameObject newLevelBlock = Instantiate(newBlockDesign);
         newLevelBlock.transform.parent = levelBlockParent;
 
-        enemyRoot.transform.position = new(posX, 0, enemyRoot.transform.position.z);
+        enemyRoot.transform.localPosition = new(posX, 0, enemyRoot.transform.position.z);
         posX += 20f;
-        newLevelBlock.transform.position = new Vector2(posX, newLevelBlock.transform.position.y);
+        newLevelBlock.transform.localPosition = new Vector2(posX, newLevelBlock.transform.position.y);
         activeLevelBlocks.Add(newLevelBlock);
         if (activeLevelBlocks.Count > 4) DestroyOldestLevelBlock();
     }
