@@ -72,7 +72,7 @@ public class Player : IStatusEffectTarget, IDamageable
     {
         IStatusEffectTarget.OnBeforeRecieveDamage(this, ref amount);
         Health.Value -= amount;
-        Combat.Active.PushCombatEvent(CombatEvent.Damaged(this, Health.Value));
+        Combat.Active.PushCombatEvent(CombatEvent.Damaged(this, Health.Value, amount));
         if (Health.Value <= 0) Die();
     }
 
@@ -80,7 +80,7 @@ public class Player : IStatusEffectTarget, IDamageable
     {
         IStatusEffectTarget.OnBeforeRecieveHealing(this, ref amount);
         Health.Value += amount;
-        Combat.Active.PushCombatEvent(CombatEvent.Healed(this, Health.Value));
+        Combat.Active.PushCombatEvent(CombatEvent.Healed(this, Health.Value, amount));
         if (Health.Value <= 0) Die();
     }
 

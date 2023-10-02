@@ -30,7 +30,6 @@ public class PlayerAnimation : MonoBehaviour
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         Combat.OnEventLogChanged += OnEvent;
     }
 
@@ -65,6 +64,7 @@ public class PlayerAnimation : MonoBehaviour
                 StartCoroutine(TakenActionAnimation(e));
                 break;
         }
+
     }
 
     void OnDestroy()
@@ -100,20 +100,19 @@ public class PlayerAnimation : MonoBehaviour
 
     IEnumerator BeenDamagedAnimation(CombatEvent e)
     {
-        float effectDuration = 0.5f;
-        Camera.main.GetComponent<CameraController>().ScreenShake(shakeDuration, shakeStrength);
-
-        audioSource.clip = getHitClip;
-        audioSource.Play();
-        getHitParticles.Play();
-        hitFlashSprite.DOFade(1, secondsToFadeSprite);
-        mainSprite.DOFade(0, secondsToFadeSprite);
-        yield return new WaitForSeconds(flashDuration);
-        hitFlashSprite.DOFade(0, secondsToFadeSprite);
-        mainSprite.DOFade(1, secondsToFadeSprite);
-        
-
-        yield return new WaitForSeconds(effectDuration);
+        int amount = (int)e.Args[1];
+        if (amount > 0)
+        {
+            float effectDuration = 0.5f;
+            Camera.main.GetComponent<CameraController>().ScreenShake(shakeDuration, shakeStrength);
+            getHitParticles.Play();
+            hitFlashSprite.DOFade(1, secondsToFadeSprite);
+            mainSprite.DOFade(0, secondsToFadeSprite);
+            yield return new WaitForSeconds(flashDuration);
+            hitFlashSprite.DOFade(0, secondsToFadeSprite);
+            mainSprite.DOFade(1, secondsToFadeSprite);
+            yield return new WaitForSeconds(effectDuration);
+        }
         e.Consume();
     }
 
