@@ -8,7 +8,11 @@ public class CanvasPlaneDistanceDriver : MonoBehaviour
 
     public void Update()
     {
+        if (float.IsNaN(Canvas.planeDistance)) 
+            Canvas.planeDistance = 1f;
         var currentScale = Canvas.transform.lossyScale.x;
+        if (float.IsNaN(Canvas.transform.lossyScale.x)) 
+            currentScale = 1f;
         Canvas.planeDistance /= currentScale;
-    }
+    }    
 }
