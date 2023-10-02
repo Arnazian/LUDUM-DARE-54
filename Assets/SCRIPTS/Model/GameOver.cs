@@ -15,5 +15,6 @@ public class GameOver : MonoBehaviour
     {
         if (state != GameSession.State.GAME_OVER) return;
         gameOverScreen.SetActive(true);
+        FindObjectOfType<AudioManager>().PlayDeathMusic();
     }
 }

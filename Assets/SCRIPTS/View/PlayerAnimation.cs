@@ -27,9 +27,11 @@ public class PlayerAnimation : MonoBehaviour
 
     [Header("Animator Reference")]
     [SerializeField] private Animator anim;
+    private ControlSelectionRotator selectionRotator;
 
     void Start()
     {
+        selectionRotator = GetComponent<ControlSelectionRotator>(); 
         audioSource = GetComponent<AudioSource>();
         Combat.OnEventLogChanged += OnEvent;
     }
@@ -76,12 +78,14 @@ public class PlayerAnimation : MonoBehaviour
     IEnumerator TurnStartedAnimation(CombatEvent e)
     {
         yield return null;
+        selectionRotator.EnableRotatorVisuals();
         e.Consume();
     }
 
     IEnumerator TurnEndedAnimation(CombatEvent e)
     {
         yield return null;
+        selectionRotator.DisableRotatorVisuals();
         e.Consume();
     }
 

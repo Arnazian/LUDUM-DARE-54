@@ -18,11 +18,14 @@ public class EnemyComponent : MonoBehaviour
     [SerializeField] StatusEffectList StatusList;
     [SerializeField] PolygonCollider2D polyCollider;
 
+    private ControlSelectionRotator selectionRotator;
     private EnemyAttackVisuals attackVisuals;
     private EnemyGetHitEffects getHitEffects;
 
     void Start()
     {
+        selectionRotator = GetComponent<ControlSelectionRotator>();
+        selectionRotator.DisableRotatorVisuals();
         attackVisuals = GetComponent<EnemyAttackVisuals>();
         getHitEffects = GetComponent<EnemyGetHitEffects>();
         Combat.OnEventLogChanged += OnNewCombatEvent;
@@ -59,7 +62,6 @@ public class EnemyComponent : MonoBehaviour
             case CombatEvent.EventType.Killed:
                 e.Accept();
                 getHitEffects.DoDeathEffects();
-                /// Destroy(gameObject); //death animation
                 e.Consume();
                 break;
             case CombatEvent.EventType.Damaged:
@@ -71,6 +73,7 @@ public class EnemyComponent : MonoBehaviour
                 break;
             case CombatEvent.EventType.TurnEnded:
             case CombatEvent.EventType.TurnStarted:
+                // StartCoroutine(CoroutineDoTurn());
                 ActionCooldown.text = enemy.ReadOnlyActCooldown.Value > 0 ? enemy.ReadOnlyActCooldown.Value.ToString() : "<color=red>0</color>";
                 break;
             case CombatEvent.EventType.TakenAction:
@@ -80,6 +83,28 @@ public class EnemyComponent : MonoBehaviour
         }
     }
 
+    IEnumerator CoroutineDoTurn()
+    {
+        float waitBeforeAction = 1f;
+        float waitAfterAction = 0.5f;
+
+        selectionRotator.EnableRotatorVisuals();
+        yield return new WaitForSeconds(waitBeforeAction);
+
+        // actionCD lowering animation
+        yield return new WaitForSeconds(waitAfterAction);
+        // if(actionCD > 1)
+        {
+            // do action
+            yield return new WaitForSeconds(waitAfterAction);
+            selectionRotator.DisableRotatorVisuals();
+        }
+        // else
+        {
+            selectionRotator.DisableRotatorVisuals();
+        }
+        // end turn
+    }
     IEnumerator AnimateAction(CombatEvent e)
     {
         attackVisuals.DoAttackVisuals();
