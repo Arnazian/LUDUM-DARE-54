@@ -53,11 +53,6 @@ public class CardHandComponent : MonoBehaviour
 
     }
 
-    void OnDestroy()
-    {
-        Player.OnCardChanged -= UpdateCard;
-    }
-
     void UpdateCard(int slot, AbstractCard card)
     {
         if (card == null)
