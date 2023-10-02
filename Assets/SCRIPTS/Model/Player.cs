@@ -51,7 +51,7 @@ public class Player : IStatusEffectTarget, IDamageable
         foreach (var card in Cards.Where(card => card != null))
         {
             card.Cooldown.Minimize();
-            Combat.Active.PushCombatEvent(CombatEvent.CooldownChanged(Combat.Player, card.Cooldown.Value, card));
+            Combat.Active?.PushCombatEvent(CombatEvent.CooldownChanged(Combat.Player, card.Cooldown.Value, card));
         }
     }
 
