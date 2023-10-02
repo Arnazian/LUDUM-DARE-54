@@ -13,10 +13,10 @@ public class Player : IStatusEffectTarget, IDamageable
     public const int CardCapacity = 5;
     public List<AbstractCard> Cards { get; private set; } = new(CardCapacity) {
         new Cards.Dagger(),
-        new Cards.Dagger(),
-        new Cards.Shield(),
-        new Cards.Shield(),
-        new Cards.Potion(),
+        null,
+        null,
+        null,
+        new Cards.Potion()
     };
 
     Dictionary<Type, IStatusEffectTarget.AppliedEffect> IStatusEffectTarget.EffectStacks { get; } = new();
@@ -40,6 +40,7 @@ public class Player : IStatusEffectTarget, IDamageable
     public void ReplaceCard(AbstractCard old, AbstractCard replacement) => ReplaceCardAt(Cards.IndexOf(old), replacement);
     public void ReplaceCardAt(int index, AbstractCard replacement)
     {
+        if (index >= Cards.Count) { AddCard(replacement); return; }
         Cards[index] = replacement;
         OnCardChanged?.Invoke(index, replacement);
     }
