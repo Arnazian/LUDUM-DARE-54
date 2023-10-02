@@ -11,12 +11,10 @@ public class Player : IStatusEffectTarget, IDamageable
     public IStatusEffectTarget StatusEffectTarget => this;
 
     public const int CardCapacity = 5;
-    public List<AbstractCard> Cards { get; private set; } = new(CardCapacity) {        
-        new Cards.Haste(),
-        new Cards.Deathmark(),
-        new Cards.BloodRitual(),
-        new Cards.Mudbomb(),
-        new Cards.Meditation(),
+    public List<AbstractCard> Cards { get; private set; } = new(CardCapacity) {
+        new Cards.Dagger(),
+        null,null,null,
+        new Cards.Potion(),
     };
 
     Dictionary<Type, IStatusEffectTarget.AppliedEffect> IStatusEffectTarget.EffectStacks { get; } = new();
