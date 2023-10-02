@@ -224,6 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5506619211067660895}
   - component: {fileID: 7211223243618723850}
+  - component: {fileID: 6565255695868681381}
   m_Layer: 0
   m_Name: StatusEffectComponent
   m_TagString: Untagged
@@ -270,6 +271,22 @@ MonoBehaviour:
   TooltipName: {fileID: 6404793681602555149}
   TooltipDescr: {fileID: 5393977670516768442}
   BaseImage: {fileID: 4705436005489580632}
+--- !u!114 &6565255695868681381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3657607774924794575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63815a257c25f33489ec418f09e68d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToScale: {fileID: 5506619211067660895}
+  timeToScale: 0.3
+  delayToScale: 0.25
+  newScale: {x: 2.5, y: 2.5}
 --- !u!1 &3757229298638646117
 GameObject:
   m_ObjectHideFlags: 0

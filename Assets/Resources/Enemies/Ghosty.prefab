@@ -10979,6 +10979,7 @@ MonoBehaviour:
   timeToGrowInSeconds: 1
   delayToStartGrowing: 0.5
   sizeToStartFrom: {x: 0, y: 0, z: 0}
+  hudToEnable: {fileID: 5963788302172467784}
 --- !u!114 &8357995539414789723
 MonoBehaviour:
   m_ObjectHideFlags: 0

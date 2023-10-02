@@ -175,9 +175,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: BabyBag
       objectReference: {fileID: 0}
-    - target: {fileID: 2691459608460847043, guid: dfed74e5ae967804d98fd3b106138e20, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 2868215228348559821, guid: dfed74e5ae967804d98fd3b106138e20, type: 3}
+      propertyPath: delayToScale
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7873387453765321476, guid: dfed74e5ae967804d98fd3b106138e20, type: 3}
       propertyPath: m_Camera
@@ -2068,7 +2068,7 @@ PrefabInstance:
       objectReference: {fileID: 1624036130}
     - target: {fileID: 2834642040619634168, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_PlaneDistance
-      value: 12.36022
+      value: 12.363646
       objectReference: {fileID: 0}
     - target: {fileID: 3493632606037404392, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_LocalPosition.x

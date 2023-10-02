@@ -5083,6 +5083,7 @@ MonoBehaviour:
   timeToGrowInSeconds: 1
   delayToStartGrowing: 0.5
   sizeToStartFrom: {x: 0, y: 0, z: 0}
+  hudToEnable: {fileID: 5408466143953696003}
 --- !u!114 &2931550861951366965
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,10 +12,12 @@ public class GrowIntoPlace : MonoBehaviour
     [SerializeField] private float timeToGrowInSeconds;
     [SerializeField] private float delayToStartGrowing;
     [SerializeField] private Vector3 sizeToStartFrom;
+    [SerializeField] private GameObject hudToEnable;
     private Vector3 originalSize;
 
     private void OnEnable()
     {
+        hudToEnable.SetActive(false);
         originalSize = transform.localScale;
         StartCoroutine(CoroutineDoGrowIn());
     }
@@ -24,7 +26,10 @@ public class GrowIntoPlace : MonoBehaviour
     {
         transform.DOScale(sizeToStartFrom, 0f);
         yield return new WaitForSeconds(delayToStartGrowing);
-        transform.DOScale(originalSize, timeToGrowInSeconds);
+        transform.DOScale(originalSize, timeToGrowInSeconds).OnComplete(() =>
+        {
+            hudToEnable.SetActive(true);
+        });
     }
 }
 
