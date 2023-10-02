@@ -10,6 +10,8 @@ public class DoShieldVisuals : MonoBehaviour
     [SerializeField] private float shieldUpDuration;
     [SerializeField] private float shieldFadeInDuration;
     [SerializeField] private float shieldFadeOutDuration;
+
+    [SerializeField] private AudioSource blockAudioSource;
     void Start()
     {
         shield.DOFade(0, 0);
@@ -21,6 +23,7 @@ public class DoShieldVisuals : MonoBehaviour
 
     IEnumerator CoroutineStartShieldVisuals()
     {
+        blockAudioSource.Play();
         shield.DOFade(1, shieldFadeInDuration);
         shieldParticles.Play();
         yield return new WaitForSeconds(shieldUpDuration);

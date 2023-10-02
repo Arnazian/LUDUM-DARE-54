@@ -37,7 +37,7 @@ public class EnemyGetHitEffects : MonoBehaviour
 
     public void DoGetHitEffects(int damageAmount)
     {
-        // move to card if we have different sounds for each different card
+        if (damageAmount <= 0) return;
         audioSource.clip = getHitClip;
         audioSource.Play();
 

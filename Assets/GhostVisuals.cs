@@ -20,7 +20,14 @@ public class GhostVisuals : MonoBehaviour
     }
     public void DoFadeOut()
     {
+        StartCoroutine(CoroutineFadeOutWithDelay());
+    }
+
+    IEnumerator CoroutineFadeOutWithDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
         ghostSprite.DOFade(transAlpha, fadeDurationInSeconds);
+
     }
     
 }
