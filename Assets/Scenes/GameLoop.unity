@@ -333,6 +333,9 @@ MonoBehaviour:
   levelBlockParent: {fileID: 1090305933}
   levelBlocks:
   - {fileID: 5775543650424354084, guid: 3246931f81cee10438c65f95d1d66114, type: 3}
+  - {fileID: 5775543650424354084, guid: 399f6f934216ec043ae13994176fe437, type: 3}
+  - {fileID: 5775543650424354084, guid: 9a519f6cf79274143a6c7fbb76faec48, type: 3}
+  - {fileID: 5775543650424354084, guid: b8097a3287438dc4caf899a56a4afa87, type: 3}
   enemyRoot: {fileID: 980695843}
 --- !u!1001 &527670646
 PrefabInstance:
@@ -1759,7 +1762,7 @@ PrefabInstance:
       objectReference: {fileID: 1624036130}
     - target: {fileID: 2834642040619634168, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_PlaneDistance
-      value: 12.37157
+      value: 12.368242
       objectReference: {fileID: 0}
     - target: {fileID: 3493632606037404392, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_LocalPosition.x
