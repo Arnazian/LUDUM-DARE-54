@@ -658,6 +658,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 686805920324093144, guid: 85c477f4e1d4f4449b0b5b823feeb9a3, type: 3}
+      propertyPath: simulationSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 755476737892135131, guid: 85c477f4e1d4f4449b0b5b823feeb9a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.45
@@ -1556,7 +1560,7 @@ PrefabInstance:
       objectReference: {fileID: 1624036130}
     - target: {fileID: 2834642040619634168, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_PlaneDistance
-      value: 12.363649
+      value: 12.363648
       objectReference: {fileID: 0}
     - target: {fileID: 3493632606037404392, guid: 142a6c1505d4a1746bf97c391ff11047, type: 3}
       propertyPath: m_LocalPosition.x
