@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cards;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ public class ProcessCombatEnd : MonoBehaviour
         else if (Combat.Active.Enemies.Count == 0)
         {
             GameSession.OfferedCard = CardGroups.GetRandom(Combat.Active.difficulty);
+            if (GameSession.Player.Cards.Any(c => c?.GetType() == GameSession.OfferedCard.GetType()))
+                GameSession.OfferedCard = CardGroups.GetRandom(Combat.Active.difficulty); //reroll once if type is already in hand
             GameSession.ActiveCombat = null;
             StartCoroutine(SwitchStateRoutine(GameSession.State.LOOT));
         }

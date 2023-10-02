@@ -29,6 +29,7 @@ public class GameSession : MonoBehaviour
         Player = new();
         OfferedCard = null;
         ActiveCombat = null;
+        EncounterCounter = 0;
         StartCombat();
     }
 
@@ -42,14 +43,12 @@ public class GameSession : MonoBehaviour
 
     private static readonly EncounterGroups.Difficulty[] Pattern = new EncounterGroups.Difficulty[]
     {
-        EncounterGroups.Difficulty.Easy,
-        EncounterGroups.Difficulty.Easy,
-        EncounterGroups.Difficulty.Easy,
-        EncounterGroups.Difficulty.Medium,
+        EncounterGroups.Difficulty.Boss,
         EncounterGroups.Difficulty.Easy,
         EncounterGroups.Difficulty.Easy,
         EncounterGroups.Difficulty.Medium,
         EncounterGroups.Difficulty.Easy,
+        EncounterGroups.Difficulty.Medium,
         EncounterGroups.Difficulty.Medium,
         EncounterGroups.Difficulty.Hard,
         EncounterGroups.Difficulty.Medium,
@@ -62,7 +61,7 @@ public class GameSession : MonoBehaviour
     private static int EncounterCounter;
     public static void StartCombat()
     {
-        var difficulty = Pattern[EncounterCounter++];
+        var difficulty = Pattern[EncounterCounter++ % Pattern.Length];
         var encounterOptions = EncounterGroups.EncountersByDifficulty[difficulty];
         var rand = new System.Random();
         ActiveCombat = new(encounterOptions[rand.Next(encounterOptions.Count)], difficulty);

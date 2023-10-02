@@ -14,7 +14,7 @@ namespace Cards
 
         public override void OnPlayed(params object[] args)
         {
-            foreach (var enemy in Combat.Active.Enemies) enemy.StatusTarget.Apply<Timebombed>(3);
+            foreach (var enemy in Combat.Active.Enemies) enemy.EffectTarget.Apply<Timebombed>(3);
         }
     }
 }

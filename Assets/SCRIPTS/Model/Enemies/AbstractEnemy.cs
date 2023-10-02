@@ -9,7 +9,7 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
     public IReadOnlyCappedInt ReadOnlyHealth => Health;
     Dictionary<Type, IStatusEffectTarget.AppliedEffect> IStatusEffectTarget.EffectStacks { get; } = new();
     IReadOnlyCappedInt IDamageable.Health => this.Health;
-    public IStatusEffectTarget StatusTarget => this;
+    public IStatusEffectTarget EffectTarget => this;
 
     public string Name => GetType().Name;
     public abstract string PrefabName { get; }

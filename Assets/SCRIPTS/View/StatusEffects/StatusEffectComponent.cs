@@ -26,7 +26,7 @@ public class StatusEffectComponent : MonoBehaviour, IPointerEnterHandler, IPoint
             BaseImage.color = value.Color;
             TooltipName.text = value.Name;
             TooltipDescr.text = value.Description;
-            StackCountText.text = value.Stacks.ToString();
+            StackCountText.text = value.Stacks > 0 ? value.Stacks.ToString() : "-";
         }
     }
 
@@ -44,9 +44,10 @@ public class StatusEffectComponent : MonoBehaviour, IPointerEnterHandler, IPoint
             case CombatEvent.EventType.StatusRemoved:
                 var eventStatusEffect = e.Args[0] as AbstractStatusEffect;
                 if (eventStatusEffect != Effect) break;
-                if (eventStatusEffect.Stacks == 0)
+                var stacks = (int)e.Args[1];
+                if (stacks == 0)
                     Destroy(gameObject);
-                StackCountText.text = eventStatusEffect.Stacks.ToString();
+                StackCountText.text = stacks > 0 ? stacks.ToString() : "-";
                 break;
         }
     }
