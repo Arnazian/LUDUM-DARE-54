@@ -24,14 +24,6 @@ public class ActionCoolDownVisuals : MonoBehaviour
     {
         originalScale = actionCoolDownObject.transform.localScale;
     }
-/*     private void Update()
-    {
-        Debug.Log("Keycode Used For Testing");
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            AnimatedCoolDownChange();
-        }
-    } */
     public void AnimatedCoolDownChange()
     {
         actionCoolDownObject.DOScale(newScale, scalingDuration).OnComplete(() =>

@@ -26,7 +26,11 @@ public class Pumpkin : AbstractEnemy
 
         public override void OnBeforeRecieveDamage(ref int amount)
         {
-            if (EffectTarget is AbstractEnemy) ((AbstractEnemy)EffectTarget).ActCooldown.Value -= 1;
+            if (EffectTarget is AbstractEnemy)
+            {
+                ((AbstractEnemy)EffectTarget).ActCooldown.Value -= 1;
+                Combat.Active.PushCombatEvent(CombatEvent.CooldownChanged(EffectTarget, ((AbstractEnemy)EffectTarget).ActCooldown.Value));
+            }
         }
     }
 }

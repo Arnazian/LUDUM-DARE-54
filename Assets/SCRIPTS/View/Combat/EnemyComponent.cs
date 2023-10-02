@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.SymbolStore;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -75,6 +74,9 @@ public class EnemyComponent : MonoBehaviour
             case CombatEvent.EventType.TurnStarted:
                 // StartCoroutine(CoroutineDoTurn());
                 ActionCooldown.text = enemy.ReadOnlyActCooldown.Value > 0 ? enemy.ReadOnlyActCooldown.Value.ToString() : "<color=red>0</color>";
+                break;
+            case CombatEvent.EventType.CooldownChanged:
+                //Cooldown update here
                 break;
             case CombatEvent.EventType.TakenAction:
                 e.Accept();

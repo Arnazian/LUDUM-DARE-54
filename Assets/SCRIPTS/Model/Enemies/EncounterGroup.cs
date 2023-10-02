@@ -24,7 +24,6 @@ public static class EncounterGroups
 
     public static List<List<AbstractEnemy>> Medium => new()
     {
-
         new() { new BabyBag(), new Ghosty()},
         new() { new Pumpkin(), new Pumpkin(), new Pumpkin()},
         new() { new Pumpkin(), new Pumpkin(), new Ghosty()},

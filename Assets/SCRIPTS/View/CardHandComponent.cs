@@ -115,10 +115,14 @@ public class CardHandComponent : MonoBehaviour
             }
         }
         ICardTarget.OnFinishSelection -= callback;
-        var sfx = Resources.Load<AudioClip>($"Cards/{card.name}");
-        Source.clip = sfx;
-        Source.Play();
-        if (!cancel) Combat.Active.PlayCard(card.Card, selections.ToArray());
+        if (!cancel)
+        {
+            var sfx = Resources.Load<AudioClip>($"Cards/{card.name}");
+            sfx ??= Resources.Load<AudioClip>($"Cards/Fallback");
+            Source.clip = sfx;
+            Source.Play();
+            Combat.Active.PlayCard(card.Card, selections.ToArray());
+        }
         selectionRoutine = null;
     }
 }
