@@ -90,8 +90,8 @@ public class EnemyComponent : MonoBehaviour
 
     IEnumerator CoroutineDoTurn(CombatEvent e)
     {
-        float waitBeforeAction = 1f;
-        float waitAfterAction = 0.5f;
+        float waitBeforeAction = 0.5f;
+        float waitAfterAction = 0.25f;
 
         selectionRotator.EnableRotatorVisuals();
         yield return new WaitForSeconds(waitBeforeAction);
