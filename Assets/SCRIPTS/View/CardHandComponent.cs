@@ -17,11 +17,11 @@ public class CardHandComponent : MonoBehaviour
     [Header("Other Settings")]
     public float PlayYThreshold;
 
-    bool IsPlayersTurn = false;
+    bool IsPlayersTurn = true;
 
-    void Awake()
+    void Start()
     {
-        GameSession.Player.OnCardChanged += UpdateCard;
+        Player.OnCardChanged += UpdateCard;
         for (int i = 0; i < GameSession.Player.Cards.Count; i++)
         {
             AbstractCard card = GameSession.Player.Cards[i];
@@ -45,7 +45,7 @@ public class CardHandComponent : MonoBehaviour
 
     void OnDestroy()
     {
-        GameSession.Player.OnCardChanged -= UpdateCard;
+        Player.OnCardChanged -= UpdateCard;
     }
 
     void UpdateCard(int slot, AbstractCard card)

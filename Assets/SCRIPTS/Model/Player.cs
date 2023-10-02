@@ -22,7 +22,7 @@ public class Player : IStatusEffectTarget, IDamageable
     Dictionary<Type, IStatusEffectTarget.AppliedEffect> IStatusEffectTarget.EffectStacks { get; } = new();
 
 
-    public event Action<int, AbstractCard> OnCardChanged;
+    public static event Action<int, AbstractCard> OnCardChanged;
 
     public void RemoveCard(AbstractCard card) => RemoveCardAt(Cards.IndexOf(card));
     public void RemoveCardAt(int slot)
@@ -87,6 +87,6 @@ public class Player : IStatusEffectTarget, IDamageable
     void Die()
     {
         GameSession.GameState = GameSession.State.GAME_OVER;
-        //TODO: handle deathg
+        //TODO: handle death
     }
 }

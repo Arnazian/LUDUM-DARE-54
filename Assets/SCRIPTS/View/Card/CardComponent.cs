@@ -17,7 +17,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             if (card == null) return;
             TitleText.text = card.Name;
             DescriptionText.text = card.Description;
-            Artwork.sprite = Resources.Load<Sprite>($"Cards/{card.Name}");
+            Artwork.sprite = Resources.Load<Sprite>($"Cards/{card.GetType().Name}");
         }
     }
     public Vector2Spring PositionSpring { get; private set; }
@@ -45,6 +45,7 @@ public class CardComponent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     [SerializeField] Image GlowEffect;
     [SerializeField] Image CooldownFill;
     [SerializeField] TMP_Text CooldownText;
+    [SerializeField] TMP_Text MaxCooldownText;
     [field: SerializeField] public RectTransform DragVisual { get; private set; }
 
     [Header("Tooltip")]

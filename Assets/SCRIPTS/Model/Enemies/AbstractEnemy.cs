@@ -3,22 +3,24 @@ using System.Collections.Generic;
 
 public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
 {
-    protected abstract CappedInt ActCooldown { get; set; }
+    public abstract CappedInt ActCooldown { get; set; }
     protected abstract CappedInt Health { get; set; }
     public IReadOnlyCappedInt ReadOnlyActCooldown => ActCooldown;
     public IReadOnlyCappedInt ReadOnlyHealth => Health;
     Dictionary<Type, IStatusEffectTarget.AppliedEffect> IStatusEffectTarget.EffectStacks { get; } = new();
     IReadOnlyCappedInt IDamageable.Health => this.Health;
 
+    public IStatusEffectTarget StatusTarget => this;
+
     public abstract void Act();
     public void DoTurn()
     {
         IStatusEffectTarget.OnBeginTurn(this);
-        if (ActCooldown.Value > 0)
+        if (ActCooldown.Value > 1)
         {
             ActCooldown.Value--;
             return;
-        }       
+        }
         Combat.Active.PushCombatEvent(CombatEvent.TakenAction(this));
         Act();
         IStatusEffectTarget.OnAfterAction(this, Act);

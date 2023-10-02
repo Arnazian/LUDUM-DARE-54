@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Cards
 {
     public class CardName : AbstractCard
