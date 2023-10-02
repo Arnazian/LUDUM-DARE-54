@@ -96,7 +96,13 @@ public class CardHandComponent : MonoBehaviour
         while (selectionTypes.Count > 0 && !cancel)
         {
             selecting = true;
-            ICardTarget.DoSelection(card.transform.position + Vector3.up * 1f, selectionTypes.Dequeue());
+            var type = selectionTypes.Dequeue();
+            if (type == typeof(AbstractEnemy) && Combat.Active?.Enemies.Count == 1)
+            {
+                ICardTarget.Select(Combat.Active.Enemies[0]);
+                continue;
+            }
+            ICardTarget.DoSelection(card.transform.position + Vector3.up * 1f, type);
             while (selecting)
             {
                 if (Input.GetMouseButtonDown(1))
