@@ -30,6 +30,7 @@ public class PlayerAnimation : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         Combat.OnEventLogChanged += OnEvent;
     }
 
@@ -64,7 +65,6 @@ public class PlayerAnimation : MonoBehaviour
                 StartCoroutine(TakenActionAnimation(e));
                 break;
         }
-
     }
 
     void OnDestroy()
@@ -102,6 +102,9 @@ public class PlayerAnimation : MonoBehaviour
     {
         float effectDuration = 0.5f;
         Camera.main.GetComponent<CameraController>().ScreenShake(shakeDuration, shakeStrength);
+
+        audioSource.clip = getHitClip;
+        audioSource.Play();
         getHitParticles.Play();
         hitFlashSprite.DOFade(1, secondsToFadeSprite);
         mainSprite.DOFade(0, secondsToFadeSprite);
