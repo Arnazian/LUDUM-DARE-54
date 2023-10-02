@@ -1,6 +1,5 @@
 using DG.Tweening;
 using System.Collections.Generic;
-using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -47,6 +46,7 @@ public class ButtonHighlightController : MonoBehaviour, IPointerEnterHandler, IP
     void DoConstantAnimation()
     {
         if (!constantAnimate) return;
+        
     }
 
     public void OnPointerEnter(PointerEventData pointerEventData)

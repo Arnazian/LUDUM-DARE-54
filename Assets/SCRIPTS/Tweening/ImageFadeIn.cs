@@ -12,7 +12,7 @@ public class ImageFadeIn : MonoBehaviour
     [SerializeField] private float startingAlpha;
     private float originalAlpha;
 
-    private void Start()
+    private void Awake()
     {
         originalAlpha = imageToFade.color.a;
     }
