@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace Cards
 {
-    public class Dagger : AbstractCard
+    public class Sword : AbstractCard
     {
-        public override CappedInt Cooldown { get; set; } = new(0, 1);
-        private const int Damage = 1;
+        public override CappedInt Cooldown { get; set; } = new(0, 3);
+        private const int Damage = 3;
         public override Type[] Selections => new[] { typeof(AbstractEnemy) };
 
-        public override string Name => "Dagger";
-        public override string Description => "Deal 1 damage.";
+        public override string Name => "Short Sword";
+        public override string Description => "Deal 3 damage.";
 
         public override void OnPlayed(params object[] args)
         {

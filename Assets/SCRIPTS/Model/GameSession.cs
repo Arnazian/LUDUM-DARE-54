@@ -13,7 +13,6 @@ public class GameSession : MonoBehaviour
         COMBAT, LOOT, PRE_COMBAT, GAME_OVER
     }
 
-
     private static State gameState;
     public static State GameState
     {

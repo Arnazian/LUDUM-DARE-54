@@ -87,6 +87,6 @@ public class Player : IStatusEffectTarget, IDamageable
     void Die()
     {
         GameSession.GameState = GameSession.State.GAME_OVER;
-        //TODO: handle deathg
+        //TODO: handle death
     }
 }

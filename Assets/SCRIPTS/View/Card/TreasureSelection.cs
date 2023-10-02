@@ -28,7 +28,7 @@ public class TreasureSelection : MonoBehaviour
     {
         GameSession.OnStateChanged -= OnStateChanged;
         card.OnDrop -= OnDrop;
-    }
+    }    
 
     void OnStateChanged(GameSession.State state)
     {
@@ -38,7 +38,10 @@ public class TreasureSelection : MonoBehaviour
             return;
         }
         treasureSelectionScreen.SetActive(true);
-        GameSession.OfferedCard = new Cards.Dagger(); //TODO: replace with random card that gets better with combat difficulty
+            
+
+        GameSession.OfferedCard = Cards.CardGroups.GetRandom(EncounterGroups.Difficulty.Hard);
+                
         card.Card = GameSession.OfferedCard;
         // card.gameObject.SetActive(true);
     }
