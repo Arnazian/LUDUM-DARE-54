@@ -29,8 +29,8 @@ public class CombatEvent
     }
     public void Accept() => users++;
     public static CombatEvent Killed(object target) => new(EventType.Killed, target);
-    public static CombatEvent Damaged(object target, int currentHealth, int amount) => new(EventType.Damaged, target, amount);
-    public static CombatEvent Healed(object target, int currentHealth, int amount) => new(EventType.Healed, target, amount);
+    public static CombatEvent Damaged(object target, int currentHealth, int amount) => new(EventType.Damaged, target, currentHealth, amount);
+    public static CombatEvent Healed(object target, int currentHealth, int amount) => new(EventType.Healed, target, currentHealth, amount);
     public static CombatEvent TurnStarted(object target) => new(EventType.TurnStarted, target);
     public static CombatEvent TurnEnded(object target) => new(EventType.TurnEnded, target);
 
