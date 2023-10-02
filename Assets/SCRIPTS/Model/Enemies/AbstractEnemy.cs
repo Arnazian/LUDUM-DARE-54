@@ -16,11 +16,11 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
     public void DoTurn()
     {
         IStatusEffectTarget.OnBeginTurn(this);
-        if (ActCooldown.Value > 0)
+        if (ActCooldown.Value > 1)
         {
             ActCooldown.Value--;
             return;
-        }       
+        }
         Combat.Active.PushCombatEvent(CombatEvent.TakenAction(this));
         Act();
         IStatusEffectTarget.OnAfterAction(this, Act);
