@@ -11282,6 +11282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: decf0f76c9f702445af26125758373af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyComp: {fileID: -2897376442765248092}
   ghostSprite: {fileID: 8088467258443476850}
   transAlpha: 0.2
   fadeDurationInSeconds: 0.5

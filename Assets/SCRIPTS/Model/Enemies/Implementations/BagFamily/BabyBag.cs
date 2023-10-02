@@ -29,7 +29,7 @@ public class BabyBag : AbstractEnemy
             if (EffectTarget is AbstractEnemy)
             {
                 (EffectTarget as AbstractEnemy).ActCooldown?.Maximize();
-                Combat.Active.PushCombatEvent(CombatEvent.CooldownChanged(this, (EffectTarget as AbstractEnemy).ActCooldown.Value));
+                Combat.Active.PushCombatEvent(CombatEvent.CooldownChanged(EffectTarget, (EffectTarget as AbstractEnemy).ActCooldown.Value));
             }
         }
     }
