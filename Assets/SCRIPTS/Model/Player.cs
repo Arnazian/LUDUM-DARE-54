@@ -46,6 +46,7 @@ public class Player : IStatusEffectTarget, IDamageable
 
     public void OnCombatEnd()
     {
+        StatusEffectTarget.Cleanse();
         foreach (var card in Cards.Where(card => card != null))
             card.Cooldown.Minimize();
     }

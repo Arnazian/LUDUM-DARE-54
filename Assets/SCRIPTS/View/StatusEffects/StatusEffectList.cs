@@ -22,7 +22,19 @@ public class StatusEffectList : MonoBehaviour
 
     void Start()
     {
+        GameSession.OnStateChanged += OnStateChanged;
         Combat.OnEventLogChanged += OnCombatEvent;
+    }
+
+    void OnDestroy()
+    {
+        GameSession.OnStateChanged -= OnStateChanged;
+        Combat.OnEventLogChanged -= OnCombatEvent;
+    }
+
+    private void OnStateChanged(GameSession.State state)
+    {
+        if (state != GameSession.State.COMBAT) ClearAll();
     }
 
     private void OnCombatEvent(CombatEvent e)
