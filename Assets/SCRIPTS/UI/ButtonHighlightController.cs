@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,10 +16,13 @@ public class ButtonHighlightController : MonoBehaviour, IPointerEnterHandler, IP
     [SerializeField] private float durationToScale;
     [SerializeField] private float durationToMove;
 
+    [SerializeField] private bool constantAnimate = false;
+
     //private ButtonLineTweening buttonLineTweening;
     private List<Tween> tweens = new List<Tween>();
     private Vector3 originalScale;
     private Vector3 originalPosition;
+
 
 
     private void Awake()
@@ -26,13 +30,23 @@ public class ButtonHighlightController : MonoBehaviour, IPointerEnterHandler, IP
         if (transformToModify == null)
             transformToModify = transform;
 
-        originalScale = transform.localScale;   
+        originalScale = transform.localScale;
         originalPosition = transform.localPosition;
     }
     private void Start()
     {
         // particlesToEnable?.SetActive(false);
         //buttonLineTweening = GetComponent<ButtonLineTweening>();
+    }
+
+    private void Update()
+    {
+        DoConstantAnimation();
+    }
+
+    void DoConstantAnimation()
+    {
+        if (!constantAnimate) return;
     }
 
     public void OnPointerEnter(PointerEventData pointerEventData)
