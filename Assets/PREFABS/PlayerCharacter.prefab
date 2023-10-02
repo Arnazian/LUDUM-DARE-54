@@ -73,6 +73,8 @@ MonoBehaviour:
   getHitParticles: {fileID: 847233183549339650}
   flashDuration: 0.2
   secondsToFadeSprite: 0.15
+  shakeDuration: 0
+  shakeStrength: 0
   anim: {fileID: 861832402659728048}
 --- !u!1 &1061342584889389139
 GameObject:
@@ -112,7 +114,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -2.5, y: 2.5}
+  m_AnchoredPosition: {x: -2.5, y: 3.5}
   m_SizeDelta: {x: 0.5, y: 4.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6093237746244936856
