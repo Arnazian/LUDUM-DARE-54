@@ -25,7 +25,7 @@ public class CombatEvent
     public void Consume()
     {
         users--;
-        if (users <= 0) GameSession.ActiveCombat?.ConsumeCombatEvent(this);
+        if (users <= 0) Combat.Active?.ConsumeCombatEvent(this);
     }
     public void Accept() => users++;
     public static CombatEvent Killed(object target) => new(EventType.Killed, target);

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 668251793634433341}
   - component: {fileID: 1291258159418572166}
   - component: {fileID: 6364658830633596346}
-  - component: {fileID: 7355786222306875921}
   - component: {fileID: 9096789972269640208}
+  - component: {fileID: 341075519515879697}
   m_Layer: 0
   m_Name: Tooltip
   m_TagString: Untagged
@@ -79,7 +79,22 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!223 &7355786222306875921
+--- !u!114 &9096789972269640208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924400605528673188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437ee76d733c75f4bb71ebc7b820827e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threshold: 1
+  originalX: 1.75
+  flippedX: -2.25
+--- !u!223 &341075519515879697
 Canvas:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,26 +112,11 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1825873835
   m_SortingOrder: 100
   m_TargetDisplay: 0
---- !u!114 &9096789972269640208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924400605528673188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 437ee76d733c75f4bb71ebc7b820827e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  threshold: 1
-  originalX: 1.75
-  flippedX: -2.25
 --- !u!1 &2569434320197529680
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5
+  m_text: '-'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b5977797fe577c44f9126b30694a101e, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 55812871901bf794bae7e2125a989354, type: 2}

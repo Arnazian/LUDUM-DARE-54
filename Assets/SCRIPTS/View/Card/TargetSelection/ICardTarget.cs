@@ -24,7 +24,7 @@ public interface ICardTarget : IDropHandler, IPointerClickHandler, IPointerEnter
     public static event Action<Vector2> OnEnter;
     public static event Action OnExit;
 
-    protected static void Select(object obj)
+    public static void Select(object obj)
     {
         OnFinishSelection?.Invoke(obj);
         CurrentSelectionType = null;

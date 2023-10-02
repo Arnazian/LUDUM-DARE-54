@@ -10,7 +10,7 @@ public class PlayerHUD : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI healthText;
-    [SerializeField] private Image healthImage;
+    [SerializeField] private RawImage healthImage;
     [SerializeField] private StatusEffectList statusEffectList;
     BaseSpring HealthSpring;
     Spring.Config springConfig = new(20, 2f);

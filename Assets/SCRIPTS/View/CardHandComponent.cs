@@ -33,6 +33,12 @@ public class CardHandComponent : MonoBehaviour
         Combat.OnEventLogChanged += OnEventLogChanged;
     }
 
+    void OnDestroy()
+    {
+        Player.OnCardChanged -= UpdateCard;
+        Combat.OnEventLogChanged -= OnEventLogChanged;
+    }
+
     private void OnEventLogChanged(CombatEvent e)
     {
         if (e.Target != GameSession.Player) return;
@@ -45,11 +51,6 @@ public class CardHandComponent : MonoBehaviour
                 break;
         }
 
-    }
-
-    void OnDestroy()
-    {
-        Player.OnCardChanged -= UpdateCard;
     }
 
     void UpdateCard(int slot, AbstractCard card)
@@ -68,7 +69,7 @@ public class CardHandComponent : MonoBehaviour
                 InstancesBySlotID[slot] = instance = Instantiate(CardTemplate, CardSlots[slot]);
             instance.Card = card;
             instance.IsOverDropRegion = () => instance.DragVisual.localPosition.y >= PlayYThreshold;
-            instance.IsDraggable = () => IsPlayersTurn && selectionRoutine == null && card.Cooldown.Value <= 0 && GameSession.GameState == GameSession.State.COMBAT;
+            instance.IsDraggable = () => IsPlayersTurn && Combat.Active != null && Combat.Active.Enemies.Count > 0 && selectionRoutine == null && card.Cooldown.Value <= 0 && GameSession.GameState == GameSession.State.COMBAT;
             instance.OnDrop = OnCardDropped;
         }
     }
@@ -95,7 +96,13 @@ public class CardHandComponent : MonoBehaviour
         while (selectionTypes.Count > 0 && !cancel)
         {
             selecting = true;
-            ICardTarget.DoSelection(card.transform.position + Vector3.up * 1f, selectionTypes.Dequeue());
+            var type = selectionTypes.Dequeue();
+            if (type == typeof(AbstractEnemy) && Combat.Active?.Enemies.Count == 1)
+            {
+                ICardTarget.Select(Combat.Active.Enemies[0]);
+                continue;
+            }
+            ICardTarget.DoSelection(card.transform.position + Vector3.up * 1f, type);
             while (selecting)
             {
                 if (Input.GetMouseButtonDown(1))

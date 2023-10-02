@@ -20,7 +20,7 @@ namespace Cards
             GameSession.Player.DoDamage(Damage, args.Select(arg => arg as IDamageable).ToArray());            
             foreach(var enemy in Combat.Active.Enemies)
             {
-                enemy.StatusTarget.Apply<Burning>(4);
+                enemy.EffectTarget.Apply<Burning>(4);
             }
         }
     }

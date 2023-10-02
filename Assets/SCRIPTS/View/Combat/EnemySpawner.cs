@@ -16,6 +16,11 @@ public class EnemySpawner : MonoBehaviour
         OnStateChanged(GameSession.GameState);
     }
 
+    void OnDestroy()
+    {
+        GameSession.OnStateChanged -= OnStateChanged;
+    }
+
     private void OnStateChanged(GameSession.State state)
     {
         switch (state)
@@ -31,12 +36,12 @@ public class EnemySpawner : MonoBehaviour
     // instantiate visuals at start of combat
     public void SpawnEnemies()
     {
-        int enemyCount = GameSession.ActiveCombat.Enemies.Count;
+        int enemyCount = Combat.Active.Enemies.Count;
         for (int i = 0; i < enemyCount; i++)
         {
-            var enemy = GameSession.ActiveCombat.Enemies[i];
+            var enemy = Combat.Active.Enemies[i];
             var template = Resources.Load<EnemyComponent>($"Enemies/{enemy.PrefabName}");
-           // var template = templateGO?.GetComponent<EnemyComponent>();
+            // var template = templateGO?.GetComponent<EnemyComponent>();
             var EnemyInstance = Instantiate(template, spawnPoints[i]);
             EnemyInstance.enemy = enemy;
             spawnedEnemies.Add(EnemyInstance);

@@ -28,7 +28,7 @@ public class TreasureSelection : MonoBehaviour
     {
         GameSession.OnStateChanged -= OnStateChanged;
         card.OnDrop -= OnDrop;
-    }    
+    }
 
     void OnStateChanged(GameSession.State state)
     {
@@ -38,12 +38,7 @@ public class TreasureSelection : MonoBehaviour
             return;
         }
         treasureSelectionScreen.SetActive(true);
-            
-
-        GameSession.OfferedCard = Cards.CardGroups.GetRandom(EncounterGroups.Difficulty.Hard);
-                
         card.Card = GameSession.OfferedCard;
-        // card.gameObject.SetActive(true);
     }
 
     void OnDrag(CardComponent c, PointerEventData e)
@@ -61,29 +56,30 @@ public class TreasureSelection : MonoBehaviour
 
     void OnDrop(CardComponent c, PointerEventData e)
     {
-        if (c.DragVisual.position.y > discardYThreshold)
+        /* if (c.DragVisual.position.y > discardYThreshold)
         {
             c.gameObject.SetActive(false); //animation here?
             GameSession.OfferedCard = null;
             GameSession.GameState = GameSession.State.PRE_COMBAT;
             return;
         }
-        else for (int i = 0; i < cardHand.CardSlots.Length; i++)
+        else */
+        for (int i = 0; i < cardHand.CardSlots.Length; i++)
+        {
+            RectTransform slot = cardHand.CardSlots[i];
+            var rectTransform = slot.transform as RectTransform;
+            var corners = new Vector3[4];
+            rectTransform.GetWorldCorners(corners);
+            var rect = new Rect(corners[0], corners[2] - corners[0]);
+            if (rect.Contains(c.PositionSpring.RestingPos))
             {
-                RectTransform slot = cardHand.CardSlots[i];
-                var rectTransform = slot.transform as RectTransform;
-                var corners = new Vector3[4];
-                rectTransform.GetWorldCorners(corners);
-                var rect = new Rect(corners[0], corners[2] - corners[0]);
-                if (rect.Contains(c.PositionSpring.RestingPos))
-                {
-                    GameSession.Player.ReplaceCardAt(i, c.Card);
-                    GameSession.OfferedCard = null;
-                    GameSession.GameState = GameSession.State.PRE_COMBAT;
-                    c.gameObject.SetActive(false);
-                    break;
-                }
+                GameSession.Player.ReplaceCardAt(i, c.Card);
+                GameSession.OfferedCard = null;
+                GameSession.GameState = GameSession.State.PRE_COMBAT;
+                c.gameObject.SetActive(false);
+                break;
             }
+        }
     }
 
     IEnumerator CoroutineTurnOffTreasureSelectionScreen()

@@ -9,7 +9,7 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
     public IReadOnlyCappedInt ReadOnlyHealth => Health;
     Dictionary<Type, IStatusEffectTarget.AppliedEffect> IStatusEffectTarget.EffectStacks { get; } = new();
     IReadOnlyCappedInt IDamageable.Health => this.Health;
-    public IStatusEffectTarget StatusTarget => this;
+    public IStatusEffectTarget EffectTarget => this;
 
     public string Name => GetType().Name;
     public abstract string PrefabName { get; }
@@ -21,6 +21,7 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
         if (ActCooldown.Value > 1)
         {
             ActCooldown.Value--;
+            IStatusEffectTarget.OnEndTurn(this);
             return;
         }
         Combat.Active.PushCombatEvent(CombatEvent.TakenAction(this));
@@ -50,15 +51,15 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
     public void Die()
     {
         Health.Value = 0;
-        GameSession.ActiveCombat.Enemies.Remove(this);
-        GameSession.ActiveCombat.PushCombatEvent(CombatEvent.Killed(this));
+        Combat.Active.Enemies.Remove(this);
+        Combat.Active.PushCombatEvent(CombatEvent.Killed(this));
     }
 
     public void RecieveDamage(int amount)
     {
         IStatusEffectTarget.OnBeforeRecieveDamage(this, ref amount);
         Health.Value -= amount;
-        GameSession.ActiveCombat.PushCombatEvent(CombatEvent.Damaged(this, Health.Value, amount));
+        Combat.Active.PushCombatEvent(CombatEvent.Damaged(this, Health.Value, amount));
         if (Health.Value <= 0) Die();
     }
 
@@ -66,7 +67,7 @@ public abstract class AbstractEnemy : IStatusEffectTarget, IDamageable
     {
         IStatusEffectTarget.OnBeforeRecieveHealing(this, ref amount);
         Health.Value += amount;
-        GameSession.ActiveCombat.PushCombatEvent(CombatEvent.Healed(this, Health.Value, amount));
+        Combat.Active.PushCombatEvent(CombatEvent.Healed(this, Health.Value, amount));
         if (Health.Value <= 0) Die();
     }
 }
