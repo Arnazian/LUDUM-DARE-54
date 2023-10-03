@@ -13,7 +13,7 @@ public class Player : IStatusEffectTarget, IDamageable
     public const int CardCapacity = 5;
     public List<AbstractCard> Cards { get; private set; } = new(CardCapacity) {
         new Cards.Dagger(),
-        null,null,null,
+        null, null, null,
         new Cards.Potion(),
     };
 

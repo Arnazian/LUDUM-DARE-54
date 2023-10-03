@@ -63,10 +63,8 @@ public class EnemyComponent : MonoBehaviour
         if (e.Target != enemy) return;
         switch (e.Type)
         {
-            case CombatEvent.EventType.Killed:
-                e.Accept();
+            case CombatEvent.EventType.Killed:                
                 getHitEffects.DoDeathEffects();
-                e.Consume();
                 break;
             case CombatEvent.EventType.Damaged:
                 e.Accept();
